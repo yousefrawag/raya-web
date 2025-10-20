@@ -2,6 +2,8 @@
   "name": "raya-website",
   "version": "0.1.0",
   "private": true,
+    "type": "module",
+
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -10,6 +12,7 @@
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",
+    "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.534.0",
@@ -23,9 +26,9 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.1.15",
     "eslint": "^9",
     "eslint-config-next": "15.4.3",
-    "tailwindcss": "^4"
+    "tailwindcss": "^4.1.15"
   }
 }
