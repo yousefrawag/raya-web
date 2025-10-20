@@ -20,7 +20,55 @@
 }
 
 body {
-  background: var(--background);
+ 
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+
 }
+
+
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s ease-out forwards;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+.swiper-pagination {
+  position: absolute;
+  z-index: 889;
+  bottom: 5px !important; /* تنزل البولتس تحت */
+  text-align: center;
+}
+
+.swiper-pagination .swiper-pagination-bullet {
+  background: #e5e7eb; /* رمادي */
+  opacity: 1;
+  width: 12px;
+  height: 12px;
+  margin: 0 4px !important;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination .swiper-pagination-bullet-active {
+  background: linear-gradient(to right, #f97316, #ea580c); /* برتقالي متدرج */
+  transform: scale(1.3);
+}
+
