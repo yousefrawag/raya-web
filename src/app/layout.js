@@ -56,7 +56,7 @@ export const metadata = {
     ],
   },
   alternates: {
-    canonical: "https://alraya-realestate.com", // ← غيّرها للدومين الحقيقي
+    canonical: "https://alraya-realestate.vercal", // ← غيّرها للدومين الحقيقي
   },
 };
 
