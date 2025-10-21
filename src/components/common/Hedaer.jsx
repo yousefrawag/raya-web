@@ -49,7 +49,7 @@ const Hedaer = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8 space-x-reverse">
+          <div className="hidden md:flex gap-5 space-x-reverse">
             {navItems.map((item) => (
               <Link
                 key={item.id}

@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import { Building } from 'lucide-react';
 import Link from "next/link";
 
-export default function LandingProject() {
+export default function ProjectsRelated() {
   const projects = [
     {
       title: "فال - مشروع رسين ريجان قبلا- للبيع",
@@ -70,14 +70,7 @@ export default function LandingProject() {
   return (
     <div className="py-12 px-4">
       <div className="max-w-7xl mx-auto"> {/* Added container with max-width */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-            المشاريع المتاحة
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            اكتشف مجموعة متنوعة من المشاريع المتميزة للبيع والإيجار
-          </p>
-        </div>
+      
       
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}

@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { ArrowRight, MapPin, Calendar, Building, Users, Phone, Mail, MessageCircle, Star, Check, Image as ImageIcon, FileText, CreditCard } from 'lucide-react';
 import { projectsData } from "@/data/index";
 import MapSection from '@/components/common/MapSection';
+import ProjectsRelated from '@/components/sections/ProjectsRelated';
 const ProjectDetail = () => {
   const { id } = useParams();
   const project = projectsData.find(p => p.id === parseInt(id || '0'));
@@ -35,7 +36,7 @@ const ProjectDetail = () => {
   };
 
   return (
-    <div className="h-full bg-gray-50">
+    <div className="h-full ">
       <div className='container mx-auto px-6  '>
 
       {/* Header */}
@@ -337,7 +338,11 @@ const ProjectDetail = () => {
          
       </div>
       
+          <h2 className='text-slate-900 text-2xl'> مشاريع ذات صلة </h2>
+      <ProjectsRelated />
       </div>
+
+  
     </div>
   );
 };

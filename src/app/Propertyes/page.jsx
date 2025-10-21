@@ -34,7 +34,7 @@ const Projects = () => {
  
 
   {/* قسم العقارات */}
-  <main className=" px-4 w-full lg:w-[70%]">
+  <main className=" lg:px-4 w-full lg:w-[70%]">
    <div className='flex  justify-between items-center'>
     <div>
       <h1 className='text-xl font-bold text-slate-900'>عقارات للبيع فى حنين</h1>
@@ -46,7 +46,7 @@ const Projects = () => {
   placeholder="ترتيب حسب"/>
 
    </div>
-    <AllProperties CurrentView={CurrentView} />
+    <AllProperties  />
   </main>
 <div className='w-full hidden lg:block  mt-10 lg:w-[30%] bg-[#fff] h-[250px] shadow-lg border-1 border-[#e1e4e8] rounded-md p-4'>
 

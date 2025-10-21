@@ -43,7 +43,7 @@ const PropertyDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen ">
       <div className="container mx-auto px-3 ">
       {/* Header */}
       <div className="p-4  mt-25 ">

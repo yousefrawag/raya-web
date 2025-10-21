@@ -112,7 +112,7 @@ const AllProperties = ({CurrentView}) => {
           {properties.map((property) => (
             <div 
               key={property.id}
-              className="bg-white mb-4 border-1 border-[#e1e4e8] rounded-lg flex gap-1  overflow-hidden hover:shadow-xl transition-all duration-300 group"
+              className="bg-white mb-4 border-1 border-[#e1e4e8] rounded-lg flex lg:flex-row flex-col gap-1  overflow-hidden hover:shadow-xl transition-all duration-300 group"
             >
               <div className="relative w-full overflow-hidden">
                 <img 
@@ -156,13 +156,13 @@ const AllProperties = ({CurrentView}) => {
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col lg:flex-row  items-center justify-between">
                   <div className="text-2xl font-bold text-amber-600">
                     {property.price} {property.type === 'للبيع' ? 'ريال' : 'ريال/شهر'}
                   </div>
                   <Link 
                     href={`/Propertyes/${property.id}`}
-                    className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300"
+                    className="bg-gradient-to-r from-amber-500 to-amber-600 mt-8 w-full text-center lg:w-auto md:mt-5 sm:mt-5 hover:from-amber-600 hover:to-amber-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300"
                   >
                     تفاصيل
                   </Link>

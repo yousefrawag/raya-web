@@ -62,7 +62,7 @@ const handelSelect = (e) => {
   };
 
   return (
-<section className="max-w-6xl bg-[url('@/images/Hero-images/searchsection.webp')] bg-cover bg-center mx-auto  bg-white  rounded-2xl shadow-xl p-6">
+<section className="max-w-6xl bg-[url('/images/Hero-images/searchsection.webp')] bg-cover bg-center mx-auto  bg-white  rounded-2xl shadow-xl p-6">
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
     {/* Operation */}
     <select name="opeartion" onChange={handelSelect}  className="w-full p-3 outline-none  text-gray-800 rounded-xl border border-gray-300 focus:ring-2 focus:ring-amber-400">
