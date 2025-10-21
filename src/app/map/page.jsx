@@ -1,7 +1,16 @@
 "use client"
 import { useState, useEffect } from 'react';
-import MapFilter from '@/components/common/MapFilter';
-import MapSection from '@/components/sections/MapSection';
+import dynamic from 'next/dynamic';
+
+// تحميل المكونات التي تستخدم window ديناميكياً
+const MapSection = dynamic(() => import('@/components/sections/MapSection'), {
+  ssr: false,
+  loading: () => <div className="h-[600px] bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">جاري تحميل الخريطة...</div>
+});
+
+const MapFilter = dynamic(() => import('@/components/common/MapFilter'), {
+  ssr: false
+});
 import PropertyCard from '@/components/common/PropertyCard';
 // Mock data for demonstration
 const mockProperties = [
