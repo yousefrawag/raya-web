@@ -397,7 +397,7 @@ const PropertySearch = () => {
         />
             </div>
 
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 w-full h-full">
               <MapSection
                 properties={filteredProperties}
                 onPropertySelect={handlePropertySelect}

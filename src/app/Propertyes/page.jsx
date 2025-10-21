@@ -48,7 +48,8 @@ const Projects = () => {
    </div>
     <AllProperties  />
   </main>
-<div className='w-full hidden lg:block  mt-10 lg:w-[30%] bg-[#fff] h-[250px] shadow-lg border-1 border-[#e1e4e8] rounded-md p-4'>
+
+<div className='w-full  lg:block  mt-10 lg:w-[30%] bg-[#fff] h-[250px] shadow-lg border-1 border-[#e1e4e8] rounded-md p-4'>
 
 
   

@@ -64,7 +64,7 @@ const freeAreas = [
 
 
   return (
-    <div className="h-full w-full overflow-hidden shadow-lg">
+    <div className="h-full mt-10 lg:mt-0 w-full overflow-hidden shadow-lg">
       <MapContainer
         center={palestineCenter}
         zoom={8}

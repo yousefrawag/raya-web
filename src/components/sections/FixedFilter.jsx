@@ -47,7 +47,7 @@ export default function FixedFilter() {
 
   return (
     <div
-      className={`w-full z-50 transition-all  duration-300 mb-5 ${
+      className={`w-full z-50 transition-all overflow-auto duration-300 mb-5 ${
         isFixed
           ? "fixed top-0 left-0   right-0 shadow-md bg-white/95 backdrop-blur-sm border-b-[1px] border-[#e1e4e8] py-3"
           : "relative bg-white"
