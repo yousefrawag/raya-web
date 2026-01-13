@@ -52,8 +52,8 @@ const AboutSection = () => {
           <div className="relative">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
               <Image
-              width={100}
-              height={100}
+              width={500}
+              height={500}
                 loading="lazy"
                 src="https://images.pexels.com/photos/3184432/pexels-photo-3184432.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
                 alt="فريقنا المحترف"
