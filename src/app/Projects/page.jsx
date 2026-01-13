@@ -7,7 +7,8 @@ import Link from 'next/link'
 import AllProject from '@/components/sections/AllProject'
 import { GetProjectEntry } from '@/lib/GetProjectEntry'
 const Projects = async ({searchParams}) => {
-  const data = await GetProjectEntry(searchParams)
+  const {city ,projectType ,region ,bedrooms ,area } = await searchParams
+  const data = await GetProjectEntry(city ,projectType ,region ,bedrooms ,area)
   return (
     <div className='pt-20 min-h-screen bg-[#f7f7f7]'>
   {/* <div className="p-4  mt-1 px-4 ">

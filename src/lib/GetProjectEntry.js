@@ -1,27 +1,27 @@
 import { client , checkimageprotcoll } from "../utils/ContentfullClient";
 
-export async function GetProjectEntry(searchParams) {
+export async function GetProjectEntry(city ,projectType ,region ,bedrooms ,area  ) {
   const query = {
     content_type: "alraya-projects-project",
   };
 
-  if (searchParams.city) {
-    query["fields.city"] = searchParams.city || "";
+  if (city) {
+    query["fields.city"] = city || "";
   }
 
-  if (searchParams.projectType) {
-    query["fields.projectType"] = searchParams.projectType || "";
+  if (projectType) {
+    query["fields.projectType"] = projectType || "";
   }
 
-  if (searchParams.region) {
-    query["fields.region"] = searchParams.region || "";
+  if (region) {
+    query["fields.region"] = region || "";
   }
 
-  if (searchParams.bedrooms) {
-    query["fields.bedrooms"] = searchParams.bedrooms || "";
+  if (bedrooms) {
+    query["fields.bedrooms"] = bedrooms || "";
   }
-  if (searchParams.area) {
-    query["fields.area"] = searchParams.area || "";
+  if (area) {
+    query["fields.area"] = area|| "";
   }
 
   const res = await client.getEntries(query);

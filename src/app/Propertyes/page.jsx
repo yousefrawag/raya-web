@@ -12,7 +12,8 @@ import FixedFilter from '@/components/sections/FixedFilter'
 
 import { getProperties } from '@/lib/GetpropertiesEntry'
 const Projects = async ({searchParams}) => {
-   const newdata = await  getProperties(searchParams )
+  const {city , propertyType , area, bedrooms ,region , opeartion} = await searchParams
+   const newdata = await  getProperties(city , propertyType , area, bedrooms ,region , opeartion)
 
   return (
     <div  className='pt-20 min-h-screen bg-[#f7f7f7]'>
