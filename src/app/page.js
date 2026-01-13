@@ -8,6 +8,7 @@ import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import FilterSection from "@/components/sections/FilterSection";
 import RegionFilter from "@/components/sections/RegionFilter";
 import LandingProject from "@/components/sections/LandingProject";
+import ProjectServerDataLanding from "@/components/sections/ProjectServerDataLanding";
 export default function Home() {
   return (
     <div className=" w-full">
@@ -18,7 +19,7 @@ export default function Home() {
 
 
 <Properties />
-<LandingProject />
+<ProjectServerDataLanding />
 <AboutSection />
 <ServicesSection />
 {/* <WhyChooseUs /> */}

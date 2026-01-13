@@ -1,17 +1,19 @@
-"use client"
-import { useState, useEffect } from 'react';
+
 import dynamic from 'next/dynamic';
 
+import SelectOne from '@/components/common/SelectOne';
 // تحميل المكونات التي تستخدم window ديناميكياً
 const MapSection = dynamic(() => import('@/components/sections/MapSection'), {
-  ssr: false,
+  ssr: true,
   loading: () => <div className="h-[600px] bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">جاري تحميل الخريطة...</div>
 });
 
 const MapFilter = dynamic(() => import('@/components/common/MapFilter'), {
-  ssr: false
+  ssr: true
 });
 import PropertyCard from '@/components/common/PropertyCard';
+import { GetallEntry } from '@/lib/GetallEntry';
+import { getProperties } from '@/lib/GetpropertiesEntry';
 // Mock data for demonstration
 const mockProperties = [
   {
@@ -21,8 +23,8 @@ const mockProperties = [
     price: '4,200,000 ريال',
     type: 'sale',
     area: 300,
-      tax: false ,
-    bedrooms: 3,
+    tax: false ,
+    bedrooms: "3",
     bathrooms: 4,
     lat: 31.9466,
     lng: 35.3027,
@@ -36,7 +38,7 @@ const mockProperties = [
     type: 'rent',
      tax: false ,
     area: 120,
-    bedrooms: 2,
+    bedrooms: "2",
     bathrooms: 2,
     lat: 31.8,
     lng: 35.2,
@@ -288,102 +290,189 @@ const mockProperties = [
 
 
 
-const PropertySearch = () => {
-  const [properties, setProperties] = useState(mockProperties);
-  const [filteredProperties, setFilteredProperties] = useState(mockProperties);
-  const [selectedProperty, setSelectedProperty] = useState(null);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'map'
+const PropertySearch = async ({searchParams}) => {
+ const data = await getProperties(searchParams)
+  // const [allProperties, setAllProperties] = useState(  [
+  //     {
+  //       id: 1,
+  //       city:"المصايف",
+  //           lat: 31.9466,
+  //   lng: 35.3027,
+  //       propertyType:"فيلا",
+  //       title: 'فيلا فاخرة في الرياض',
+  //       location: 'المصايف,  القدس',
+  //       price: '2,500,000',
+  //       image: 'https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+  //       bedrooms: "5",
+  //       bathrooms: 4,
+  //       area: "450",
+  //       opeartion: 'بيع'
+  //     },
+  //     {
+  //       id: 2,
+  //       city:"ام طوبا",
+  //       propertyType:"شقة",
+  //       title: 'شقة عصرية في دبي',
+  //       location: 'ام طوبا,  القدس',
+  //       price: '8,500',
+  //       image: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+  //       bedrooms: "2",
+  //       bathrooms: 2,
+  //       area: "120",
+  //           lat: 31.8,
+  //   lng: 35.2,
+  //       opeartion: 'ايجار'
+  //     },
+  //     {
+  //       id: 3,
+  //         propertyType:"فيلا",
+  //       city:"جبل المكبر",
+  //       title: 'بنتهاوس مطل على البحر',
+  //       location: 'جبل المكبر, القدس',
+  //       price: '4,200,000',
+  //       image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+  //       bedrooms: "4",
+  //       bathrooms: 3,
+  //          lat: 32.1,
+  //   lng: 35.1,
+  //       area: "300",
+  //       opeartion: 'بيع'
+  //     },
+  //     {
+  //       id: 4,
+  //       propertyType:"مكتب",
+  //       city:"كفر عقرب",
+  //       title: 'مكتب استثمارية',
+  //       location: ' كفر عقرب, رام الله',
+  //       price: '1,200',
+  //       image: 'https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+  //       bedrooms: "1",
+  //       bathrooms: 1,
+  //       area: "80",
+  //           lat: 31.7,
+  //   lng: 35.4,
+  //       opeartion: 'ايجار'
+  //     },
+  //     {
+  //       id: 5,
+  //         propertyType:"مستودع",
+  //       city:"شعفاط السهل",
+  //       title: 'مستودع مع حديقة',
+  //       location: ' شعفاط السهل, القدس',
+  //       price: '1,800,000',
+  //       image: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+  //       bedrooms: "4",
+  //       bathrooms: 3,
+  //       area: "350",
+  //        lat: 31.5326,
+  //   lng: 35.0998,
+  //       opeartion: 'بيع'
+  //     },
+  //     {
+  //       id: 6,
+  //       city:"صور باهر",
+  //         propertyType:"استوديو",
+  //       title: 'استوديو حديث',
+  //       location: ' صور باهر,  القدس',
+  //       price: '4,500',
+  //       image: 'https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+  //       bedrooms: "1",
+  //       bathrooms: 1,
+  //       area: "60",
+  //          lat: 31.7683,
+  //   lng: 35.2137,
+  //       opeartion: 'بيع'
+  //     } ,
+  //       {
+  //       id: 12,
+  //         propertyType:"فيلا",
+  //       title: 'فيلا فاخرة في الرياض',
+  //       city:"القدس",
+  //       location: ' القدس,  القدس',
+  //       price: '2,500,000',
+  //       image: 'https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+  //       bedrooms: "5",
+  //       bathrooms: 4,
+  //       area: "450",
+  //           lat: 31.7054,
+  //   lng: 35.2024,
+  //       opeartion: 'ايجار'
+  //     }, 
+  //       {
+  //       id: 11,
+  //         propertyType:"استوديو",
+  //         city:"صور باهر",
+  //       title: 'فيلا فاخرة في الرياض',
+  //       location: 'حي الملقا، الرياض',
+  //       price: '2,500,000',
+  //       image: 'https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+  //       bedrooms: "5",
+  //       bathrooms: 4,
+  //       area: "450",
+  //           lat: 31.7054,
+  //   lng: 35.2024,
+  //       opeartion: 'ايجار'
+  //     },
+  //   ]);
+  // const [selectedProperty, setSelectedProperty] = useState(null);
 
-  const handleFilterChange = (filters) => {
-    let filtered = properties;
+  
+//    const searchParams = useSearchParams();
 
-    if (filters.location) {
-      filtered = filtered.filter(property => 
-        property.location.includes(filters.location)
-      );
-    }
+// const handleFilterChange = (filters) => {
+//   let filtered = [...allProperties];
 
-    if (filters.saleType) {
-      const saleType = filters.saleType === 'للبيع' ? 'sale' : 'rent';
-      filtered = filtered.filter(property => property.type === saleType);
-    }
+//   if (filters.city) {
+//     filtered = filtered.filter(p =>
+//       p.city?.trim().includes(filters.city.trim())
+//     );
+//   }
+//   if (filters.propertyType) {
+//     filtered = filtered.filter(p =>
+//       p.propertyType?.trim().includes(filters.propertyType.trim())
+//     );
+//   }
+//   if (filters.opeartion) {
+//     filtered = filtered.filter(
+//       p => p.opeartion === filters.opeartion
+//     );
+//   }
 
-    if (filters.bedrooms) {
-      filtered = filtered.filter(property => 
-        property.bedrooms >= parseInt(filters.bedrooms)
-      );
-    }
+//   if (filters.bedrooms) {
+//     filtered = filtered.filter(
+//       p => Number(p.bedrooms) >= Number(filters.bedrooms)
+//     );
+//   }
 
-    if (filters.bathrooms) {
-      filtered = filtered.filter(property => 
-        property.bathrooms >= parseInt(filters.bathrooms)
-      );
-    }
+//   if (filters.bathrooms) {
+//     filtered = filtered.filter(
+//       p => Number(p.bathrooms) >= Number(filters.bathrooms)
+//     );
+//   }
 
-    if (filters.minPrice && filters.maxPrice) {
-      filtered = filtered.filter(property => {
-        const price = parseInt(property.price.replace(/[^\d]/g, ''));
-        const minPrice = parseInt(filters.minPrice);
-        const maxPrice = parseInt(filters.maxPrice);
-        return price >= minPrice && price <= maxPrice;
-      });
-    }
+//   if (filters.minPrice || filters.maxPrice) {
+//     filtered = filtered.filter(p => {
+//       const price = Number(p.price);
+//       return (
+//         (!filters.minPrice || price >= filters.minPrice) &&
+//         (!filters.maxPrice || price <= filters.maxPrice)
+//       );
+//     });
+//   }
 
-    setFilteredProperties(filtered);
-  };
+//   setProperties(filtered);
+// };
 
-  const handlePropertySelect = (property) => {
-    setSelectedProperty(property);
-  };
+
+  // const handlePropertySelect = (property) => {
+  //   setSelectedProperty(property);
+  // };
 
   return (
     <div className="min-h-screen bg-gray-50 py-10" dir="rtl">
       <div >
-        {/* Header */}
-        {/* <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">البحث عن العقارات</h1>
-          <p className="text-gray-600">اعثر على العقار المناسب لك في فلسطين</p>
-        </div> */}
-
-        {/* Filter Section */}
-  
-
-        {/* View Toggle */}
-        {/* <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
-            <span className="text-gray-600">
-              {filteredProperties.length} عقار متاح
-            </span>
-          </div>
-          
-          <div className="flex bg-white rounded-lg shadow-sm border border-gray-200">
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`px-4 py-2 rounded-r-lg transition-colors ${
-                viewMode === 'grid' 
-                  ? 'bg-orange-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
-              </svg>
-            </button>
-            <button
-              onClick={() => setViewMode('map')}
-              className={`px-4 py-2 rounded-l-lg transition-colors ${
-                viewMode === 'map' 
-                  ? 'bg-orange-500 text-white' 
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
-              </svg>
-            </button>
-          </div>
-        </div> */}
+     
+   
 
         {/* Main Content */}
    
@@ -391,16 +480,15 @@ const PropertySearch = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 h-[600px]">
             <div className=' py-5 overflow-y-auto'>
                   <MapFilter
-          onFilterChange={handleFilterChange}
-          isOpen={isFilterOpen}
-          onToggle={() => setIsFilterOpen(!isFilterOpen)}
+        
+       
         />
             </div>
 
             <div className="lg:col-span-2 w-full h-full">
               <MapSection
-                properties={filteredProperties}
-                onPropertySelect={handlePropertySelect}
+              data={data}
+                // onPropertySelect={handlePropertySelect}
               />
             </div>
 
@@ -425,7 +513,7 @@ const PropertySearch = () => {
       
 
         {/* No Results */}
-        {filteredProperties.length === 0 && (
+        {data.length === 0 && (
           <div className="text-center py-12">
             <svg className="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>

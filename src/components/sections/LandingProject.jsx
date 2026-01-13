@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import { Building } from 'lucide-react';
 import Link from "next/link";
 
-export default function LandingProject() {
+export default function LandingProject({data}) {
   const projects = [
     {
       title: "فال - مشروع رسين ريجان قبلا- للبيع",
@@ -106,13 +106,13 @@ export default function LandingProject() {
             },
           }}
         >
-          {projects.map((item, index) => (
-            <SwiperSlide key={index} className="!flex !justify-center">
+          {data?.map((item, index) => (
+            <SwiperSlide key={item.id} className="!flex !justify-center">
               <div className="w-[320px] bg-white rounded-[25px] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 mx-auto"> {/* Added mx-auto */}
                 {/* صورة المشروع */}
                 <div className="relative h-[220px] overflow-hidden">
                   <Image
-                    src={item.image}
+                    src={item.seriesimagesCutmez[0]?.url}
                     alt={item.title}
                     fill
                     className="object-cover transition-transform duration-500 hover:scale-105"
@@ -125,7 +125,7 @@ export default function LandingProject() {
 
                   {/* نوع المشروع */}
                   <span className="absolute top-4 right-4 bg-white text-gray-800 text-sm px-3 py-1 rounded-full shadow">
-                    {item.type}
+                    {item.projectType}
                   </span>
                 </div>
 
@@ -145,7 +145,7 @@ export default function LandingProject() {
                     {/* دائرة اللوجو */}
                     <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-16 h-16 bg-white border-4 border-white shadow-lg rounded-full overflow-hidden z-20">
                       <Image
-                        src={item.logo}
+                        src={item.seriesimagesCutmez[1]?.url}
                         alt="Developer Logo"
                         width={64}
                         height={64}
@@ -162,16 +162,15 @@ export default function LandingProject() {
                     </h3>
 
                     {/* الموقع */}
-                    <p className="text-gray-600 text-sm mb-4">{item.location}</p>
+                    <p className="text-gray-600 text-sm mb-4">{item.adress}</p>
 
                     {/* الأسعار */}
                     <div className="bg-gray-50 rounded-2xl py-3 px-4 mb-4">
                       <div className="flex justify-between items-center text-gray-900">
                         <span className="text-sm font-medium">يبدأ</span>
                         <div className="flex items-center gap-2">
-                          <span className="text-lg font-bold">{item.priceMax}</span>
-                          <span className="text-gray-400">-</span>
-                          <span className="text-lg font-bold">{item.priceMin}</span>
+                          <span className="text-lg font-bold">{item.startingPrice + "$"} </span>
+                          
                         </div>
                       </div>
                     </div>
@@ -180,9 +179,9 @@ export default function LandingProject() {
                     <div className="flex justify-between items-center text-sm text-gray-600">
                       <div className="flex items-center">
                         <Building size={16} className="text-amber-500 ml-2" />
-                        <span className="text-sm text-gray-600">12 وحدة</span>
+                        <span className="text-sm text-gray-600">{item?.numberofunits} وحدة</span>
                       </div>
-                      <Link href={`/Projects/3`} className="text-amber-600 font-medium cursor-pointer hover:text-amber-700">
+                      <Link href={`/Projects/${item.id}`} className="text-amber-600 font-medium cursor-pointer hover:text-amber-700">
                         تفاصيل
                       </Link>
                     </div>

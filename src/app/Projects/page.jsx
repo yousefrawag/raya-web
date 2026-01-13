@@ -1,16 +1,16 @@
-"use client"
+
 import React from 'react'
 import ProjectSection from '@/components/sections/ProjectSection'
 import AdvancedSearch from '@/components/sections/AdvancedSearch'
-import GridFilter from '@/components/common/GridFilter'
-import { useState } from 'react'
+
 import Link from 'next/link'
 import AllProject from '@/components/sections/AllProject'
-const Projects = () => {
-  const [CurrentView , setCurrentView] = useState("list")
+import { GetProjectEntry } from '@/lib/GetProjectEntry'
+const Projects = async ({searchParams}) => {
+  const data = await GetProjectEntry(searchParams)
   return (
-    <div  className='pt-20 min-h-screen bg-gray-50'>
-  <div className="p-4  mt-1 px-4 ">
+    <div className='pt-20 min-h-screen bg-[#f7f7f7]'>
+  {/* <div className="p-4  mt-1 px-4 ">
         <div className="  flex gap-4 px-4">
           <Link href="/" className="inline-flex items-center text-slate-900 hover:text-amber-700 transition-colors">
             
@@ -25,21 +25,24 @@ const Projects = () => {
           </Link>
   
         </div>
-      </div>
-      
-<div className="px-4 grid grid-cols-1 lg:grid-cols-[350px_1fr] gap-10">
+      </div> */}
+          <AdvancedSearch />
+<div className='  container mx-auto px-4'>
   
   {/* قسم الفلترة - يمين */}
   
-    
-      <AdvancedSearch />
+    <div className='flex flex-col lg:flex-row gap-1'>
+
+  <main  className=" lg:px-4 w-full lg:w-full">
+    <AllProject data={data} />
+  </main>
+    </div>
+  
    
  
 
   {/* قسم المشاريع */}
-  <main className="  p-4">
-    <AllProject CurrentView={CurrentView} />
-  </main>
+
 
 </div>
     </div>

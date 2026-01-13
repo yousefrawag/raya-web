@@ -23,19 +23,14 @@ const Footer = () => {
               شريكك الموثوق في العقارات لأكثر من عقد من الزمن. نحول أحلامك العقارية 
               إلى حقيقة بالخبرة والنزاهة والخدمة الشخصية المتميزة.
             </p>
-            <div className="flex space-x-4 space-x-reverse">
-              <a href="#" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
+            <div className="flex  gap-4 space-x-4 space-x-reverse">
+              <a href="https://www.facebook.com/akaratalraya" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
+              <a href="https://www.instagram.com/akaratalraya/" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
-                <Twitter size={20} />
-              </a>
+            
             </div>
           </div>
 
@@ -84,12 +79,7 @@ const Footer = () => {
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => scrollToSection('contact')}
-                  className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
-                >
-                  تواصل معنا
-                </button>
+  
               </li>
             </ul>
           </div>
@@ -98,8 +88,12 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-bold mb-4">معلومات التواصل</h4>
             <div className="space-y-2 text-gray-400">
-              <p>+972 56-870-0632</p>
-              <p>rayapalinfo@gmail.com</p>
+              <p>
+                +972 59-270-0633
+              </p>
+              <p>
+                akaratalraya@gmail.com
+              </p>
               <p> فلسطين , القدس</p>
             </div>
           </div>
@@ -107,7 +101,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-slate-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 العقارات المتميزة. جميع الحقوق محفوظة.</p>
+          <p>&copy; 2026 العقارات المتميزة. جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>

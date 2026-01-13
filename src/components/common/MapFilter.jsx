@@ -1,47 +1,212 @@
 "use client"
-import { useState } from 'react';
+import React, { useState, useEffect , useTransition } from 'react'
+import { useRouter, useSearchParams } from "next/navigation";
+import SelectOne from './SelectOne';
 
-const MapFilter = ({ onFilterChange, isOpen, onToggle }) => {
+const MapFilter = () => {
+    const router = useRouter();
+      const [isPending, startTransition] = useTransition();
+       const [relatedLocations , setRelatedLocations] = useState([])
+    const params = useSearchParams();
+
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filters, setFilters] = useState({
-    location: '',
+        propertyType:"",
+      city:"",
+      opeartion:"",
+      bedrooms:"",
+      area:"" ,
+      region:""
+  });
+  const propertyTypes = [
+   "نوع العقار",
+  "شقة",
+    "فيلا"
+    ,
+   "مكتب"
+    ,
+  "مشروع"
+    ,
+   "أرض" ,
+   "مستودعات" ,
+   "روف" ,
+   "استوديو"
+   
+  ];
+const regions = [
+  {
+    id: "jerusalem",
+    name: "القدس",
+    locations: [
+      "القدس",
+      "صور باهر",
+      "شعفاط السهل",
+      "شعفاط",
+      "بيت صفافا - الشرفات",
+      "كفر عقب",
+      "بيت حنينا تل الفول",
+      "بيت حنينا حي الهجرة",
+      "جبل المكبر",
+      "بيت حنينا حي العقبة",
+      "بيت حنينا قرب جامع شومان",
+      "ام طوبا",
+      "بيت حنينا حي الاشقريه",
+      "بيت حنينا",
+      "عمارات نسيبة",
+      "راس العمود"
+    ]
+  },
+  {
+    id: "jericho",
+    name: "أريحا",
+    locations: [
+      "أريحا",
+      "البوابة"
+    ]
+  },
+  {
+    id: "ramallah",
+    name: "رام الله",
+    locations: [
+      "رام الله",
+      "سطح مرحبا",
+      "المصايف",
+      "البيرة",
+      "طلعة مشتل قلقيلية"
+    ]
+  }
+];
+  const cities = [
+    "اختر المدينة",
+  "القدس",
+  "صور باهر",
+  "شعفاط السهل",
+  "شعفاط",
+  "بيت صفافا - الشرفات",
+  "كفر عقب",
+  "بيت حنينا تل الفول",
+  "بيت حنينا حي الهجرة",
+  "جبل المكبر",
+  "بيت حنينا حي العقبة",
+  "بيت حنينا قرب جامع شومان",
+  "ام طوبا",
+  "بيت حنينا حى الاشقريه",
+  "بيت حنينا",
+  "عمارات نسيبة",
+  "راس العمود",
+ 
+  "اريحا",
+  "البوابه",
+    "رام الله",
+    "سطح مرحبا",
+    "المصايف",
+    "البيرة",
+    "طلعه مشتل قلقيلية"
+  
+    
+  ];
+  const OpeartionType = [
+      "بيع",
+    "شراء",
+      "إيجار",
+  
+   
+  ]
+  const rooms =  ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "10"]
+    const area =  ["100" , "120" , "130" , "140" , "150" , "160" , "170" , "180" , "190" , "200" ,
+      "220",
+      "230",
+      "240",
+      "250",
+      "260",
+      "270",
+      "280",
+      "290",
+      "300",
+      "310",
+      "320",
+      "330",
+      "340",
+      "350",
+      "360",
+      "370",
+      "380",
+      "400",
+      "420",
+      "440",
+      "460"
+    ]
+  const handleFilterChange = (key, value) => {
+    const newFilters = { ...filters, [key]: value };
+    setFilters(newFilters);
+    console.log();
+    
+    onFilterChange(filters);
+  };
+
+  const resetFilters = () => {
+    const resetFilters = {
+     city: '',
     propertyType: '',
     saleType: '',
     minPrice: '',
     maxPrice: '',
     bedrooms: '',
-    bathrooms: ''
-  });
-
-  const handleFilterChange = (key, value) => {
-    const newFilters = { ...filters, [key]: value };
-    setFilters(newFilters);
-    onFilterChange(newFilters);
-  };
-
-  const resetFilters = () => {
-    const resetFilters = {
-      location: '',
-      propertyType: '',
-      saleType: '',
-      minPrice: '',
-      maxPrice: '',
-      bedrooms: '',
-      bathrooms: ''
+    bathrooms: '' ,
+    opeartion:""
     };
     setFilters(resetFilters);
     onFilterChange(resetFilters);
   };
 
-  const locations = ['رام الله', 'نابلس', 'الخليل', 'بيت لحم', 'جنين', 'قلقيلية', 'طولكرم'];
-  const propertyTypes = ['شقة', 'فيلا', 'أرض', 'محل تجاري', 'مكتب'];
-  const saleTypes = ['للبيع', 'للإيجار'];
+  const handleClearAll = () => {
+  setFilters({
+    price: "",
+    propertyType: "",
+    city: "",
+    opeartion:"" ,
+    bedrooms:"" ,
+    area:"" ,
+    region:""
+  })
+  router.push("/map")
+  };
+useEffect(() => {
+  setFilters({
+    propertyType: params.get("propertyType") || "",
+    city: params.get("city") || "",
+    opeartion: params.get("operation") || "",
+    bedrooms: params.get("bedrooms") || "", 
+    area: params.get("area") || "",
+    region: params.get("region") || ""
+  });
+    const relatedLocations = regions?.find(item => item.name === filters.city )
+  setRelatedLocations(relatedLocations?.locations)
+}, []);
+
+useEffect(() => {
+  if (!Object.values(filters).some(Boolean)) return;
+
+  const query = new URLSearchParams();
+
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value) query.set(key, value);
+  });
+  const relatedLocations = regions?.find(item => item.name === filters.city )
+  setRelatedLocations(relatedLocations?.locations)
+  startTransition(() => {
+    router.push(`/map?${query.toString()}`);
+  });
+}, [filters]);
+
+
 
   return (
-    <div className={`bg-white   rounded-lg shadow-md transition-all duration-300 ${isOpen ? 'mb-6' : ''}`}>
+    <div className={`bg-white   rounded-lg shadow-md transition-all duration-300 ${isFilterOpen ? 'mb-6' : ''}`}>
       {/* Filter Toggle Button */}
         <div className="text-gray-50 p-6 flex items-center justify-between">
                 <h3 className="text-lg text-gray-500 font-semibold">فلاتر البحث</h3>
-               <span className="cursor-pointer text-amber-500" onClick={onToggle}>
+               <span className="cursor-pointer text-amber-500" onClick={() => setIsFilterOpen(!isFilterOpen)}>
    <svg
                   width="24"
                   height="24"
@@ -56,115 +221,29 @@ const MapFilter = ({ onFilterChange, isOpen, onToggle }) => {
 
 
       {/* Filter Content */}
-      <div className={`  p-4 pt-0 lg:p-4 lg:block ${isOpen ? 'block' : 'hidden'}`}>
+      <div className={`  p-4 pt-0 lg:p-4 lg:block ${isFilterOpen ? 'block' : 'hidden'}`}>
         <div className="grid grid-cols-1  gap-4">
-          {/* Location Filter */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">المنطقة</label>
-            <select
-              value={filters.location}
-              onChange={(e) => handleFilterChange('location', e.target.value)}
-              className="w-full p-2  border-1 border-[#e1e4e8] outline-none text-slate-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
-            >
-              <option value="">جميع المناطق</option>
-              {locations.map((location) => (
-                <option key={location} value={location}>{location}</option>
-              ))}
-            </select>
-          </div>
+      <SelectOne  data={propertyTypes} titale="نوع العقار" name="propertyType" currentValue={filters.propertyType} setFormData={setFilters} />
 
-          {/* Property Type Filter */}
-          <div>
-            <label className="block text-sm font-medium text-slate-900 mb-2">نوع العقار</label>
-            <select
-              value={filters.propertyType}
-              onChange={(e) => handleFilterChange('propertyType', e.target.value)}
-              className="w-full border-1 border-[#e1e4e8] outline-none text-slate-900 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
-            >
-              <option value="">جميع الأنواع</option>
-              {propertyTypes.map((type) => (
-                <option key={type} value={type}>{type}</option>
-              ))}
-            </select>
-          </div>
+  <SelectOne  data={regions} titale="المنطقة" name="city" currentValue={filters.city} setFormData={setFilters} />
+  <SelectOne  data={cities} titale="الموقع" name="region" currentValue={filters.region} setFormData={setFilters} />
 
-          {/* Sale Type Filter */}
-          <div>
-            <label className="block text-sm font-medium text-slate-900 mb-2">نوع العرض</label>
-            <select
-              value={filters.saleType}
-              onChange={(e) => handleFilterChange('saleType', e.target.value)}
-              className="w-full p-2 border-1 border-[#e1e4e8] outline-none text-slate-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
-            >
-              <option value="">الكل</option>
-              {saleTypes.map((type) => (
-                <option key={type} value={type}>{type}</option>
-              ))}
-            </select>
-          </div>
+  <SelectOne  data={OpeartionType} titale="نوع العملية" name="opeartion" currentValue={filters.opeartion} setFormData={setFilters} />
 
+  <SelectOne  data={rooms} titale="عدد الغرف" name="bedrooms" currentValue={filters.bedrooms} setFormData={setFilters} />
+  <SelectOne  data={area} titale="المساحة" name="area" currentValue={filters.area} setFormData={setFilters} />
           {/* Price Range */}
-          <div>
-            <label className="block text-sm font-medium text-slate-900 mb-2">السعر الأدنى</label>
-            <input
-              type="number"
-              placeholder="من"
-              value={filters.minPrice}
-              onChange={(e) => handleFilterChange('minPrice', e.target.value)}
-              className="w-full p-2  border-1 border-[#e1e4e8] outline-none text-slate-900  rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
-            />
-          </div>
+      
 
-          <div>
-            <label className="block text-sm font-medium  text-slate-900  mb-2">السعر الأعلى</label>
-            <input
-              type="number"
-              placeholder="إلى"
-              value={filters.maxPrice}
-              onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
-              className="w-full p-2  border-1 border-[#e1e4e8] outline-none text-slate-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
-            />
-          </div>
-
-          {/* Bedrooms */}
-          <div>
-            <label className="block text-sm font-mediumtext-slate-900 mb-2">غرف النوم</label>
-            <select
-              value={filters.bedrooms}
-              onChange={(e) => handleFilterChange('bedrooms', e.target.value)}
-              className="w-full p-2 border-1 border-[#e1e4e8] outline-none text-slate-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
-            >
-              <option value="">أي عدد</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5+</option>
-            </select>
-          </div>
-
-          {/* Bathrooms */}
-          <div>
-            <label className="block text-sm font-medium text-slate-900 mb-2">الحمامات</label>
-            <select
-              value={filters.bathrooms}
-              onChange={(e) => handleFilterChange('bathrooms', e.target.value)}
-              className="w-full p-2 border-1 border-[#e1e4e8] outline-none text-slate-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
-            >
-              <option value="">أي عدد</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4+</option>
-            </select>
-          </div>
+      
+       
         </div>
 
         {/* Reset Button */}
         <div className="mt-4 flex justify-end">
           <button
-            onClick={resetFilters}
-            className="px-4 py-2 text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded-lg transition-colors duration-200"
+            onClick={handleClearAll}
+            className="px-4 py-2 cursor-pointer  bg-gradient-to-r from-amber-500 to-amber-600 text-white  hover:bg-gradient-to-r from-amber-50 to-amber-60  rounded-lg transition-colors duration-200"
           >
             إعادة تعيين الفلاتر
           </button>

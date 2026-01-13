@@ -1,85 +1,54 @@
+"use client";
+import Image from "next/image";
+import { FaHeart } from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Bed, Bath, Square, MapPin, Heart } from 'lucide-react';
 
-import React from 'react';
-import Link from 'next/link';
-import { Bed, Bath, Square, MapPin, Heart, Star } from 'lucide-react';
-import { getProperties } from '@/lib/GetpropertiesEntry';
-import { GetallEntry } from '@/lib/GetallEntry';
-const Properties =  async () => {
-  const data = await GetallEntry()
-  const properties = [
-    {
-      id: 1,
-      title: 'بنتهاوس مثل على البحر',
-      location: 'الكورنيش، جدة',
-      price: '4,200,000',
-      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      bedrooms: 4,
-      bathrooms: 3,
-      area: 300,
-      type: 'للبيع',
-      featured: true,
-      rating: 4.8
-    },
-     {
-      id: 11,
-      title: 'بنتهاوس مثل على البحر',
-      location: 'الكورنيش، جدة',
-      price: '4,200,000',
-      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      bedrooms: 4,
-      bathrooms: 3,
-      area: 300,
-      type: 'للبيع',
-      featured: true,
-      rating: 4.8
-    },
-    
-    {
-      id: 2,
-      title: 'شقة عصرية في دبي مارينا',
-      location: 'دبي مارينا، دبي',
-      price: '8,500',
-      image: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      bedrooms: 2,
-      bathrooms: 2,
-      area: 120,
-      type: 'للإيجار',
-      featured: false,
-      rating: 4.5
-    },
-    {
-      id: 3,
-      title: 'فيلا فاخرة في الرياض',
-      location: 'حي الملقا، الرياض',
-      price: '2,500,000',
-      image: 'https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      bedrooms: 5,
-      bathrooms: 4,
-      area: 450,
-      type: 'للبيع',
-      featured: true,
-      rating: 4.9
-    }
-  ];
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Building } from 'lucide-react';
+import Link from "next/link";
+import { GetEntryByquery } from "@/lib/GetEntryByquery";
+
+export default   function  PropertiesRelated ({data}) {
+
 
   return (
-    <section id="properties" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 sm:px-6">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-            العقارات المتاحة
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            اكتشف مجموعة متنوعة من العقارات المتميزة للبيع والإيجار
-          </p>
-        </div>
-
-        {/* Properties Grid */}
-        <div className={`grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8
-        `}>
-              {data?.map((property) => (
-            <div 
+    <div className="py-12 px-4">
+      <div className="max-w-7xl mx-auto"> {/* Added container with max-width */}
+      
+      
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={20}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          className="relative !pb-20"
+          autoplay={{ delay: 3000 }}
+          navigation
+          breakpoints={{
+            640: { 
+              slidesPerView: 1,
+              centeredSlides: true, // Center slides on mobile
+            },
+            768: { 
+              slidesPerView: 2,
+              centeredSlides: false,
+            },
+            1024: { 
+              slidesPerView: 3,
+              centeredSlides: false,
+            },
+            1280: { 
+              slidesPerView: 4,
+              centeredSlides: false,
+            },
+          }}
+        >
+           {data?.map((property) => (
+            <SwiperSlide 
               key={property.id}
               className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group border border-gray-100 relative"
             >
@@ -172,28 +141,10 @@ const Properties =  async () => {
 
               {/* Hover Border Effect */}
               <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-amber-200 transition-all duration-300 pointer-events-none"></div>
-            </div>
+            </SwiperSlide>
           ))}
-        </div>
-
-        {/* View More Button */}
-        <div className="text-center mt-12">
-          <Link href="/Propertyes" className="bg-gradient-to-r cursor-pointer from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
-            عرض المزيد من العقارات
-          </Link>
-        </div>
+        </Swiper>
       </div>
-
-      {/* <style jsx>{`
-        .line-clamp-1 {
-          display: -webkit-box;
-          -webkit-line-clamp: 1;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-      `}</style> */}
-    </section>
+    </div>
   );
-};
-
-export default Properties;
+}
