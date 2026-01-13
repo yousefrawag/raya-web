@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Bed, Bath, Square, MapPin, Heart } from 'lucide-react';
 import { getProperties } from '@/lib/GetpropertiesEntry';
-
+import Image from 'next/image';
 const AllProperties = ({ propertiesServerdata}) => {
  
 
@@ -318,6 +318,8 @@ const AllProperties = ({ propertiesServerdata}) => {
               {/* Image Container */}
               <div className="relative overflow-hidden">
                 <Image
+               width={400}               // حجم مناسب للبطاقة
+        height={300}  
                   loading="lazy"
                   src={property.seriesimagesCutmez[0]?.url}
                   alt={property.title}

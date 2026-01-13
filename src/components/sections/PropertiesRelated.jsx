@@ -4,7 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Bed, Bath, Square, MapPin, Heart } from 'lucide-react';
-import { Image } from "next/image";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -62,6 +62,8 @@ export default   function  PropertiesRelated ({data}) {
               {/* Image Container */}
               <div className="relative overflow-hidden">
                 <Image
+                width={300}
+                height={300}
                   loading="lazy"
                   src={property.seriesimagesCutmez[0]?.url}
                   alt={property.title}

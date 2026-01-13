@@ -9,7 +9,7 @@ const item = res.fields;
  if (!item) return null; // لو مفيش entry
   // استخراج البيانات
   const {
-  title,adress , details, area , numberofunits , city,buildingheight ,map3d , images , firstPayemnt , 
+  title,adress , details, area , projectType , numberofunits , city,buildingheight ,map3d , images , firstPayemnt , 
 installemnt ,
 installemntPeriod ,
 projectdeatline ,
@@ -26,7 +26,7 @@ projectfiles
 
   return {
     id: res.sys.id,
-            title,adress , id , details, area , numberofunits , city,buildingheight ,map3d , seriesimagesCutmez , firstPayemnt , 
+            title,adress , id , projectType , details, area , numberofunits , city,buildingheight ,map3d , seriesimagesCutmez , firstPayemnt , 
 installemnt ,
 installemntPeriod ,
 projectdeatline ,

@@ -5,6 +5,8 @@ const nextConfig = {
       "images.unsplash.com",
       "upload.wikimedia.org",
       "via.placeholder.com",
+      "images.ctfassets.net" ,
+      "images.pexels.com" ,
       "images.ctfassets.net"
     ],
   },

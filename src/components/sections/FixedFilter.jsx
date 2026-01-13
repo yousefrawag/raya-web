@@ -208,7 +208,7 @@ useEffect(() => {
     >
       <div className="container mx-auto px-4">
         {/* container of filters: responsive - scroll horizontal on mobile */}
-        <div className="grid grid-cols-2 lg:grid-cols-6 gap-3 items-center  py-2">
+        <div className="grid grid-cols-2 lg:grid-cols-7 gap-3 items-center  py-2">
           <SelectOne  data={propertyTypes} titale="نوع العقار" name="propertyType" currentValue={filters.propertyType || params.get("propertyType")}  setFormData={setFilters} />
   <SelectOne  data={regions} titale="المنطقة" name="city" currentValue={ filters.city || params.get("city")} setFormData={setFilters} />
 

@@ -29,6 +29,8 @@ const [activeTab, setActiveTab] = useState('overview');
      
       <div className="relative w-full lg:w-[80%] h-96 overflow-hidden shadow-md">
         <Image
+          width={400}               // حجم مناسب للبطاقة
+        height={300} 
           src={project.seriesimagesCutmez[selectedImage]?.url}
           alt={project.title}
             loading="lazy"
@@ -59,7 +61,8 @@ const [activeTab, setActiveTab] = useState('overview');
                   selectedImage === index ? 'border-amber-500' : 'border-gray-200'
                 }`}
               >
-                <Image   loading="lazy" src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover" />
+                <Image   width={400}               // حجم مناسب للبطاقة
+        height={300}   loading="lazy" src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover" />
               </button>
             ))}
           </div>
@@ -227,7 +230,8 @@ const [activeTab, setActiveTab] = useState('overview');
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {project.seriesimagesCutmez.map((image, index) => (
                         <div key={index} className="aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                          <Image   loading="lazy" src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                          <Image   width={400}               // حجم مناسب للبطاقة
+        height={300}   loading="lazy" src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                         </div>
                       ))}
                     </div>

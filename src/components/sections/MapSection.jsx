@@ -191,6 +191,8 @@ const MapSection = ({data}) => {
               <Popup>
                 <div className="flex items-start w-64">
                   <Image
+                  width={200}
+                  height={200}
                     src={property.seriesimagesCutmez[0]?.url}
                     alt={property.title}
                       loading="lazy"
