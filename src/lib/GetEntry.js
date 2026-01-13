@@ -4,6 +4,7 @@ export async function getPropertiey(id) {
 //   const query = {
 //     content_type: "alraya-projects",
 //   };
+console.log("id" , id);
 
 
 

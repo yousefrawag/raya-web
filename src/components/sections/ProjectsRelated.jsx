@@ -10,62 +10,7 @@ import { Building } from 'lucide-react';
 import Link from "next/link";
 
 export default function ProjectsRelated({data}) {
-  const projects = [
-    {
-      title: "فال - مشروع رسين ريجان قبلا- للبيع",
-      location: "العازض، شمال، الرياض",
-      priceMin: "2.96M",
-      priceMax: "4.59M",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-    {
-      title: "فال - مشروع رسين ريجان قبلا- للبيع",
-      location: "العازض، شمال، الرياض",
-      priceMin: "2.96M",
-      priceMax: "4.59M",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-    {
-      title: "فال - مشروع رسين ريجان قبلا- للبيع",
-      location: "العازض، شمال، الرياض",
-      priceMin: "2.96M",
-      priceMax: "4.59M",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-    {
-      title: "فال - مشروع رسين ريجان قبلا- للبيع",
-      location: "العازض، شمال، الرياض",
-      priceMin: "2.96M",
-      priceMax: "4.59M",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-    {
-      title: "سما الورود - 2 فلل للبيع",
-      location: "الورود الثاني، الانساء",
-      priceMin: "656.38K",
-      priceMax: "962.59K",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-    {
-      title: "شمس الرياض - فلل فاخرة",
-      location: "شرق الرياض",
-      priceMin: "80.01M",
-      priceMax: "97.09M",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-  ];
+
 
   return (
     <div className="py-12 px-4">
@@ -108,6 +53,7 @@ export default function ProjectsRelated({data}) {
                     src={item.seriesimagesCutmez[0]?.url}
                     alt={item.title}
                     fill
+                      loading="lazy"
                     className="object-cover transition-transform duration-500 hover:scale-105"
                   />
 
@@ -142,6 +88,7 @@ export default function ProjectsRelated({data}) {
                         alt="Developer Logo"
                         width={64}
                         height={64}
+                          loading="lazy"
                         className="w-full h-full object-cover rounded-full"
                       />
                     </div>

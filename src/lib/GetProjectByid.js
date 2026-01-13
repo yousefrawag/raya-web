@@ -1,6 +1,7 @@
 import { client , checkimageprotcoll } from "../utils/ContentfullClient";
 
 export async function GetProjectByid(id) {
+console.log("id-project" , id);
 
   const res = await client.getEntry(id);
   console.log("res project data", res?.fields);

@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, Circle, Polygon } from "react-l
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 // إصلاح الأيقونات الافتراضية
 delete Icon.Default.prototype._getIconUrl;
@@ -189,9 +190,10 @@ const MapSection = ({data}) => {
             >
               <Popup>
                 <div className="flex items-start w-64">
-                  <img
+                  <Image
                     src={property.seriesimagesCutmez[0]?.url}
                     alt={property.title}
+                      loading="lazy"
                     className="w-24 h-24 object-cover rounded-md"
                   />
                   <div className="flex-1 ml-2">

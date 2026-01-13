@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, MapPin, Bed, Bath, Square, Phone, Mail, MessageCircle, Star, Check, Image as ImageIcon, FileText, CreditCard, User } from 'lucide-react';
 import MapSection from '@/components/common/MapSection';
 import { useState } from 'react';
@@ -25,7 +26,8 @@ const ProertyContent = ({data}) => {
         <div className='flex flex-col lg:flex-row gap-5 w-full py-8  '>
       {/* Hero Section */}
       <div className="relative w-full lg:w-[80%] h-96 overflow-hidden">
-        <img 
+        <Image
+          loading="lazy"
           src={data.seriesimagesCutmez[selectedImage]?.url}
           alt={data.title}
           className="w-full h-full object-cover rounded-md"
@@ -58,7 +60,7 @@ const ProertyContent = ({data}) => {
                   selectedImage === index ? 'border-amber-500' : 'border-gray-200'
                 }`}
               >
-                <img src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover" />
+                <Image src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover" />
               </button>
             ))}
           </div>
@@ -239,7 +241,7 @@ const ProertyContent = ({data}) => {
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {data.seriesimagesCutmez.map((image, index) => (
                         <div key={index} className="aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                          <img src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                          <Image   loading="lazy" src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                         </div>
                       ))}
                     </div>

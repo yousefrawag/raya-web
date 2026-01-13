@@ -22,6 +22,7 @@ const AllProject = ({data}) => {
                   <Image
                     src={item.seriesimagesCutmez[0]?.url}
                     alt={item.title}
+                      loading="lazy"
                     fill
                     className="object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -56,6 +57,7 @@ const AllProject = ({data}) => {
                         src={item.seriesimagesCutmez[1]?.url}
                         alt="Developer Logo"
                         width={64}
+                          loading="lazy"
                         height={64}
                         className="w-full h-full object-cover rounded-full"
                       />

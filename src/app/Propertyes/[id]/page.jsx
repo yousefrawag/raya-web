@@ -10,7 +10,8 @@ import ProertyContent from '@/components/common/ProertyContent';
 import PropertiesRelatedServer from '@/components/sections/PropertiesRelatedServer';
 
 const PropertyDetail =  async ({params}) => {
-const property = await getPropertiey(params.id)
+   const { id } = await params;
+const property = await getPropertiey(id)
   
 
 

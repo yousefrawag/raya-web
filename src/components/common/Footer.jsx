@@ -94,7 +94,7 @@ const Footer = () => {
               <p>
                 akaratalraya@gmail.com
               </p>
-              <p> فلسطين , القدس</p>
+            
             </div>
           </div>
         </div>

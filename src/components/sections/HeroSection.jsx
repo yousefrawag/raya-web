@@ -6,7 +6,8 @@ import heroVideoPoster from "@/images/Hero-images/poster.png";
 import FilterSection from "./FilterSection";
 
 const HeroSection = () => {
-  const videoRef = useRef(null);
+   const videoRef = useRef(null);
+  const [showVideo, setShowVideo] = useState(false);
 
   // Animated texts
   const texts = [
@@ -47,23 +48,41 @@ const HeroSection = () => {
     return () => clearTimeout(timeout);
   }, [charIndex, deleting, textIndex, texts]);
 
+  // Lazy load video after 1s
+  useEffect(() => {
+    const timer = setTimeout(() => setShowVideo(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center items-center pb-48">
-      {/* Background Video */}
-      <div className="absolute inset-0">
+      {/* Poster as background */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src={heroVideoPoster}
+          alt="Hero Poster"
+          fill
+          sizes="100vw"
+          quality={70}
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      {/* Lazy Video */}
+      {showVideo && typeof window !== "undefined" && (
         <video
           ref={videoRef}
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover -z-20"
           autoPlay
           muted
           loop
           playsInline
-          poster={heroVideoPoster.src}
         >
           <source src="/banner.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
+      )}
 
       {/* Content */}
       <div className="relative z-10 px-6 text-white flex flex-col items-center pt-24 md:pt-0">

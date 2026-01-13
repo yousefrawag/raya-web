@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { ArrowRight, MapPin, Calendar, Building, Users, Phone, Mail, MessageCircle, Star, Check, Image as ImageIcon, FileText, CreditCard } from 'lucide-react';
 import { projectsData } from "@/data/index";
 import MapSection from '@/components/common/MapSection';
+import Image from 'next/image';
 import { useState } from 'react';
 const ProjectByidContent = ({project}) => {
 const [selectedImage, setSelectedImage] = useState(0);
@@ -27,9 +28,10 @@ const [activeTab, setActiveTab] = useState('overview');
       {/* Hero Section */}
      
       <div className="relative w-full lg:w-[80%] h-96 overflow-hidden shadow-md">
-        <img 
+        <Image
           src={project.seriesimagesCutmez[selectedImage]?.url}
           alt={project.title}
+            loading="lazy"
           className="w-full h-full object-cover rounded-md"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -57,7 +59,7 @@ const [activeTab, setActiveTab] = useState('overview');
                   selectedImage === index ? 'border-amber-500' : 'border-gray-200'
                 }`}
               >
-                <img src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover" />
+                <Image   loading="lazy" src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover" />
               </button>
             ))}
           </div>
@@ -225,7 +227,7 @@ const [activeTab, setActiveTab] = useState('overview');
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {project.seriesimagesCutmez.map((image, index) => (
                         <div key={index} className="aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                          <img src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                          <Image   loading="lazy" src={image?.url} alt={`صورة ${index + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                         </div>
                       ))}
                     </div>

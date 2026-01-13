@@ -317,7 +317,8 @@ const AllProperties = ({ propertiesServerdata}) => {
 
               {/* Image Container */}
               <div className="relative overflow-hidden">
-                <img 
+                <Image
+                  loading="lazy"
                   src={property.seriesimagesCutmez[0]?.url}
                   alt={property.title}
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"

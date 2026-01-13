@@ -10,8 +10,9 @@ import { GetProjectByid } from '@/lib/GetProjectByid';
 import ProjectByidContent from '@/components/sections/ProjectByidContent';
 import ProjectsRelatedServer from '@/components/sections/ProjectsRelatedServer';
 const ProjectDetail = async ({params}) => {
+ const { id } = await params;
 
- const project = await GetProjectByid(params.id)
+ const project = await GetProjectByid(id)
  
 
   // if (!project) {

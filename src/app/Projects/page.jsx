@@ -1,6 +1,6 @@
 
 import React from 'react'
-import ProjectSection from '@/components/sections/ProjectSection'
+
 import AdvancedSearch from '@/components/sections/AdvancedSearch'
 
 import Link from 'next/link'

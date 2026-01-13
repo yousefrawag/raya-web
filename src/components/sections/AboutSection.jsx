@@ -1,6 +1,6 @@
 import React from 'react';
 import { Award, Users, Star } from 'lucide-react';
-
+import Image from 'next/image';
 const AboutSection = () => {
   return (
     <section id="about" className="py-20 bg-white">
@@ -51,7 +51,8 @@ const AboutSection = () => {
           {/* Team Image */}
           <div className="relative">
             <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <img 
+              <Image
+                loading="lazy"
                 src="https://images.pexels.com/photos/3184432/pexels-photo-3184432.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
                 alt="فريقنا المحترف"
                 className="w-full h-[500px] object-cover"

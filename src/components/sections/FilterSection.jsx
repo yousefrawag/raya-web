@@ -82,7 +82,7 @@ const handelSelect = (e) => {
   };
 
   return (
-<section className="max-w-6xl bg-[url('/images/Hero-images/searchsection.webp')] bg-cover bg-center mx-auto  bg-white  rounded-2xl shadow-xl p-6">
+<section className="max-w-6xl  bg-cover bg-center mx-auto  bg-white  rounded-2xl shadow-xl p-6">
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
     {/* Operation */}
   <SelectOne  data={propertyTypes} titale="نوع العقار" name="propertyType" currentValue={searchData.propertyType} setFormData={setSearchData} />
