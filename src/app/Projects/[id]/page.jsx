@@ -40,13 +40,13 @@ const ProjectDetail = async ({params}) => {
             /
           </Link>
         
-            <Link href="/project" className="inline-flex items-center text-slate-900 hover:text-amber-700 transition-colors">
+            <Link href="/Projects" className="inline-flex items-center text-slate-900 hover:text-amber-700 transition-colors">
             
             المشاريع
             /
           </Link>
                  <Link href={{
-    pathname: "/project",
+    pathname: "/Projects",
     query: {
   
       city: project.city,
