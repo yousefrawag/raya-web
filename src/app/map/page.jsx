@@ -8,7 +8,8 @@ import { getProperties } from '@/lib/GetpropertiesEntry';
 import MapPageContentent from '@/components/sections/MapPageContentent';
 
 const PropertySearch = async ({searchParams}) => {
- const data = await getProperties(searchParams)
+  const {city , propertyType , area, bedrooms ,region , opeartion} = await searchParams
+ const data = await getProperties(city , propertyType , area, bedrooms ,region , opeartion)
 
   return (
     <div className="min-h-screen bg-gray-50 py-10" dir="rtl">
