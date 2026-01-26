@@ -4,9 +4,28 @@ import Link from 'next/link';
 import { MapPin, Calendar, Users, Building } from 'lucide-react';
 import { FaHeart } from "react-icons/fa";
 import Image from 'next/image';
+import { SearchX } from "lucide-react";
+
 const AllProject = ({data}) => {
 
+if (data?.length === 0) {
+  return (
+    <div className="flex flex-col items-center justify-center w-full py-16 text-center">
+      <div className="flex items-center justify-center w-16 h-16 rounded-full bg-red-50 mb-4">
+        <SearchX className="w-8 h-8 text-red-500" />
+      </div>
 
+      <h3 className="text-lg font-semibold text-gray-700">
+        لا توجد نتائج مطابقة
+      </h3>
+
+      <p className="text-sm text-gray-500 mt-2 max-w-md">
+        لم نعثر على عقارات تطابق معايير البحث الحالية.  
+        جرّب تعديل الفلاتر أو تغيير نطاق البحث.
+      </p>
+    </div>
+  );
+}
   return (
     <section id="projects" className="py-20 ">
       <div className="container mx-auto px-6">
