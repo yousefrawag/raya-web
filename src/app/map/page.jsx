@@ -6,6 +6,39 @@ import { GetallEntry } from '@/lib/GetallEntry';
 import { getProperties } from '@/lib/GetpropertiesEntry';
 
 import MapPageContentent from '@/components/sections/MapPageContentent';
+export async function generateMetadata({ searchParams }) {
+  const params = {
+    city: searchParams?.city,
+    propertyType: searchParams?.propertyType,
+    area: searchParams?.area,
+    bedrooms: searchParams?.bedrooms,
+    region: searchParams?.region,
+    opeartion: searchParams?.opeartion
+  }
+
+  const cityText = params.city ? `في ${params.city}` : 'في القدس'
+  const typeText = params.propertyType || 'عقارات'
+  const operationText = params.opeartion
+    
+
+  const title = `${typeText} ${operationText} ${cityText} | خريطة تفاعلية`
+  const description = `استعرض ${typeText} ${operationText} ${cityText} على خريطة تفاعلية. فلترة حسب السعر، المساحة، عدد الغرف والموقع.`
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/properties/map?${new URLSearchParams(
+        Object.entries(params).filter(([_, v]) => v)
+      ).toString()}`
+    },
+    openGraph: {
+      title,
+      description,
+      type: 'website'
+    }
+  }
+}
 
 const PropertySearch = async ({searchParams}) => {
   const {city , propertyType , area, bedrooms ,region , opeartion} = await searchParams

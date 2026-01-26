@@ -8,7 +8,52 @@ import { propertiesData } from "@/data/index";
 import { getPropertiey } from '@/lib/GetEntry';
 import ProertyContent from '@/components/common/ProertyContent';
 import PropertiesRelatedServer from '@/components/sections/PropertiesRelatedServer';
+export async function generateMetadata({ params }) {
+  const { id } = await params
+  const project = await getPropertiey(id)
 
+  if (!project) {
+    return {
+      title: 'عقار غير موجود | شركة الراية',
+      robots: {
+        index: false,
+        follow: false
+      }
+    }
+  }
+
+  const title = `${project.title} في ${project.city} | عقار ${project.typeOfproject} من شركة الراية`
+
+  const description = `
+${project.title} عقار ${project.typeOfproject} في ${project.city}.
+${project.details?.slice(0, 140) || 'مشروع عقاري مميز بموقع استراتيجي وأنظمة سداد مرنة.'}
+  `.trim()
+
+  return {
+    title,
+    description,
+
+    alternates: {
+      canonical: `/Propertyes/${id}`
+    },
+
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      locale: 'ar_AR',
+      images: project.seriesimagesCutmez?.[0]?.url
+        ? [{ url: project.seriesimagesCutmez[0].url }]
+        : []
+    },
+
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description
+    }
+  }
+}
 const PropertyDetail =  async ({params}) => {
    const { id } = await params;
 const property = await getPropertiey(id)

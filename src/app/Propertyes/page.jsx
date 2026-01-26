@@ -11,6 +11,52 @@ import SelectHook from '@/hooks/SelectHook'
 import FixedFilter from '@/components/sections/FixedFilter'
 
 import { getProperties } from '@/lib/GetpropertiesEntry'
+export async function generateMetadata({ searchParams }) {
+  const {
+    city,
+    propertyType,
+    area,
+    bedrooms,
+    region,
+    opeartion
+  } = searchParams || {}
+
+  const cityText = city ? `في ${city}` : 'في القدس'
+  const typeText = propertyType || 'عقارات'
+  const operationText = opeartion || 'للبيع والإيجار'
+  const areaText = area ? `منطقة ${area}` : ''
+  const bedroomsText = bedrooms ? `${bedrooms} غرف` : ''
+
+  const title = `${typeText} ${operationText} ${cityText} | شركة الراية العقارية`
+
+  const description = `
+استعرض أفضل ${typeText} ${operationText} ${cityText}
+${areaText ? `بـ ${areaText}` : ''}
+${bedroomsText ? `بعدد ${bedroomsText}` : ''}.
+فلترة متقدمة، صور حقيقية، مواقع مميزة وأسعار تنافسية.
+  `.trim()
+
+  return {
+    title,
+    description,
+
+    alternates: {
+      canonical: `/properties?${new URLSearchParams(
+        Object.entries(searchParams || {}).filter(
+          ([, v]) => typeof v === 'string'
+        )
+      ).toString()}`
+    },
+
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      locale: 'ar_AR'
+    }
+  }
+}
+
 const Projects = async ({searchParams}) => {
   const {city , propertyType , area, bedrooms ,region , opeartion} = await searchParams
    const newdata = await  getProperties(city , propertyType , area, bedrooms ,region , opeartion)
@@ -29,27 +75,11 @@ const Projects = async ({searchParams}) => {
 
   {/* قسم العقارات */}
   <main className=" lg:px-4 w-full lg:w-full">
-   {/* <div className='flex  justify-between items-center'>
-    <div>
-      <h1 className='text-xl font-bold text-slate-900'>عقارات للبيع فى حنين</h1>
-<h2 className='text-[#485661] font-bold '> عدد النتائج <span className='text-amber'>23</span></h2>
-    </div>
-   <SelectHook  options={sortOptions}   name="sort"
-  value={sort}
-  onChange={setSort}
-  placeholder="ترتيب حسب"/>
 
-   </div> */}
     <AllProperties propertiesServerdata={newdata} />
   </main>
 
-{/* <div className='w-full  lg:block  mt-10 lg:w-[30%] bg-[#fff] h-[250px] shadow-lg border-1 border-[#e1e4e8] rounded-md p-4'>
 
-
-  
-<Image src={mapImage} alt="map-image" />
-
-</div> */}
 </div>
     </div>
 

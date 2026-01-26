@@ -27,6 +27,7 @@ const Hedaer = () => {
     { id: '/Projects', label: 'مشاريعنا' },
     { id: '/Propertyes', label: 'العقارات' },
      { id: '/map', label: 'ابحث على الخريطة' },
+       { id: '/blogs', label: "المدونة" },
 
   ];
 

@@ -27,6 +27,7 @@ const regions = [
     id: 2,
     name: "رام الله",
     image: ramella,
+   
     propertyCount: 189,
     avgPrice: "720,000 ريال",
     description: "جبل النار ومدينة التجارة والصناعة",
@@ -35,13 +36,15 @@ const regions = [
     id: 3,
     name: "بيت حنينا",
     image: phetahnen,
+    region: "القدس",
     propertyCount: 167,
     avgPrice: "680,000 ريال",
     description: "مدينة الأنبياء والتاريخ العريق",
   },
   {
     id: 4,
-    name: "كفر عقرب",
+    name: "كفر عقب",
+     region: "القدس",
     image: akrab,
     propertyCount: 134,
     avgPrice: "900,000 ريال",
@@ -50,6 +53,7 @@ const regions = [
   {
     id: 5,
     name: "صور باهر",
+     region: "القدس",
     image: surbare,
     propertyCount: 98,
     avgPrice: "580,000 ريال",
@@ -104,7 +108,8 @@ const RegionFilter = () => {
     pathname: "/Propertyes",
     query: {
   
-      city: region.name,
+      city: region.region ? region.region : region.name,
+      region :region.region ? region.name : ""
     
     },
   }} className="w-full bg-gradient-to-r text-center cursor-pointer from-orange-500 to-orange-600 text-white py-3 rounded-xl font-semibold hover:from-orange-600 hover:to-orange-700 transform hover:scale-[1.02] transition-all duration-200 shadow-md hover:shadow-lg">

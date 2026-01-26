@@ -2,15 +2,14 @@ import { client , checkimageprotcoll } from "../utils/ContentfullClient";
 
 export async function GetEntryByquery(city) {
   const query = {
-    content_type: "alraya-projects",
+    content_type: "arya-properties",
   };
 
   if (city) {
     query["fields.city"] = city || "";
+     
   }
-  // if (city) {
-  //   query["fields.region"] = city || "";
-  // }
+ 
 
 
   const res = await client.getEntries(query);

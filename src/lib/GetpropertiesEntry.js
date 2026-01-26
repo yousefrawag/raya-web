@@ -2,7 +2,7 @@ import { client , checkimageprotcoll } from "../utils/ContentfullClient";
 
 export async function getProperties(city ,  propertyType , area, bedrooms ,region , opeartion) {
   const query = {
-    content_type: "alraya-projects",
+    content_type: "arya-properties",
   };
 
   if (city) {

@@ -2,11 +2,12 @@ import { client , checkimageprotcoll } from "../utils/ContentfullClient";
 
 export async function GetProjectEntry(city ,projectType ,region ,bedrooms ,area  ) {
   const query = {
-    content_type: "alraya-projects-project",
+    content_type: "raya-projects-lastedtion",
   };
 
   if (city) {
     query["fields.city"] = city || "";
+      
   }
 
   if (projectType) {
