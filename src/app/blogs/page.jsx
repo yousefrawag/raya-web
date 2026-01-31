@@ -1,3 +1,4 @@
+export const revalidate = 60;
 import React from 'react'
 import AllBlogs from '@/components/sections/AllBlogs'
 import { GetBlogs } from '@/lib/GetBlogs'

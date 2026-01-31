@@ -6,61 +6,7 @@ import { getProperties } from '@/lib/GetpropertiesEntry';
 import { GetallEntry } from '@/lib/GetallEntry';
 const Properties =  async () => {
   const data = await GetallEntry()
-  const properties = [
-    {
-      id: 1,
-      title: 'بنتهاوس مثل على البحر',
-      location: 'الكورنيش، جدة',
-      price: '4,200,000',
-      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      bedrooms: 4,
-      bathrooms: 3,
-      area: 300,
-      type: 'للبيع',
-      featured: true,
-      rating: 4.8
-    },
-     {
-      id: 11,
-      title: 'بنتهاوس مثل على البحر',
-      location: 'الكورنيش، جدة',
-      price: '4,200,000',
-      image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      bedrooms: 4,
-      bathrooms: 3,
-      area: 300,
-      type: 'للبيع',
-      featured: true,
-      rating: 4.8
-    },
-    
-    {
-      id: 2,
-      title: 'شقة عصرية في دبي مارينا',
-      location: 'دبي مارينا، دبي',
-      price: '8,500',
-      image: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      bedrooms: 2,
-      bathrooms: 2,
-      area: 120,
-      type: 'للإيجار',
-      featured: false,
-      rating: 4.5
-    },
-    {
-      id: 3,
-      title: 'فيلا فاخرة في الرياض',
-      location: 'حي الملقا، الرياض',
-      price: '2,500,000',
-      image: 'https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
-      bedrooms: 5,
-      bathrooms: 4,
-      area: 450,
-      type: 'للبيع',
-      featured: true,
-      rating: 4.9
-    }
-  ];
+
 
   return (
     <section id="properties" className="py-20 bg-gray-50">
