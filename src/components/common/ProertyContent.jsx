@@ -13,8 +13,8 @@ const ProertyContent = ({ data }) => {
     const whatsappUrl = `https://wa.me/${+972568700632}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
-  const heroImage =
-    data.seriesimagesCutmez[selectedImage]?.url ||
+  const heroImage =   data?.seriesimagesCutmez ? 
+    data?.seriesimagesCutmez[selectedImage]?.url :
     "https://via.placeholder.com/800x450?text=No+Image";
   return (
     <div>
@@ -43,7 +43,8 @@ const ProertyContent = ({ data }) => {
         </div>
 
         {/* Gallery Thumbnails */}
-        <div className="bg-white py-4 w-full lg:w-[20%] shadow-md rounded-md">
+        {
+          data.seriesimagesCutmez &&  <div className="bg-white py-4 w-full lg:w-[20%] shadow-md rounded-md">
           <div className="container mx-auto px-6">
             <div className="flex lg:flex-col flex-row gap-3 items-center overflow-x-auto">
               {data.seriesimagesCutmez.slice(0, 3).map((image, index) => (
@@ -68,6 +69,8 @@ const ProertyContent = ({ data }) => {
             </div>
           </div>
         </div>
+        }
+       
       </div>
 
       {/* Main Content Grid */}

@@ -24,7 +24,7 @@ const Properties =  async () => {
         {/* Properties Grid */}
         <div className={`grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8
         `}>
-              {data?.map((property) => (
+              {data?.slice(0 , 3)?.map((property) => (
             <div 
               key={property.id}
               className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group border border-gray-100 relative"
@@ -37,28 +37,31 @@ const Properties =  async () => {
               )}
 
               {/* Image Container */}
-              <div className="relative overflow-hidden">
-                <img 
-                  src={property.seriesimagesCutmez[0]?.url}
-                  alt={property.title}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                
-                {/* Type Badge */}
-                <div className="absolute top-4 left-4 bg-white/95 text-gray-800 px-3 py-1 rounded-full text-sm font-semibold">
-                  {property.typeOfproject} 
-                </div>
+            {
+  property?.seriesimagesCutmez && 
+  property.seriesimagesCutmez.length > 0 && 
+  property.seriesimagesCutmez[0]?.url ? 
+    <div className="relative overflow-hidden">
+      <img 
+        src={property.seriesimagesCutmez[0].url}
+        alt={property.title}
+        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+      />
+      
+      <div className="absolute top-4 left-4 bg-white/95 text-gray-800 px-3 py-1 rounded-full text-sm font-semibold">
+        {property.typeOfproject} 
+      </div>
 
-                {/* Action Buttons */}
-                {/* <div className="absolute top-4 left-14 flex gap-2">
-                  <button className="bg-white/90 hover:bg-white p-2 rounded-full transition-all duration-300 shadow-md">
-                    <Heart size={16} className="text-gray-600 hover:text-red-500 transition-colors" />
-                  </button>
-                </div> */}
-
-                {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
-              </div>
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
+    </div> 
+    : (
+      // صورة بديلة لو مفيش صورة
+      <div className="w-full h-64 bg-gray-200 flex items-center justify-center">
+        <span className="text-gray-400">لا توجد صورة</span>
+      </div>
+    )
+}
+            
               
               {/* Content */}
               <div className="p-6">
