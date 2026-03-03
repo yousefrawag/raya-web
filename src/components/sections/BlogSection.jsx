@@ -50,7 +50,7 @@ const BlogSection = ({data}) => {
               },
             }}
           >
-           {data.map((post) => (
+           {data?.slice(0 , 5).map((post) => (
   <SwiperSlide
     key={post.id}
     className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden group"

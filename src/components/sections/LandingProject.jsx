@@ -110,10 +110,11 @@ export default function LandingProject({data}) {
             <SwiperSlide key={item.id} className="!flex !justify-center">
               <div className="w-[320px] bg-white rounded-[25px] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 mx-auto"> {/* Added mx-auto */}
                 {/* صورة المشروع */}
-                <div className="relative h-[220px] overflow-hidden">
+             {
+              item?.seriesimagesCutmez && <div className="relative h-[220px] overflow-hidden">
                   <Image
-                    src={item.seriesimagesCutmez[0]?.url}
-                    alt={item.title}
+                    src={item?.seriesimagesCutmez[0]?.url}
+                    alt={item?.title}
                     fill
                     className="object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -128,6 +129,7 @@ export default function LandingProject({data}) {
                     {item.projectType}
                   </span>
                 </div>
+             }   
 
                 {/* الجزء السفلي مع التصميم المميز */}
                 <div className="relative pt-8 pb-6 px-6">
@@ -144,13 +146,16 @@ export default function LandingProject({data}) {
                     
                     {/* دائرة اللوجو */}
                     <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-16 h-16 bg-white border-4 border-white shadow-lg rounded-full overflow-hidden z-20">
-                      <Image
+                 {
+                  item?.seriesimagesCutmez &&  <Image
                         src={item.seriesimagesCutmez[1]?.url}
                         alt="Developer Logo"
                         width={64}
                         height={64}
                         className="w-full h-full object-cover rounded-full"
                       />
+                 }
+                    
                     </div>
                   </div>
 
