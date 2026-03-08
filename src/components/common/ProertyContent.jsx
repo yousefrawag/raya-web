@@ -182,26 +182,34 @@ const ProertyContent = ({ data }) => {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-2xl font-bold text-slate-800 mb-6">مميزات العقار</h3>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {data.projectFeatures.map((feature, index) => (
+                    {
+                      data?.projectFeatures ?     <div className="grid md:grid-cols-2 gap-4">
+                      {data?.projectFeatures?.map((feature, index) => (
                         <div key={index} className="flex items-center">
                           <Check className="text-green-500 ml-3" size={20} />
                           <span className="text-gray-700">{feature}</span>
                         </div>
                       ))}
-                    </div>
+                    </div> : <span className="text-lg  text-slate-500 ">
+                      غير متوفره
+                    </span>
+                    }
+                
                   </div>
 
                   <div>
                     <h3 className="text-2xl font-bold text-slate-800 mb-6">المرافق القريبة</h3>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {data.propertiesServies.map((amenity, index) => (
+                    {
+                      data?.propertiesServies &&       <div className="grid md:grid-cols-2 gap-4">
+                      {data?.propertiesServies?.map((amenity, index) => (
                         <div key={index} className="flex items-center">
                           <Check className="text-amber-500 ml-3" size={20} />
                           <span className="text-gray-700">{amenity}</span>
                         </div>
                       ))}
                     </div>
+                    }
+              
                   </div>
                 </div>
               )}

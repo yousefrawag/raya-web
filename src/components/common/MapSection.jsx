@@ -30,7 +30,8 @@ const MapSection = ({map3d , map}) => {
       </div>
 
       {/* الخريطة */}
-      <div className="flex-1 w-full overflow-hidden rounded-lg shadow">
+      {
+        map3d  &&     <div className="flex-1 w-full overflow-hidden rounded-lg shadow">
         <iframe
           src={iframeSrc}
           className="w-full h-full"
@@ -39,6 +40,19 @@ const MapSection = ({map3d , map}) => {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
+      }
+            {
+        map  &&     <div className="flex-1 w-full overflow-hidden rounded-lg shadow">
+        <iframe
+          src={iframeSrc}
+          className="w-full h-full"
+          allowFullScreen={true}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+      }
+
     </div>
   )
 }

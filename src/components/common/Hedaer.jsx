@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Home, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from "next/navigation";
+
 const Hedaer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,6 +27,7 @@ const Hedaer = () => {
 
     { id: '/Projects', label: 'مشاريعنا' },
     { id: '/Propertyes', label: 'العقارات' },
+    { id: '/se', label: 'إستثمار' },
      { id: '/map', label: 'ابحث على الخريطة' },
        { id: '/blogs', label: "المدونة" },
 

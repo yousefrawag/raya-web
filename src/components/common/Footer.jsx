@@ -1,7 +1,9 @@
 "use client"
 import React from 'react';
 import { Home, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
-
+import { FaSnapchatGhost } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
@@ -24,11 +26,20 @@ const Footer = () => {
               إلى حقيقة بالخبرة والنزاهة والخدمة الشخصية المتميزة.
             </p>
             <div className="flex  gap-4 space-x-4 space-x-reverse">
-              <a href="https://www.facebook.com/akaratalraya" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
+              <a target='_blank' href="https://www.facebook.com/akaratalraya" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
                 <Facebook size={20} />
               </a>
-              <a href="https://www.instagram.com/akaratalraya/" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
+              <a target='_blank' href="https://www.instagram.com/akaratalraya/" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
                 <Instagram size={20} />
+              </a>
+                 <a target='_blank' href="https://x.com/akaratalraya" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
+                <FaXTwitter size={20} />
+              </a>
+                    <a href="https://www.tiktok.com/@akaratalraya?_r=1&_t=ZS-94U8XiehrcW" target='_blank' className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
+                <FaTiktok size={20} />
+              </a>
+                        <a target='_blank' href="https://www.snapchat.com/add/akaratalraya?share_id=u2bNKV7lgWE&locale=en-EG" className="bg-slate-800 hover:bg-amber-500 p-3 rounded-full transition-colors duration-300">
+                <FaSnapchatGhost size={20} />
               </a>
             
             </div>
@@ -92,7 +103,7 @@ const Footer = () => {
                 +972 59-270-0633
               </p>
               <p>
-                akaratalraya@gmail.com
+            alrayapalms@gmail.com
               </p>
             
             </div>
