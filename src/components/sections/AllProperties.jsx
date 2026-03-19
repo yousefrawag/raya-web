@@ -4,25 +4,15 @@ import Link from 'next/link';
 import { Bed, Bath, Square, MapPin, Heart } from 'lucide-react';
 import { getProperties } from '@/lib/GetpropertiesEntry';
 import { SearchX } from "lucide-react";
-
+import { MdOutlineMapsHomeWork, MdOutlineWarehouse } from 'react-icons/md';
 import Image from 'next/image';
 const AllProperties = ({ propertiesServerdata}) => {
 if (propertiesServerdata?.length === 0) {
   return (
-    <div className="flex flex-col items-center justify-center w-full py-16 text-center">
-      <div className="flex items-center justify-center w-16 h-16 rounded-full bg-red-50 mb-4">
-        <SearchX className="w-8 h-8 text-red-500" />
-      </div>
-
-      <h3 className="text-lg font-semibold text-gray-700">
-        لا توجد نتائج مطابقة
-      </h3>
-
-      <p className="text-sm text-gray-500 mt-2 max-w-md">
-        لم نعثر على عقارات تطابق معايير البحث الحالية.  
-        جرّب تعديل الفلاتر أو تغيير نطاق البحث.
-      </p>
-    </div>
+       <div className="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-gray-100">
+              <MdOutlineMapsHomeWork size={60} className="mx-auto text-gray-200 mb-4"/>
+              <p className="text-gray-400 font-bold">عذراً، لا توجد عقارات متوفرة في هذا القسم حالياً</p>
+            </div>
   );
 }
 

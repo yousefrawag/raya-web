@@ -20,9 +20,9 @@ const Header = () => {
 
   const navItems = [
     { id: '/', label: 'الرئيسية' },
-    { id: '/Projects', label: 'مشاريع' },
+    // { id: '/Projects', label: 'مشاريع' },
     { id: '/Propertyes', label: 'العقارات' },
-    { id: '/se', label: 'إستثمار' },
+    { id: '/investment', label: 'إستثمار' },
     { id: '/map', label: 'الخريطة' },
     { id: '/blogs', label: "المدونة" },
   ];

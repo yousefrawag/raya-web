@@ -11,17 +11,21 @@ const AllBlogs = ({data}) => {
   const [selectedCategory, setSelectedCategory] = useState('الكل');
 const categories = [
   "الكل",
-  ...new Set(data?.map((item) => item.blogCatgeoray))
+  ...new Set(
+    data
+      ?.map(item => item.blogCatgeoray?.trim()) // نشيل المسافات
+      ?.filter(cat => cat) // نشيل null و undefined و ""
+  )
 ];
   const filteredBooks = data.filter(book => {
     const matchesSearch = book?.blogTietal.includes(searchTerm) ;
-    const matchesCategory = selectedCategory === 'الكل' ;
+    const matchesCategory = selectedCategory === 'الكل' || book.blogCatgeoray === selectedCategory ;
     return matchesSearch && matchesCategory;
   });
 
  return (
-    <section className="py-25 px-4">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20 ">
+      
         
         {/* Page Header */}
         {/* <div className="mb-12 text-center">
@@ -61,13 +65,16 @@ const categories = [
     <div className="max-w-3xl mx-auto space-y-6">
 
       <div className="relative">
-        <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+        <Search className="absolute outline-none border-none right-4 top-1/2 -translate-y-1/2 text-gray-200 w-5 h-5" />
 
-        <Input
-          type="text"
-          placeholder="ابحث في المقالات..."
-          className="pr-12 h-14   text-lg rounded-xl border border-gray-200 shadow-sm bg-white"
-        />
+<Input
+  type="text"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  placeholder="ابحث في المقالات..."
+  className="pr-12 h-14 text-lg rounded-xl shadow-sm bg-white text-black
+             border-none outline-none ring-0 focus:ring-0 focus:outline-none"
+/>
       </div>
 
       {/* categories */}
@@ -77,7 +84,7 @@ const categories = [
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-5 pointer py-2 rounded-lg text-sm font-medium transition 
+            className={`px-5 cursor-pointer py-2 rounded-lg text-sm font-medium transition 
             ${
               selectedCategory === category
                 ? "bg-amber-500 text-white shadow"
@@ -96,7 +103,7 @@ const categories = [
 
 </section>
 
-
+<div className="max-w-7xl mx-auto">
         {/* Blog Grid */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {filteredBooks?.map((post) => (

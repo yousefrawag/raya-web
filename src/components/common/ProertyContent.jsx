@@ -13,94 +13,93 @@ const ProertyContent = ({ data }) => {
     const whatsappUrl = `https://wa.me/${+972568700632}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
-  const heroImage =   data?.seriesimagesCutmez ? 
+
+  const heroImage = data?.seriesimagesCutmez ? 
     data?.seriesimagesCutmez[selectedImage]?.url :
     "https://via.placeholder.com/800x450?text=No+Image";
+
   return (
-    <div>
-      {/* Hero + Thumbnails */}
-      <div className="flex flex-col lg:flex-row gap-5 w-full py-8">
-        {/* Hero Section */}
-        <div className="relative w-full lg:w-[80%] h-96 rounded-md overflow-hidden">
+    <div className="max-w-7xl mx-auto px-4" dir="rtl">
+      {/* --- القسم المطور: Hero + Gallery --- */}
+      <div className="flex flex-col lg:flex-row gap-4 py-8">
+        
+        {/* الصورة الرئيسية الكبيرة */}
+        <div className="relative w-full lg:w-[75%] h-[400px] md:h-[500px] rounded-2xl overflow-hidden group shadow-lg">
           <Image
             src={heroImage}
             alt={data.title}
-          fill
-            className="object-cover"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
             unoptimized
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          <div className="absolute bottom-6 right-6 text-white">
-            <div className="bg-amber-500 px-3 py-1 rounded-full text-sm font-semibold mb-2">
-              {data.typeOfproject}
-            </div>
-            <h1 className="text-4xl font-bold mb-2">{data.title}</h1>
-            <div className="flex items-center text-lg mb-2">
-              <MapPin size={20} className="ml-2" />
-              {data.city}
-            </div>
-          </div>
-        </div>
-
-        {/* Gallery Thumbnails */}
-        {
-          data.seriesimagesCutmez &&  <div className="bg-white py-4 w-full lg:w-[20%] shadow-md rounded-md">
-          <div className="container mx-auto px-6">
-            <div className="flex lg:flex-col flex-row gap-3 items-center overflow-x-auto">
-              {data.seriesimagesCutmez.slice(0, 3).map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`cursor-pointer flex-shrink-0 w-20 h-20 lg:w-40 lg:h-30 rounded-lg overflow-hidden border-2 transition-all ${
-                    selectedImage === index ? 'border-amber-500' : 'border-gray-200'
-                  }`}
-                >
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={image?.url}
-                      alt={`صورة ${index + 1}`}
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-        }
-       
-      </div>
-
-      {/* Main Content Grid */}
-      <div className="grid lg:grid-cols-3 gap-8">
-        {/* Main Section */}
-        <div className="lg:col-span-2">
-          {/* Property Info Bar */}
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-6 space-x-reverse">
-                <div className="flex items-center">
-                  <Bed size={20} className="text-amber-500 ml-2" />
-                  <span className="font-bold text-slate-800">{data.bedrooms} غرف نوم</span>
-                </div>
-                <div className="flex items-center">
-                  <Bath size={20} className="text-amber-500 ml-2" />
-                  <span className="font-bold text-slate-800">{data.bathrooms} حمامات</span>
-                </div>
-                <div className="flex items-center">
-                  <Square size={20} className="text-amber-500 ml-2" />
-                  <span className="font-bold text-slate-800">{data.area} متر مربع</span>
-                </div>
+          {/* Layer Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          
+          {/* تفاصيل العقار فوق الصورة بتصميم أنيق */}
+          <div className="absolute bottom-8 right-8 left-8 flex flex-col md:flex-row md:items-end justify-between gap-4 text-white">
+            <div>
+              <span className="inline-block bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3">
+                {data.typeOfproject}
+              </span>
+              <h1 className="text-3xl md:text-4xl font-black mb-2 drop-shadow-md">{data.title}</h1>
+              <div className="flex items-center text-white/90 font-medium">
+                <MapPin size={18} className="ml-1 text-amber-400" />
+                {data.city}
               </div>
             </div>
+            {/* السعر إن وجد أو حالة العقار */}
+            {/* <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 hidden md:block">
+               <p className="text-xs text-amber-400 font-bold mb-1">حالة المشروع</p>
+               <p className="text-lg font-bold">جاهز للتسليم</p>
+            </div> */}
+          </div>
+        </div>
+
+        {/* الصور المصغرة - تصميم عمودي أنيق */}
+        {data.seriesimagesCutmez && (
+          <div className="w-full lg:w-[25%] flex lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto no-scrollbar max-h-[500px]">
+            {data.seriesimagesCutmez.map((image, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedImage(index)}
+                className={`relative flex-shrink-0 w-24 h-24 lg:w-full lg:h-32 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
+                  selectedImage === index 
+                  ? 'border-amber-500 ring-4 ring-amber-500/10' 
+                  : 'border-transparent grayscale-[40%] hover:grayscale-0'
+                }`}
+              >
+                <Image
+                  src={image?.url}
+                  alt={`صورة ${index + 1}`}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+                {/* Overlay خفيف عند الاختيار */}
+                {selectedImage !== index && <div className="absolute inset-0 bg-black/10 hover:bg-transparent"></div>}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* --- باقي الكود كما هو مع تحسينات بسيطة في الـ Shadows --- */}
+      <div className="grid lg:grid-cols-3 gap-8 pb-12">
+        <div className="lg:col-span-2">
+          {/* Info Bar */}
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 mb-8 flex flex-wrap items-center justify-around gap-4">
+             <QuickInfo icon={<Bed className="text-amber-500" />} label="غرف نوم" value={data.bedrooms} />
+             <div className="w-px h-10 bg-slate-100 hidden md:block"></div>
+             <QuickInfo icon={<Bath className="text-amber-500" />} label="حمامات" value={data.bathrooms} />
+             <div className="w-px h-10 bg-slate-100 hidden md:block"></div>
+             <QuickInfo icon={<Square className="text-amber-500" />} label="المساحة" value={`${data.area} م²`} />
           </div>
 
-          {/* Tabs */}
-          <div className="bg-white rounded-xl shadow-lg mb-8">
-            <div className="border-b border-gray-200">
-              <nav className="flex flex-col lg:flex-row space-x-8 space-x-reverse px-6">
+          {/* Tabs Container */}
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+            <div className="bg-slate-50/50 border-b border-gray-100 overflow-x-auto">
+              <nav className="flex whitespace-nowrap px-4">
                 {[
                   { id: 'overview', label: 'نظرة عامة', icon: Square },
                   { id: 'features', label: 'المميزات', icon: Star },
@@ -111,155 +110,96 @@ const ProertyContent = ({ data }) => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`cursor-pointer flex items-center py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                    className={`flex items-center py-5 px-6 font-bold text-sm transition-all relative ${
                       activeTab === tab.id
-                        ? 'border-amber-500 text-amber-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-700'
+                        ? 'text-amber-600'
+                        : 'text-gray-400 hover:text-gray-600'
                     }`}
                   >
                     <tab.icon size={16} className="ml-2" />
                     {tab.label}
+                    {activeTab === tab.id && (
+                      <div className="absolute bottom-0 right-0 left-0 h-1 bg-amber-500 rounded-t-full"></div>
+                    )}
                   </button>
                 ))}
               </nav>
             </div>
 
-            <div className="p-6">
-              {/* Overview */}
+            <div className="p-8">
               {activeTab === 'overview' && (
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-2xl font-bold text-slate-800 mb-4">وصف العقار</h3>
-                    <p className="text-gray-600 leading-relaxed text-lg">{data.details}</p>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-gray-50 p-6 rounded-xl">
-                      <h4 className="text-lg font-bold text-slate-800 mb-4">تفاصيل العقار</h4>
-                      <div className="space-y-3">
-                        <div className="flex justify-between">
-                          <span className="font-semibold text-slate-800">غرف النوم:</span>
-                          <span className="text-gray-600">{data.bedrooms}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="font-semibold text-slate-800">الحمامات:</span>
-                          <span className="text-gray-600">{data.bathrooms}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="font-semibold text-slate-800">المساحة:</span>
-                          <span className="text-gray-600">{data.area} م²</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="font-semibold text-slate-800">النوع:</span>
-                          <span className="text-gray-600">{data.typeOfproject}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-gray-50 p-6 rounded-xl">
-                      <h4 className="text-lg font-bold text-slate-800 mb-4">المواصفات</h4>
-                      <div className="space-y-3">
-                        <div className="flex justify-between">
-                          <span className="font-semibold text-slate-800">سنة البناء:</span>
-                          <span className="text-slate-800">{data?.buildingage}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="font-semibold text-slate-800">المواقف:</span>
-                          <span className="text-gray-600">{data?.barkingStauts}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="font-semibold text-slate-800">الأثاث:</span>
-                          <span className="text-gray-600">{data?.furniture}</span>
-                        </div>
-                      </div>
-                    </div>
+                <div className="animate-in fade-in duration-500">
+                  <h3 className="text-xl font-black text-slate-800 mb-4 border-r-4 border-amber-500 pr-4">وصف العقار</h3>
+                  <p className="text-gray-600 leading-relaxed text-lg mb-8">{data.details}</p>
+                  
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <DetailBox label="سنة البناء" value={data?.buildingage} />
+                    <DetailBox label="المواقف" value={data?.barkingStauts} />
+                    <DetailBox label="الأثاث" value={data?.furniture} />
+                    <DetailBox label="النوع" value={data.typeOfproject} />
                   </div>
                 </div>
               )}
 
-              {/* Features */}
               {activeTab === 'features' && (
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-2xl font-bold text-slate-800 mb-6">مميزات العقار</h3>
-                    {
-                      data?.projectFeatures ?     <div className="grid md:grid-cols-2 gap-4">
-                      {data?.projectFeatures?.map((feature, index) => (
-                        <div key={index} className="flex items-center">
-                          <Check className="text-green-500 ml-3" size={20} />
-                          <span className="text-gray-700">{feature}</span>
-                        </div>
-                      ))}
-                    </div> : <span className="text-lg  text-slate-500 ">
-                      غير متوفره
-                    </span>
-                    }
-                
-                  </div>
-
-                  <div>
-                    <h3 className="text-2xl font-bold text-slate-800 mb-6">المرافق القريبة</h3>
-                    {
-                      data?.propertiesServies &&       <div className="grid md:grid-cols-2 gap-4">
-                      {data?.propertiesServies?.map((amenity, index) => (
-                        <div key={index} className="flex items-center">
-                          <Check className="text-amber-500 ml-3" size={20} />
-                          <span className="text-gray-700">{amenity}</span>
-                        </div>
-                      ))}
-                    </div>
-                    }
-              
-                  </div>
+                <div className="grid md:grid-cols-2 gap-8 animate-in fade-in duration-500">
+                   <div>
+                     <h4 className="font-black text-lg mb-4 text-slate-800">مميزات المشروع</h4>
+                     <div className="space-y-3">
+                        {data?.projectFeatures?.map((f, i) => (
+                          <div key={i} className="flex items-center gap-3 text-gray-700">
+                            <Check className="text-green-500" size={18} /> {f}
+                          </div>
+                        ))}
+                     </div>
+                   </div>
+                   <div>
+                     <h4 className="font-black text-lg mb-4 text-slate-800">الخدمات القريبة</h4>
+                     <div className="space-y-3">
+                        {data?.propertiesServies?.map((s, i) => (
+                          <div key={i} className="flex items-center gap-3 text-gray-700">
+                            <Check className="text-amber-500" size={18} /> {s}
+                          </div>
+                        ))}
+                     </div>
+                   </div>
                 </div>
               )}
 
-              {/* Map */}
-              {activeTab === "map" && <MapSection map3d={data?.d3map} map={data?.map} />}
+              {activeTab === "map" && <div className="rounded-2xl overflow-hidden h-96"><MapSection map3d={data?.d3map} map={data?.map} /></div>}
 
-              {/* Payment */}
               {activeTab === 'payment' && (
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-bold text-slate-800 mb-6">خيارات الدفع</h3>
-                  <div className="bg-gradient-to-r from-amber-50 to-amber-100 p-6 rounded-xl border border-amber-200">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="text-center">
-                        <div className="bg-amber-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <CreditCard className="text-white" size={24} />
-                        </div>
-                        <h4 className="font-bold text-slate-800 mb-2">الدفعة الأولى</h4>
-                        <p className="text-gray-600">{data?.firstPayemnt}</p>
-                      </div>
-
-                      <div className="text-center">
-                        <div className="bg-amber-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <FileText className="text-white" size={24} />
-                        </div>
-                        <h4 className="font-bold text-slate-800 mb-2">مدة السداد</h4>
-                        <p className="text-gray-600">{data?.installemntPeriod}</p>
-                      </div>
-                    </div>
+                <div className="grid md:grid-cols-2 gap-6 animate-in fade-in duration-500">
+                  <div className="p-6 bg-amber-50 rounded-2xl border border-amber-100 flex items-center gap-4">
+                     <div className="bg-amber-500 p-3 rounded-xl text-white"><CreditCard size={24}/></div>
+                     <div>
+                       <p className="text-xs text-amber-700 font-bold">الدفعة الأولى</p>
+                       <p className="font-black text-lg text-slate-800">{data?.firstPayemnt}</p>
+                     </div>
+                  </div>
+                  <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-4">
+                     <div className="bg-slate-800 p-3 rounded-xl text-white"><FileText size={24}/></div>
+                     <div>
+                       <p className="text-xs text-slate-500 font-bold">مدة السداد</p>
+                       <p className="font-black text-lg text-slate-800">{data?.installemntPeriod}</p>
+                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Gallery */}
               {activeTab === 'gallery' && (
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-bold text-slate-800 mb-6">معرض الصور</h3>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {data.seriesimagesCutmez.map((image, index) => (
-                      <div key={index} className="relative aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                        <Image
-                          src={image?.url}
-                          alt={`صورة ${index + 1}`}
-                          fill
-                          className="object-cover hover:scale-105 transition-transform duration-300"
-                          unoptimized
-                        />
-                      </div>
-                    ))}
-                  </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 animate-in fade-in duration-500">
+                  {data.seriesimagesCutmez.map((image, index) => (
+                    <div key={index} className="relative aspect-square rounded-xl overflow-hidden shadow-sm group">
+                      <Image
+                        src={image?.url}
+                        alt="Gallery"
+                        fill
+                        className="object-cover transition-transform group-hover:scale-110"
+                        unoptimized
+                      />
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
@@ -267,31 +207,48 @@ const ProertyContent = ({ data }) => {
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-6">
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <h3 className="text-xl font-bold text-slate-800 mb-6">تواصل معنا</h3>
-            <div className="space-y-4 mb-6">
-              <div className="flex items-center">
-                <Phone className="text-amber-500 ml-3" size={20} />
-                <span className="text-gray-700">+972 59-270-0633</span>
-              </div>
-              <div className="flex items-center">
-                <Mail className="text-amber-500 ml-3" size={20} />
-                <span className="text-gray-700">akaratalraya@gmail.com</span>
-              </div>
+        <aside className="space-y-6">
+          <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-8 sticky top-6">
+            <h3 className="text-xl font-black text-slate-800 mb-6">احجز موعداً للمعاينة</h3>
+            <div className="space-y-4 mb-8">
+               <div className="flex items-center p-4 bg-slate-50 rounded-xl gap-4">
+                  <Phone className="text-amber-500" size={20} />
+                  <span className="font-bold text-slate-700">+972 59-270-0633</span>
+               </div>
+               <div className="flex items-center p-4 bg-slate-50 rounded-xl gap-4">
+                  <Mail className="text-amber-500" size={20} />
+                  <span className="font-bold text-slate-700 truncate text-sm">akaratalraya@gmail.com</span>
+               </div>
             </div>
             <button
               onClick={handleWhatsApp}
-              className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center"
+              className="w-full bg-green-500 hover:bg-green-600 text-white font-black py-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-green-100 active:scale-95"
             >
-              <MessageCircle size={20} className="ml-2" />
-              تواصل عبر الواتساب
+              <MessageCircle size={22} /> تواصل عبر الواتساب
             </button>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   );
 };
+
+// مكونات مساعدة للحفاظ على نظافة الكود
+const QuickInfo = ({ icon, label, value }) => (
+  <div className="flex items-center gap-3">
+    <div className="bg-amber-50 p-2 rounded-lg">{icon}</div>
+    <div>
+      <p className="text-[10px] text-slate-400 font-bold uppercase">{label}</p>
+      <p className="font-black text-slate-800">{value}</p>
+    </div>
+  </div>
+);
+
+const DetailBox = ({ label, value }) => (
+  <div className="flex justify-between items-center p-4 bg-slate-50 rounded-xl">
+    <span className="text-slate-500 font-bold text-sm">{label}:</span>
+    <span className="text-slate-800 font-black">{value || 'غير متوفر'}</span>
+  </div>
+);
 
 export default ProertyContent;

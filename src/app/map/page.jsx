@@ -45,7 +45,7 @@ const PropertySearch = async ({searchParams}) => {
  const data = await getProperties(city , propertyType , area, bedrooms ,region , opeartion)
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10" dir="rtl">
+    <div className="min-h-screen bg-gray-50 py-15" dir="rtl">
       <div >
      
    
