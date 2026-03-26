@@ -8,74 +8,31 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Building } from 'lucide-react';
 import Link from "next/link";
-
+import { 
+  HiOutlineLocationMarker, 
+  HiOutlineArrowsExpand, 
+  HiOutlineSearch,
+  HiOutlineBadgeCheck,
+  HiOutlineTrendingUp,
+  HiOutlineShieldCheck,
+  HiOutlineUserGroup,
+  HiOutlinePlus
+} from 'react-icons/hi';
 export default function LandingProject({data}) {
-  const projects = [
-    {
-      title: "فال - مشروع رسين ريجان قبلا- للبيع",
-      location: "العازض، شمال، الرياض",
-      priceMin: "2.96M",
-      priceMax: "4.59M",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-    {
-      title: "فال - مشروع رسين ريجان قبلا- للبيع",
-      location: "العازض، شمال، الرياض",
-      priceMin: "2.96M",
-      priceMax: "4.59M",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-    {
-      title: "فال - مشروع رسين ريجان قبلا- للبيع",
-      location: "العازض، شمال، الرياض",
-      priceMin: "2.96M",
-      priceMax: "4.59M",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-    {
-      title: "فال - مشروع رسين ريجان قبلا- للبيع",
-      location: "العازض، شمال، الرياض",
-      priceMin: "2.96M",
-      priceMax: "4.59M",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-    {
-      title: "سما الورود - 2 فلل للبيع",
-      location: "الورود الثاني، الانساء",
-      priceMin: "656.38K",
-      priceMax: "962.59K",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-    {
-      title: "شمس الرياض - فلل فاخرة",
-      location: "شرق الرياض",
-      priceMin: "80.01M",
-      priceMax: "97.09M",
-      type: "فيلا",
-      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-      logo: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000",
-    },
-  ];
+ console.log("data" , data);
+ 
 
   return (
     <div className="py-12 px-4">
       <div className="max-w-7xl mx-auto"> {/* Added container with max-width */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-            المشاريع المتاحة
+             الفرص الإستثمارية المتاحة
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            اكتشف مجموعة متنوعة من المشاريع المتميزة للبيع والإيجار
+             أستكشف العقارات التي تم اختيارها بعناية 
+             من
+             فريقنا
           </p>
         </div>
       
@@ -97,102 +54,28 @@ export default function LandingProject({data}) {
               centeredSlides: false,
             },
             1024: { 
-              slidesPerView: 3,
+              slidesPerView: 2,
               centeredSlides: false,
             },
             1280: { 
-              slidesPerView: 4,
+              slidesPerView: 2,
               centeredSlides: false,
             },
           }}
         >
           {data?.map((item, index) => (
             <SwiperSlide key={item.id} className="!flex !justify-center">
-              <div className="w-[320px] bg-white rounded-[25px] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 mx-auto"> {/* Added mx-auto */}
-                {/* صورة المشروع */}
-             {
-              item?.seriesimagesCutmez && <div className="relative h-[220px] overflow-hidden">
-                  <Image
-                    src={item?.seriesimagesCutmez[0]?.url}
-                    alt={item?.title}
-                    fill
-                    className="object-cover transition-transform duration-500 hover:scale-105"
-                  />
-
-                  {/* زر المفضلة */}
-                  <button className="absolute top-4 left-4 bg-white/90 text-gray-700 p-2 rounded-full hover:bg-gray-200 transition">
-                    <FaHeart size={16} />
-                  </button>
-
-                  {/* نوع المشروع */}
-                  <span className="absolute top-4 right-4 bg-white text-gray-800 text-sm px-3 py-1 rounded-full shadow">
-                    {item.projectType}
-                  </span>
-                </div>
-             }   
-
-                {/* الجزء السفلي مع التصميم المميز */}
-                <div className="relative pt-8 pb-6 px-6">
-                  {/* الشكل المقطوع مع اللوجو */}
-                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-full">
-                    {/* الخط المنحني */}
-                    <div className="relative h-10">
-                      <div className="absolute top-0 left-0 w-full h-10 bg-white rounded-t-[50%]"></div>
-                      
-                      {/* الثقوب الجانبية */}
-                      <div className="absolute -top-1 -left-4 w-8 h-8 rounded-full bg-gray-100"></div>
-                      <div className="absolute -top-1 -right-4 w-8 h-8 rounded-full bg-gray-100"></div>
-                    </div>
-                    
-                    {/* دائرة اللوجو */}
-                    <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-16 h-16 bg-white border-4 border-white shadow-lg rounded-full overflow-hidden z-20">
-                 {
-                  item?.seriesimagesCutmez &&  <Image
-                        src={item.seriesimagesCutmez[1]?.url}
-                        alt="Developer Logo"
-                        width={64}
-                        height={64}
-                        className="w-full h-full object-cover rounded-full"
-                      />
-                 }
-                    
-                    </div>
-                  </div>
-
-                  {/* محتوى البطاقة */}
-                  <div className="text-center mt-2">
-                    {/* العنوان */}
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 leading-tight">
-                      {item.title}
-                    </h3>
-
-                    {/* الموقع */}
-                    <p className="text-gray-600 text-sm mb-4">{item.adress}</p>
-
-                    {/* الأسعار */}
-                    <div className="bg-gray-50 rounded-2xl py-3 px-4 mb-4">
-                      <div className="flex justify-between items-center text-gray-900">
-                        <span className="text-sm font-medium">يبدأ</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-lg font-bold">{item.startingPrice + "$"} </span>
-                          
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* معلومات إضافية */}
-                    <div className="flex justify-between items-center text-sm text-gray-600">
-                      <div className="flex items-center">
-                        <Building size={16} className="text-amber-500 ml-2" />
-                        <span className="text-sm text-gray-600">{item?.numberofunits} وحدة</span>
-                      </div>
-                      <Link href={`/Projects/${item.id}`} className="text-amber-600 font-medium cursor-pointer hover:text-amber-700">
-                        تفاصيل
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
+         <PropertyCard 
+            
+             image={item?.seriesimagesCutmez[0]?.url || "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800"}
+             title={item?.title}
+             location={`${item?.city} - ${item?.region}`}
+             price={item?.price}
+             area={item?.area}
+             type={item?.type}
+             desc={item?.details}
+                id={item?.id}
+          />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -200,3 +83,28 @@ export default function LandingProject({data}) {
     </div>
   );
 }
+const PropertyCard = ({ image, title, location, price, area, type, desc , id }) => (
+  <div className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col md:flex-row h-full">
+    <div className="md:w-5/12 relative h-60 md:h-auto overflow-hidden">
+      <img src={image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+      <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-amber-600 px-4 py-1 rounded-xl text-[10px] font-black uppercase">فرصة حصرية</span>
+    </div>
+    <div className="md:w-7/12 p-8 flex flex-col justify-between">
+      <div>
+        <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-amber-500 transition-colors">{title}</h3>
+        <div className="flex items-center text-slate-400 text-xs mb-4">
+          <HiOutlineLocationMarker className="text-amber-500 ml-1" size={16}/> {location}
+        </div>
+        <p className="text-slate-500 text-xs leading-relaxed mb-6 line-clamp-2">{desc}</p>
+        <div className="flex gap-4 py-4 border-t border-slate-50 mb-4 text-[10px] font-bold text-slate-600">
+           <span className="flex items-center gap-1"><HiOutlineArrowsExpand size={14}/> {area} م²</span>
+           <span className="flex items-center gap-1 uppercase tracking-tighter bg-amber-50 px-2 py-0.5 rounded text-amber-700">{type}</span>
+        </div>
+      </div>
+      <div className="flex justify-between items-center">
+        <div className="text-2xl font-black text-slate-900"><span className="text-amber-500 text-sm ml-1">$</span>{price}</div>
+        <Link href={`/investment/${id}`} className="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-bold text-xs hover:bg-amber-500 transition-all">التفاصيل</Link>
+      </div>
+    </div>
+  </div>
+);

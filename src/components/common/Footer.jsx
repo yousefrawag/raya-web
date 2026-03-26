@@ -78,7 +78,7 @@ const Footer = () => {
                   onClick={() => scrollToSection('projects')}
                   className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
                 >
-                  مشاريعنا
+                  إستثمار
                 </button>
               </li>
               <li>

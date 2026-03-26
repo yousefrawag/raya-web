@@ -1,5 +1,7 @@
-"use client";
-import React, { useState } from 'react';
+// "use client";
+import { GetAllinvestment } from '@/lib/GetAllinvestment';
+import Link from 'next/link';
+// import React, { useState } from 'react';
 import { 
   HiOutlineLocationMarker, 
   HiOutlineArrowsExpand, 
@@ -12,10 +14,10 @@ import {
 } from 'react-icons/hi';
 import { IoBedOutline, IoWaterOutline } from 'react-icons/io5';
 
-const Investment = () => {
-  const [selectedCategory, setSelectedCategory] = useState('الكل');
-  const categories = ["الكل", "فيلا", "ارض", "مخازن", "محل", "شقة", "روف"];
-
+const Investment =  async() => {
+  // const [selectedCategory, setSelectedCategory] = useState('الكل');
+  // const categories = ["الكل", "فيلا", "ارض", "مخازن", "محل", "شقة", "روف"];
+const investmentPrperties = await GetAllinvestment()
   return (
     <div className="min-h-screen bg-white" dir="rtl">
       
@@ -76,11 +78,16 @@ const Investment = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div>
             <h2 className="text-3xl font-black text-slate-900 mb-2">الفرص المتاحة حالياً</h2>
-            <p className="text-slate-500 font-medium">استكشف العقارات التي تم اختيارها بعناية من فريقنا</p>
+            <p className="text-slate-500 font-medium"
+            >استكشف العقارات التي تم اختيارها بعناية
+             من
+             فريقنا
+            
+            </p>
           </div>
           
           {/* الفلترة */}
-          <div className="flex flex-wrap gap-2">
+          {/* <div className="flex flex-wrap gap-2">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -94,21 +101,28 @@ const Investment = () => {
                 {cat}
               </button>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* كروت العقارات (تصميم رشيق) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <PropertyCard 
-             image="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800"
-             title="برج الراية الاستثماري"
-             location="غزة - حي الرمال"
-             price="120,000"
-             area="180"
-             type="شقة"
-             desc="شقة سكنية بامتيازات تجارية، موقع استراتيجي يضمن لك عائداً إيجارياً مرتفعاً فور الاستلام."
+          {
+            investmentPrperties?.map((item) => {
+              return <PropertyCard 
+              key={item?.id}
+             image={item?.seriesimagesCutmez[0]?.url || "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800"}
+             title={item?.title}
+             location={`${item?.city} - ${item?.region}`}
+             price={item?.price}
+             area={item?.area}
+             type={item?.type}
+             desc={item?.details}
+             id={item?.id}
           />
-          <PropertyCard 
+            })
+          }
+   
+          {/* <PropertyCard 
              image="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800"
              title="أرض تجارية - ناصية"
              location="خانيونس - السطر الشرقي"
@@ -116,7 +130,7 @@ const Investment = () => {
              area="650"
              type="ارض"
              desc="فرصة نادرة لأرض تجارية حاصلة على تراخيص بناء مجمع تجاري، تقع على شارعين رئيسيين."
-          />
+          /> */}
         </div>
       </section>
     </div>
@@ -133,7 +147,7 @@ const FeatureCard = ({ icon, title, desc }) => (
 );
 
 // مكون الكارت المطور
-const PropertyCard = ({ image, title, location, price, area, type, desc }) => (
+const PropertyCard = ({ image, title, location, price, area, type, desc  , id}) => (
   <div className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col md:flex-row h-full">
     <div className="md:w-5/12 relative h-60 md:h-auto overflow-hidden">
       <img src={image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -153,7 +167,7 @@ const PropertyCard = ({ image, title, location, price, area, type, desc }) => (
       </div>
       <div className="flex justify-between items-center">
         <div className="text-2xl font-black text-slate-900"><span className="text-amber-500 text-sm ml-1">$</span>{price}</div>
-        <button className="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-bold text-xs hover:bg-amber-500 transition-all">التفاصيل</button>
+        <Link href={`/investment/${id}`} className="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-bold text-xs hover:bg-amber-500 transition-all">التفاصيل</Link>
       </div>
     </div>
   </div>

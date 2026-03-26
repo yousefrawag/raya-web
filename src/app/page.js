@@ -11,6 +11,7 @@ import RegionFilter from "@/components/sections/RegionFilter";
 import LandingProject from "@/components/sections/LandingProject";
 import ProjectServerDataLanding from "@/components/sections/ProjectServerDataLanding";
 import BlogServerRendering from "@/components/sections/BlogServerRendering";
+import InvestMentServer from "@/components/sections/InvestMentServer";
 export default function Home() {
   return (
     <div className=" w-full">
@@ -21,7 +22,7 @@ export default function Home() {
 
 {/* جميع القعارت  */}
 <Properties /> 
-<ProjectServerDataLanding />
+<InvestMentServer />
 <AboutSection />
 <BlogServerRendering />
 <ServicesSection />
