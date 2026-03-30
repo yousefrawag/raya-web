@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { HiSearch } from "react-icons/hi";
 import FilterSection from "./FilterSection";
-
+import rayaLanding from "@/images/Hero-images/slide2.jpg"
 const HeroSection = () => {
   return (
     <section className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col justify-center">
@@ -13,7 +13,7 @@ const HeroSection = () => {
         <div className="relative w-full lg:w-[55%] h-full">
           {/* الصورة التي أرفقتها (المبنى التاريخي) */}
           <Image
-            src="/homebanner21.webp" 
+            src={rayaLanding}
             alt="الراية للعقارات"
             fill
             priority
