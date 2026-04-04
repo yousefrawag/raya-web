@@ -29,7 +29,7 @@ const investmentPrperties = await GetAllinvestment()
             {/* النص التعريفي */}
             <div className="text-right">
               <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-700 rounded-lg text-xs font-black mb-6">
-                الراية لتطوير والاستثمار العقاري
+               منصة الراية لخدمات الاستثمار والتسويق
               </span>
               <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-tight">
                 حول عقارك إلى <span className="text-amber-500">فرصة استثمارية</span> ناجحة

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { HiSearch } from "react-icons/hi";
 import FilterSection from "./FilterSection";
-import rayaLanding from "@/images/Hero-images/slide2.jpg"
+import rayaLanding from "@/images/Hero-images/raya-landdung.jpeg"
 const HeroSection = () => {
   return (
     <section className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col justify-center">
@@ -14,7 +14,7 @@ const HeroSection = () => {
           {/* الصورة التي أرفقتها (المبنى التاريخي) */}
           <Image
             src={rayaLanding}
-            alt="الراية للعقارات"
+            alt="منصة الراية لخدمات الاستثمار والتسويق"
             fill
             priority
             className="object-cover object-center"

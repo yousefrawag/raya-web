@@ -47,9 +47,11 @@ const Header = () => {
               <span className={`text-xl font-black tracking-tight leading-none ${
                 isScrolled || !isHomePage ? 'text-slate-900' : 'text-slate-900' // جعلناه داكناً دائماً لأن خلفية النص بيضاء في الـ Hero الجديد
               }`}>
-                الراية
+                منصة الراية
               </span>
-              <span className="text-[10px] text-amber-600 font-bold uppercase tracking-widest mt-1">للعقارات</span>
+              <span className="text-[10px] text-amber-600 font-bold uppercase tracking-widest mt-1">
+                  لخدمات الاستثمار والتسويق
+              </span>
             </div>
           </Link>
 
