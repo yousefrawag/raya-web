@@ -2,7 +2,7 @@
 import React, { useState, useEffect , useTransition } from 'react'
 import { useRouter, useSearchParams } from "next/navigation";
 import SelectOne from '../common/SelectOne'
-
+import getFullTypes from '@/lib/getFullTypes';
 const defaultCityOptions = [
   { label: "بيت حنين", value: "بيت حنين" },
   { label: "القدس", value: "القدس" },
@@ -15,6 +15,13 @@ export default function FixedFilter() {
   const router = useRouter();
     const [isPending, startTransition] = useTransition();
      const [relatedLocations , setRelatedLocations] = useState([])
+
+      const [dynamicTypes, setDynamicTypes] = useState([]);
+       const [isLoading, setIsLoading] = useState(true);
+       const [dynmicCityes , setDynamicCityes] = useState([])
+     const [dynmicOpeartions, setDynamicOpeartions] = useState([])
+     const [dynmicAreas, setDynamicAreas] = useState([])
+     
   const params = useSearchParams();
    const [filters, setFilters] = useState({
     propertyType:"",
@@ -41,35 +48,51 @@ export default function FixedFilter() {
    
   ];
 
-  const cities = [
-    "اختر المدينة",
-  "القدس",
-  "صور باهر",
-  "شعفاط السهل",
-  "شعفاط",
-  "بيت صفافا - الشرفات",
-  "كفر عقب",
-  "بيت حنينا تل الفول",
-  "بيت حنينا حي الهجرة",
-  "جبل المكبر",
-  "بيت حنينا حي العقبة",
-  "بيت حنينا قرب جامع شومان",
-  "ام طوبا",
-  "بيت حنينا حى الاشقريه",
-  "بيت حنينا",
-  "عمارات نسيبة",
-  "راس العمود",
- 
-  "اريحا",
-  "البوابه",
-    "رام الله",
-    "سطح مرحبا",
-    "المصايف",
-    "البيرة",
-    "طلعه مشتل قلقيلية"
-  
-    
-  ];
+  useEffect(() => {
+    const fetchTypes = async () => {
+      try {
+        const { types , cityes  , opeartions , Areas} = await getFullTypes();
+        // تأكد من إضافة قيمة افتراضية لو الداتا فاضية
+        setDynamicTypes(types?.length > 0 ? types : ["شقة", "فيلا" , "مستودع"]);
+        setDynamicCityes(cityes?.length > 0 ? cityes : [
+    "القدس", "صور باهر", "شعفاط", "كفر عقب", "بيت حنينا", "جبل المكبر", "اريحا", "رام الله", "البيرة"
+  ]) 
+  setDynamicOpeartions(opeartions?.length > 0 ? opeartions : ["بيع" , "إيجار"])
+  setDynamicAreas(Areas?.length > 0  ? Areas : 
+
+     ["100" , "120" , "130" , "140" , "150" , "160" , "170" , "180" , "190" , "200" ,
+      "220",
+      "230",
+      "240",
+      "250",
+      "260",
+      "270",
+      "280",
+      "290",
+      "300",
+      "310",
+      "320",
+      "330",
+      "340",
+      "350",
+      "360",
+      "370",
+      "380",
+      "400",
+      "420",
+      "440",
+      "460"
+    ]
+  )
+      } catch (error) {
+        console.error("Error fetching types:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTypes();
+  }, []);
   
 const regions = [
   {
@@ -96,9 +119,9 @@ const regions = [
   },
   {
     id: "jericho",
-    name: "أريحا",
+    name: "اريجا",
     locations: [
-      "أريحا",
+      "اريجا",
       "البوابة"
     ]
   },
@@ -145,6 +168,8 @@ const regions = [
       "440",
       "460"
     ]
+    console.log("Areas" , dynmicAreas);
+    
   // تثبيت عند السكروول
   useEffect(() => {
     const handleScroll = () => {
@@ -208,16 +233,17 @@ useEffect(() => {
     >
       <div className="container mx-auto px-4">
         {/* container of filters: responsive - scroll horizontal on mobile */}
-        <div className="grid grid-cols-2 lg:grid-cols-7 gap-3 items-center  py-2">
-          <SelectOne  data={propertyTypes} titale="نوع العقار" name="propertyType" currentValue={filters.propertyType || params.get("propertyType")}  setFormData={setFilters} />
-  <SelectOne  data={regions} titale="المنطقة" name="city" currentValue={ filters.city || params.get("city")} setFormData={setFilters} />
+        {
+          isLoading ? <span>جارى التحميل ...</span>  :  <div className="grid grid-cols-2 lg:grid-cols-7 gap-3 items-center  py-2">
+          <SelectOne  data={dynamicTypes} titale="نوع العقار" name="propertyType" currentValue={filters.propertyType || params.get("propertyType")}  setFormData={setFilters} />
+  <SelectOne  data={dynmicCityes} titale="المنطقة" name="city" currentValue={ filters.city || params.get("city")} setFormData={setFilters} />
 
   <SelectOne  data={relatedLocations} titale="الموقع" name="region" currentValue={ filters.region || params.get("region")} setFormData={setFilters} />
 
-  <SelectOne  data={OpeartionType} titale="نوع العملية" name="opeartion" currentValue={filters.propertyType  || params.get("opeartion")} setFormData={setFilters} />
+  <SelectOne  data={dynmicOpeartions} titale="نوع العملية" name="opeartion" currentValue={filters.opeartion  || params.get("opeartion")} setFormData={setFilters} />
 
-  <SelectOne  data={rooms} titale="عدد الغرف" name="bedrooms" currentValue={filters.propertyType  || params.get("bedrooms")} setFormData={setFilters} />
-  <SelectOne  data={area} titale="المساحة" name="area" currentValue={ filters.propertyType || params.get("area")} setFormData={setFilters} />
+  <SelectOne  data={rooms} titale="عدد الغرف" name="bedrooms" currentValue={filters.bedrooms  || params.get("bedrooms")} setFormData={setFilters} />
+  <SelectOne  data={dynmicAreas} titale="المساحة" name="area" currentValue={ filters.area || params.get("area")} setFormData={setFilters} />
 
 
 
@@ -235,6 +261,8 @@ useEffect(() => {
             </button>
           </div>
         </div>
+        }
+      
       </div>
     </div>
   );

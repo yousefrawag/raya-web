@@ -270,12 +270,14 @@ const [activeTab, setActiveTab] = useState('overview');
                         <div className="flex items-center">
                           <Phone className="text-amber-500 ml-3" size={20} />
                           <span className="text-gray-700">
-                            +972568700632
+                                +972568700632
                           </span>
                         </div>
                         <div className="flex items-center">
                           <Mail className="text-amber-500 ml-3" size={20} />
-                          <span className="text-gray-700">raya90@gmail.com</span>
+                          <span className="text-gray-700">
+                            rayapalinfo@gmail.com
+                          </span>
                         </div>
                       </div>
         

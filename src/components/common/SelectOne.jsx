@@ -10,7 +10,7 @@ const SelectOne = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
+const CurrentData = data?.filter((item) => item !== "" && item !== undefined && item !== null)
   // Normalize item (string OR object)
   const normalizeItem = (item) => {
     if (typeof item === "string") {
@@ -18,8 +18,8 @@ const SelectOne = ({
     }
 
     return {
-      label: item.name,
-      value: item.value ?? item.name
+      label: item?.name,
+      value: item?.value ?? item?.name
     };
   };
 
@@ -79,11 +79,11 @@ const SelectOne = ({
 
           {/* Options */}
           <div className="py-1">
-            {data
+            {CurrentData
               ?.filter((item) =>
-                normalizeItem(item).label
+                normalizeItem(item)?.label
                   .toLowerCase()
-                  .includes(searchTerm.toLowerCase())
+                  .includes(searchTerm?.toLowerCase())
               )
               ?.map((item) => {
                 const normalized = normalizeItem(item);

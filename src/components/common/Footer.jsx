@@ -100,10 +100,10 @@ const Footer = () => {
             <h4 className="text-lg font-bold mb-4">معلومات التواصل</h4>
             <div className="space-y-2 text-gray-400">
               <p>
-                +972 59-270-0633
+               +972568700632
               </p>
               <p>
-            alrayapalms@gmail.com
+          rayapalinfo@gmail.com
               </p>
             
             </div>

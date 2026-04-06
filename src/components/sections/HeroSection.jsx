@@ -10,7 +10,7 @@ const HeroSection = () => {
       
       {/* 1. هيكل الخلفية (تصميم وصلت: الصورة يسار مع منحنى انسيابي) */}
       <div className="absolute inset-0 z-0 flex flex-row-reverse">
-        <div className="relative w-full lg:w-[55%] h-full">
+        <div className="relative w-full lg:w-[55%] h-full  hidden sm:block">
           {/* الصورة التي أرفقتها (المبنى التاريخي) */}
           <Image
             src={rayaLanding}

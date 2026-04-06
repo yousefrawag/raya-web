@@ -1,19 +1,44 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // 1. أضفنا useEffect
 import Link from "next/link";
 import SelectOne from "../common/SelectOne";
-// استيراد أيقونات للتوضيح (تأكد من وجود react-icons أو استبدلها بـ SVGs)
 import { HiOutlineLocationMarker, HiOutlineHome, HiOutlineSearch, HiOutlineMap } from "react-icons/hi";
+import getFullTypes from "@/lib/getFullTypes";
 
 const FilterSection = () => {
   const [searchData, setSearchData] = useState({
     price: "",
     propertyType: "",
     city: "",
-    opeartion: "بيع", // جعل القيمة الافتراضية "بيع" لتتناسب مع الـ Tabs
+    opeartion: "بيع",
   });
 
-  const propertyTypes = ["شقة", "فيلا", "مكتب", "مشروع", "أرض", "مستودعات", "روف"];
+  // 2. حالة لتخزين الأنواع القادمة من الداتابيز
+  const [dynamicTypes, setDynamicTypes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [dynmicCityes , setDynamicCityes] = useState([])
+  const [dynmicOpeartion , setDynmicOpeartion] = useState([])
+
+  // 3. جلب البيانات عند تحميل المكون
+  useEffect(() => {
+    const fetchTypes = async () => {
+      try {
+        const { types , cityes , opeartions } = await getFullTypes();
+        // تأكد من إضافة قيمة افتراضية لو الداتا فاضية
+        setDynamicTypes(types?.length > 0 ? types : ["شقة", "فيلا" , "مستودع"]);
+        setDynamicCityes(cityes?.length > 0 ? cityes : [
+    "القدس", "صور باهر", "شعفاط", "كفر عقب", "بيت حنينا", "جبل المكبر", "اريحا", "رام الله", "البيرة"
+  ]) 
+  setDynmicOpeartion(opeartions)
+      } catch (error) {
+        console.error("Error fetching types:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTypes();
+  }, []);
 
   const cities = [
     "القدس", "صور باهر", "شعفاط", "كفر عقب", "بيت حنينا", "جبل المكبر", "اريحا", "رام الله", "البيرة"
@@ -23,9 +48,9 @@ const FilterSection = () => {
 
   return (
     <div className="w-full bg-white rounded-[2rem] md:rounded-[3rem] p-2 md:p-4 transition-all">
-      {/* 1. التبويبات العلوية (Tabs) - UX محسن */}
+      {/* 1. التبويبات العلوية */}
       <div className="flex items-center gap-2 mb-4 pr-4">
-        {OpeartionType.map((op) => (
+        {dynmicOpeartion?.map((op) => (
           <button
             key={op}
             onClick={() => setSearchData({ ...searchData, opeartion: op })}
@@ -40,7 +65,7 @@ const FilterSection = () => {
         ))}
       </div>
 
-      {/* 2. شبكة المدخلات (Grid) */}
+      {/* 2. شبكة المدخلات */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-2 items-center">
         
         {/* اختيار الموقع */}
@@ -50,7 +75,7 @@ const FilterSection = () => {
             <div className="w-full">
               <p className="text-[10px] text-slate-400 font-bold mb-1 mr-1">الموقع</p>
               <SelectOne 
-                data={cities} 
+                data={dynmicCityes} 
                 name="city" 
                 titale="اختر المدينة" 
                 currentValue={searchData.city} 
@@ -60,14 +85,15 @@ const FilterSection = () => {
           </div>
         </div>
 
-        {/* اختيار نوع العقار */}
+        {/* اختيار نوع العقار - الآن يستخدم dynamicTypes */}
         <div className="md:col-span-4 relative group px-4 py-2">
           <div className="flex items-center gap-3">
             <HiOutlineHome className="text-amber-500 text-xl" />
             <div className="w-full">
               <p className="text-[10px] text-slate-400 font-bold mb-1 mr-1">نوع العقار</p>
               <SelectOne 
-                data={propertyTypes} 
+                // نمرر البيانات الديناميكية هنا، ولو لسه بتحمل ممكن نعرض نص مؤقت
+                data={isLoading ? ["جاري التحميل..."] : dynamicTypes} 
                 name="propertyType" 
                 titale="كل الأنواع" 
                 currentValue={searchData.propertyType} 
@@ -103,7 +129,6 @@ const FilterSection = () => {
         </div>
       </div>
       
-      {/* لمسة إضافية: نص صغير توضيحي */}
       <div className="mt-4 pr-6 hidden md:block">
         <p className="text-[11px] text-slate-400">
             * يمكنك أيضاً تصفية النتائج حسب السعر والمساحة في صفحة البحث المتقدم

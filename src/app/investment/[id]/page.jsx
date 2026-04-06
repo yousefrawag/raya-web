@@ -196,10 +196,10 @@ const SingleInvestmentPage = async ({ params }) => {
                     <div className="absolute -bottom-10 -right-10 text-gray-800 text-9xl transform rotate-12 opacity-50">
                         <FaDollarSign />
                     </div>
-                    <p className="text-gray-400 text-sm mb-1.5 relative z-10">السعر المطلوب للاستثمار</p>
+                    {/* <p className="text-gray-400 text-sm mb-1.5 relative z-10">السعر المطلوب للاستثمار</p>
                     <p className="text-5xl font-black text-orange-400 relative z-10 leading-none">
                         {Number(data.price).toLocaleString()} <span className="text-xl font-medium text-white mr-1">دولار</span>
-                    </p>
+                    </p> */}
                 </div>
               </div>
 

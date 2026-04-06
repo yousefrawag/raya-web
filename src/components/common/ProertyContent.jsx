@@ -213,11 +213,13 @@ const ProertyContent = ({ data }) => {
             <div className="space-y-4 mb-8">
                <div className="flex items-center p-4 bg-slate-50 rounded-xl gap-4">
                   <Phone className="text-amber-500" size={20} />
-                  <span className="font-bold text-slate-700">+972 59-270-0633</span>
+                  <span className="font-bold text-slate-700">
+                    +972568700632
+                  </span>
                </div>
                <div className="flex items-center p-4 bg-slate-50 rounded-xl gap-4">
                   <Mail className="text-amber-500" size={20} />
-                  <span className="font-bold text-slate-700 truncate text-sm">akaratalraya@gmail.com</span>
+                  <span className="font-bold text-slate-700 truncate text-sm">rayapalinfo@gmail.com</span>
                </div>
             </div>
             <button

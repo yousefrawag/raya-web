@@ -166,7 +166,7 @@ const PropertyCard = ({ image, title, location, price, area, type, desc  , id}) 
         </div>
       </div>
       <div className="flex justify-between items-center">
-        <div className="text-2xl font-black text-slate-900"><span className="text-amber-500 text-sm ml-1">$</span>{price}</div>
+        {/* <div className="text-2xl font-black text-slate-900"><span className="text-amber-500 text-sm ml-1">$</span>{price}</div> */}
         <Link href={`/investment/${id}`} className="bg-slate-900 text-white px-5 py-2.5 rounded-xl font-bold text-xs hover:bg-amber-500 transition-all">التفاصيل</Link>
       </div>
     </div>
