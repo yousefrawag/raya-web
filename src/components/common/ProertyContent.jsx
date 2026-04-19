@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { MapPin, Bed, Bath, Square, Phone, Mail, MessageCircle, Star, Check, Image as ImageIcon, FileText, CreditCard } from 'lucide-react';
+import { MapPin, Bed, Bath, Square, Phone, Mail, MessageCircle, Star, Check, Image as ImageIcon, FileText, CreditCard , PlayIcon } from 'lucide-react';
 import MapSection from '@/components/common/MapSection';
 
 const ProertyContent = ({ data }) => {
@@ -99,7 +99,7 @@ const ProertyContent = ({ data }) => {
           {/* Tabs Container */}
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             <div className="bg-slate-50/50 border-b border-gray-100 overflow-x-auto">
-              <nav className="flex whitespace-nowrap px-4">
+              <nav className="flex flex-col lg:flex-row whitespace-nowrap px-4">
                 {[
                   { id: 'overview', label: 'نظرة عامة', icon: Square },
                   { id: 'features', label: 'المميزات', icon: Star },
@@ -187,21 +187,44 @@ const ProertyContent = ({ data }) => {
                 </div>
               )}
 
-              {activeTab === 'gallery' && (
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 animate-in fade-in duration-500">
-                  {data.seriesimagesCutmez.map((image, index) => (
-                    <div key={index} className="relative aspect-square rounded-xl overflow-hidden shadow-sm group">
-                      <Image
-                        src={image?.url}
-                        alt="Gallery"
-                        fill
-                        className="object-cover transition-transform group-hover:scale-110"
-                        unoptimized
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
+             {activeTab === 'gallery' && (
+  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 animate-in fade-in duration-500">
+    
+    {/* أولاً: عرض الفيديوهات */}
+    {data?.vidoesCustmez?.map((video, index) => (
+      <div key={`video-${index}`} className="relative aspect-square rounded-xl overflow-hidden shadow-sm group bg-black">
+        <video
+          src={video?.url}
+          className="w-full h-full object-cover"
+          controls={false}
+          muted
+          loop
+          onMouseEnter={(e) => e.target.play()}
+          onMouseLeave={(e) => e.target.pause()}
+        />
+        {/* أيقونة فيديو لتمييزه عن الصور */}
+        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none">
+          <div className="bg-white/30 backdrop-blur-md p-3 rounded-full">
+            <PlayIcon className="w-6 h-6 text-white fill-white" />
+          </div>
+        </div>
+      </div>
+    ))}
+
+    {/* ثانياً: عرض الصور */}
+    {data?.seriesimagesCutmez?.map((image, index) => (
+      <div key={`image-${index}`} className="relative aspect-square rounded-xl overflow-hidden shadow-sm group">
+        <Image
+          src={image?.url}
+          alt="Property Gallery"
+          fill
+          className="object-cover transition-transform group-hover:scale-110"
+          unoptimized
+        />
+      </div>
+    ))}
+  </div>
+)}
             </div>
           </div>
         </div>

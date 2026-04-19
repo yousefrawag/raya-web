@@ -1,9 +1,7 @@
 import { client , checkimageprotcoll } from "../utils/ContentfullClient";
 
 export async function getPropertiey(id) {
-//   const query = {
-//     content_type: "alraya-projects",
-//   };
+
 console.log("id" , id);
 
 
@@ -37,10 +35,12 @@ const item = res.fields;
     priec,
     projectFeatures,
     propertiesServies ,
-    typeOfproject
+    typeOfproject ,
+    videos
   } = item;
 
   const seriesimagesCutmez = checkimageprotcoll(images);
+  const vidoesCustmez = checkimageprotcoll(videos)
 
   return {
     id: res.sys.id,
@@ -66,7 +66,8 @@ const item = res.fields;
     priec,
     projectFeatures,
     propertiesServies ,
-    typeOfproject
+    typeOfproject ,
+    vidoesCustmez
   };
 
 }

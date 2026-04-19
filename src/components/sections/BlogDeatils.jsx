@@ -131,9 +131,16 @@ const BlogDeatils = ({ project }) => {
 
           {/* المحتوى الرئيسي */}
           <div className="space-y-6 text-gray-700 leading-relaxed text-lg">
-            <p>
-              {project.blogDeatils}
-            </p>
+           <div className="space-y-6 text-gray-700 leading-relaxed text-lg text-justify">
+  {project.blogDeatils.split('\n').map((paragraph, index) => (
+    // نتحقق من أن الفقرة ليست فارغة قبل عرضها
+    paragraph.trim() && (
+      <p key={index} className="mb-4 first-letter:text-2xl">
+        {paragraph}
+      </p>
+    )
+  ))}
+</div>
 
             {/* فاصل توضيحي */}
             <div className="my-10 border-b border-gray-200" />
