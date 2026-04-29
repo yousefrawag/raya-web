@@ -40,11 +40,12 @@ if (propertiesServerdata?.length === 0) {
               {/* Image Container */}
               <div className="relative overflow-hidden">
                 <Image
-               width={400}               // حجم مناسب للبطاقة
-        height={300}  
-                  loading="lazy"
-                  src={property.seriesimagesCutmez[0]?.url}
+                width={400}               // حجم مناسب للبطاقة
+                height={300}  
+                loading="lazy"
+                src={decodeURIComponent(property.seriesimagesCutmez[0]?.url)}
                   alt={property.title}
+                  unoptimized
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 

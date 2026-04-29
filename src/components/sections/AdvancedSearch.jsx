@@ -40,7 +40,7 @@ const regions = [
     id: "jerusalem",
     name: "القدس",
     locations: [
-      "القدس",
+  
       "صور باهر",
       "شعفاط السهل",
       "شعفاط",

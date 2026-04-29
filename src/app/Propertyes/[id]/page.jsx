@@ -78,7 +78,7 @@ const property = await getPropertiey(id)
       <div className="container mx-auto px-3 ">
       {/* Header */}
       <div className="p-4  mt-25 ">
-        <div className="  flex gap-4">
+        <div className="  flex gap-1 flex-col lg:flex-row lg:gap-4">
           <Link href="/" className="inline-flex items-center text-slate-900 hover:text-amber-700 transition-colors">
             
             العودة للرئيسية

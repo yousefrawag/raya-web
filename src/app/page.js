@@ -1,3 +1,4 @@
+
 export const revalidate = 60;
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
@@ -12,10 +13,13 @@ import LandingProject from "@/components/sections/LandingProject";
 import ProjectServerDataLanding from "@/components/sections/ProjectServerDataLanding";
 import BlogServerRendering from "@/components/sections/BlogServerRendering";
 import InvestMentServer from "@/components/sections/InvestMentServer";
+import ScrollToHash from "@/components/common/ScrollToHash";
 export default function Home() {
+
+  
   return (
     <div className=" w-full">
-    
+    <ScrollToHash />
 <HeroSection />
 {/* <FilterSection /> */}
 <RegionFilter />

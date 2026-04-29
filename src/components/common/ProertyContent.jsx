@@ -3,10 +3,13 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { MapPin, Bed, Bath, Square, Phone, Mail, MessageCircle, Star, Check, Image as ImageIcon, FileText, CreditCard , PlayIcon } from 'lucide-react';
 import MapSection from '@/components/common/MapSection';
+import { MdOutlineZoomOutMap } from "react-icons/md";
 
 const ProertyContent = ({ data }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [activeTab, setActiveTab] = useState('overview');
+const [CurrentImage, setCurrentImage] = useState(null);
+const [CurrentVideo , setCurrentVideo] = useState(null)
 
   const handleWhatsApp = () => {
     const message = `مرحباً، أود الاستفسار عن ${data.title}`;
@@ -26,7 +29,7 @@ const ProertyContent = ({ data }) => {
         {/* الصورة الرئيسية الكبيرة */}
         <div className="relative w-full lg:w-[75%] h-[400px] md:h-[500px] rounded-2xl overflow-hidden group shadow-lg">
           <Image
-            src={heroImage}
+            src={decodeURIComponent(heroImage) }
             alt={data.title}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -193,35 +196,55 @@ const ProertyContent = ({ data }) => {
     {/* أولاً: عرض الفيديوهات */}
     {data?.vidoesCustmez?.map((video, index) => (
       <div key={`video-${index}`} className="relative aspect-square rounded-xl overflow-hidden shadow-sm group bg-black">
+
         <video
           src={video?.url}
           className="w-full h-full object-cover"
           controls={false}
-          muted
+    
           loop
           onMouseEnter={(e) => e.target.play()}
           onMouseLeave={(e) => e.target.pause()}
         />
+             <div onClick={() => setCurrentVideo(video?.url)} className="absolute inset-0 cursor-pointer bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+
+            {/* Zoom Icon */}
+            <MdOutlineZoomOutMap className="text-orange-500 text-4xl transform scale-75 group-hover:scale-100 transition duration-300" />
+
+            </div>
         {/* أيقونة فيديو لتمييزه عن الصور */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none">
+        {/* <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none">
           <div className="bg-white/30 backdrop-blur-md p-3 rounded-full">
             <PlayIcon className="w-6 h-6 text-white fill-white" />
           </div>
-        </div>
+        </div> */}
       </div>
     ))}
 
     {/* ثانياً: عرض الصور */}
     {data?.seriesimagesCutmez?.map((image, index) => (
-      <div key={`image-${index}`} className="relative aspect-square rounded-xl overflow-hidden shadow-sm group">
-        <Image
-          src={image?.url}
-          alt="Property Gallery"
-          fill
-          className="object-cover transition-transform group-hover:scale-110"
-          unoptimized
-        />
-      </div>
+            <div
+            key={`image-${index}`}
+            className="relative aspect-square rounded-xl overflow-hidden shadow-sm group cursor-pointer"
+            onClick={() => setCurrentImage(image?.url)}
+            >
+            {/* الصورة */}
+            <Image
+            src={image?.url}
+            alt="Property Gallery"
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            unoptimized
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+
+            {/* Zoom Icon */}
+            <MdOutlineZoomOutMap className="text-orange-500 text-4xl transform scale-75 group-hover:scale-100 transition duration-300" />
+
+            </div>
+</div>
     ))}
   </div>
 )}
@@ -254,6 +277,41 @@ const ProertyContent = ({ data }) => {
           </div>
         </aside>
       </div>
+      {CurrentImage && (
+  <div
+    className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+    onClick={() => setCurrentImage(null)}
+  >
+    <button onClick={() => setCurrentImage(null)} className='absolute top-3 right-10 text-xl cursor-pointer'>
+      x
+    </button>
+    <img
+      src={CurrentImage}
+      alt="Full"
+      className="max-w-[90%] max-h-[90%] rounded-lg"
+    />
+  </div>
+)}
+
+      {CurrentVideo && (
+  <div
+    className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-10"
+    onClick={() => setCurrentVideo(null)}
+  >
+    <button onClick={() => setCurrentVideo(null)} className='absolute top-3 w-10 h-10 text-white rounded-full bg-orange-500 right-5 text-xl cursor-pointer'>
+      x
+    </button>
+     <video
+          src={CurrentVideo}
+          className="w-[90%] h-full object-cover rounded-md"
+          controls={true}
+          
+          loop
+          onMouseEnter={(e) => e.target.play()}
+         
+        />
+  </div>
+)}
     </div>
   );
 };

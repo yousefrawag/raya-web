@@ -15,23 +15,33 @@ export const client2 = createClient({
 export const checkimageprotcoll = (images) => {
   if (!images) return null;
 
-  // لو Array
-  if (Array.isArray(images)) {
-    return images.map((image) => {
-      const url = image?.fields?.file?.url;
-      if (!url) return null;
+  const fixUrl = (url) => {
+    if (!url) return null;
 
-      return {
-        url: url.startsWith("//") ? `https:${url}` : url
-      };
-    }).filter(Boolean);
+    let finalUrl = url.startsWith("//") ? `https:${url}` : url;
+
+    try {
+      // نفك الـ encoding لو بايظ
+      finalUrl = decodeURIComponent(finalUrl);
+    } catch (e) {
+      // لو حصل error سيبه زي ما هو
+    }
+
+    return finalUrl;
+  };
+
+  if (Array.isArray(images)) {
+    return images
+      .map((image) => {
+        const url = image?.fields?.file?.url;
+        const fixed = fixUrl(url);
+        return fixed ? { url: fixed } : null;
+      })
+      .filter(Boolean);
   }
 
-  // لو صورة واحدة
   const singleUrl = images?.fields?.file?.url;
-  if (!singleUrl) return null;
+  const fixed = fixUrl(singleUrl);
 
-  return {
-    url: singleUrl.startsWith("//") ? `https:${singleUrl}` : singleUrl
-  };
+  return fixed ? { url: fixed } : null;
 };

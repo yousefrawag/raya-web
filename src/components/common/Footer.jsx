@@ -1,13 +1,14 @@
 "use client"
 import React from 'react';
-import { Home, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Home, Facebook, Instagram, Linkedin, Twitter  } from 'lucide-react';
 import { FaSnapchatGhost } from "react-icons/fa";
 import { FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import Link from 'next/link';
+// import { useNavigate, useLocation } from "react-router-dom";
+
 const Footer = () => {
-  const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  };
+
 
   return (
     <footer className="bg-slate-900 text-white py-12">
@@ -50,44 +51,48 @@ const Footer = () => {
             <h4 className="text-lg font-bold mb-4">روابط سريعة</h4>
             <ul className="space-y-2">
               <li>
-                <button 
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                <Link href='/' 
+                 
                   className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
                 >
                   الرئيسية
-                </button>
+                </Link>
               </li>
               <li>
-                <button 
-                  onClick={() => scrollToSection('about')}
+                <Link 
+                href='/#about'
+                 
                   className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
                 >
                   من نحن
-                </button>
+                </Link>
               </li>
               <li>
-                <button 
-                  onClick={() => scrollToSection('services')}
+                <Link 
+                  href='/#services'
+                 
                   className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
                 >
                   خدماتنا
-                </button>
+                </Link>
               </li>
               <li>
-                <button 
-                  onClick={() => scrollToSection('projects')}
+                <Link 
+                 href='/#projects'
+        
                   className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
                 >
                   إستثمار
-                </button>
+                </Link>
               </li>
               <li>
-                <button 
-                  onClick={() => scrollToSection('properties')}
+                <Link 
+                href='/#properties'
+                  
                   className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
                 >
                   العقارات
-                </button>
+                </Link>
               </li>
               <li>
   
