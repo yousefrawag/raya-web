@@ -21,7 +21,7 @@ export default function FixedFilter() {
        const [dynmicCityes , setDynamicCityes] = useState([])
      const [dynmicOpeartions, setDynamicOpeartions] = useState([])
      const [dynmicAreas, setDynamicAreas] = useState([])
-     
+     const [activeSelect, setActiveSelect] = useState(null);
   const params = useSearchParams();
    const [filters, setFilters] = useState({
     propertyType:"",
@@ -99,30 +99,30 @@ const regions = [
     id: "jerusalem",
     name: "القدس",
     locations: [
-      "القدس",
+      "",
       "صور باهر",
       "شعفاط السهل",
       "شعفاط",
       "بيت صفافا - الشرفات",
       "كفر عقب",
       "بيت حنينا تل الفول",
-      "بيت حنينا حي الهجرة",
+      "بيت حنينا حى الهجره",
       "جبل المكبر",
-      "بيت حنينا حي العقبة",
+      "بيت حنينا حى العقبه",
       "بيت حنينا قرب جامع شومان",
       "ام طوبا",
-      "بيت حنينا حي الاشقريه",
+      "بيت حنينا حى الاشقريه",
       "بيت حنينا",
-      "عمارات نسيبة",
-      "راس العمود"
+      "عمارات نسيبه",
+    "راس العمود"
     ]
   },
   {
     id: "jericho",
-    name: "اريجا",
+    name: "اريحا",
     locations: [
-      "اريجا",
-      "البوابة"
+      "اريحا",
+      "البوابه"
     ]
   },
   {
@@ -132,43 +132,15 @@ const regions = [
       "رام الله",
       "سطح مرحبا",
       "المصايف",
-      "البيرة",
-      "طلعة مشتل قلقيلية"
+      "البيره",
+      "طلعه مشتل قلقيليه"
     ]
   }
 ];
-  const OpeartionType = [
-      "بيع",
-    "شراء",
-      "إيجار",
-  
-   
-  ]
+
   const rooms =  ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "10"]
-    const area =  ["100" , "120" , "130" , "140" , "150" , "160" , "170" , "180" , "190" , "200" ,
-      "220",
-      "230",
-      "240",
-      "250",
-      "260",
-      "270",
-      "280",
-      "290",
-      "300",
-      "310",
-      "320",
-      "330",
-      "340",
-      "350",
-      "360",
-      "370",
-      "380",
-      "400",
-      "420",
-      "440",
-      "460"
-    ]
-    console.log("Areas" , dynmicAreas);
+   
+   
     
   // تثبيت عند السكروول
   useEffect(() => {
@@ -227,7 +199,7 @@ useEffect(() => {
     <div
       className={`w-full z-50 transition-all  duration-300 mb-5 ${
         isFixed
-          ? "fixed top-0 left-0   right-0 shadow-md bg-white/95 backdrop-blur-sm border-b-[1px] border-[#e1e4e8] py-3"
+          ? " lg:fixed top-0 left-0   right-0 shadow-md bg-white/95 backdrop-blur-sm border-b-[1px] border-[#e1e4e8] py-3"
           : "relative bg-white"
       }`}
     >
@@ -235,15 +207,21 @@ useEffect(() => {
         {/* container of filters: responsive - scroll horizontal on mobile */}
         {
           isLoading ? <span>جارى التحميل ...</span>  :  <div className="grid grid-cols-2 lg:grid-cols-7 gap-3 items-center  py-2">
-          <SelectOne  data={dynamicTypes} titale="نوع العقار" name="propertyType" currentValue={filters.propertyType || params.get("propertyType")}  setFormData={setFilters} />
-  <SelectOne  data={dynmicCityes} titale="المنطقة" name="city" currentValue={ filters.city || params.get("city")} setFormData={setFilters} />
+          <SelectOne   activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect}  data={dynamicTypes} titale="نوع العقار" name="propertyType" currentValue={filters.propertyType }  setFormData={setFilters} />
+  <SelectOne   activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect}  data={dynmicCityes} titale="المنطقة" name="city" currentValue={ filters.city } setFormData={setFilters} />
 
-  <SelectOne  data={relatedLocations} titale="الموقع" name="region" currentValue={ filters.region || params.get("region")} setFormData={setFilters} />
+  <SelectOne   activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect} data={relatedLocations} titale="الموقع" name="region" currentValue={ filters.region } setFormData={setFilters} />
 
-  <SelectOne  data={dynmicOpeartions} titale="نوع العملية" name="opeartion" currentValue={filters.opeartion  || params.get("opeartion")} setFormData={setFilters} />
+  <SelectOne    activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect} data={dynmicOpeartions} titale="نوع العملية" name="opeartion" currentValue={filters.opeartion} setFormData={setFilters} />
 
-  <SelectOne  data={rooms} titale="عدد الغرف" name="bedrooms" currentValue={filters.bedrooms  || params.get("bedrooms")} setFormData={setFilters} />
-  <SelectOne  data={dynmicAreas} titale="المساحة" name="area" currentValue={ filters.area || params.get("area")} setFormData={setFilters} />
+  <SelectOne   activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect}  data={rooms} titale="عدد الغرف" name="bedrooms" currentValue={filters.bedrooms } setFormData={setFilters} />
+  <SelectOne    activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect} data={dynmicAreas} titale="المساحة" name="area" currentValue={ filters.area} setFormData={setFilters} />
 
 
 

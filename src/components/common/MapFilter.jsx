@@ -7,6 +7,8 @@ const MapFilter = () => {
     const router = useRouter();
       const [isPending, startTransition] = useTransition();
        const [relatedLocations , setRelatedLocations] = useState([])
+            const [activeSelect, setActiveSelect] = useState(null);
+       
     const params = useSearchParams();
 
     const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -223,15 +225,21 @@ useEffect(() => {
       {/* Filter Content */}
       <div className={`  p-4 pt-0 lg:p-4 lg:block ${isFilterOpen ? 'block' : 'hidden'}`}>
         <div className="grid grid-cols-1  gap-4">
-      <SelectOne  data={propertyTypes} titale="نوع العقار" name="propertyType" currentValue={filters.propertyType} setFormData={setFilters} />
+      <SelectOne                activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect} data={propertyTypes} titale="نوع العقار" name="propertyType" currentValue={filters.propertyType} setFormData={setFilters} />
 
-  <SelectOne  data={regions} titale="المنطقة" name="city" currentValue={filters.city} setFormData={setFilters} />
-  <SelectOne  data={cities} titale="الموقع" name="region" currentValue={filters.region} setFormData={setFilters} />
+  <SelectOne                activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect} data={regions} titale="المنطقة" name="city" currentValue={filters.city} setFormData={setFilters} />
+  <SelectOne                activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect}  data={cities} titale="الموقع" name="region" currentValue={filters.region} setFormData={setFilters} />
 
-  <SelectOne  data={OpeartionType} titale="نوع العملية" name="opeartion" currentValue={filters.opeartion} setFormData={setFilters} />
+  <SelectOne                activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect} data={OpeartionType} titale="نوع العملية" name="opeartion" currentValue={filters.opeartion} setFormData={setFilters} />
 
-  <SelectOne  data={rooms} titale="عدد الغرف" name="bedrooms" currentValue={filters.bedrooms} setFormData={setFilters} />
-  <SelectOne  data={area} titale="المساحة" name="area" currentValue={filters.area} setFormData={setFilters} />
+  <SelectOne                activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect}  data={rooms} titale="عدد الغرف" name="bedrooms" currentValue={filters.bedrooms} setFormData={setFilters} />
+  <SelectOne                 activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect} data={area} titale="المساحة" name="area" currentValue={filters.area} setFormData={setFilters} />
           {/* Price Range */}
       
 

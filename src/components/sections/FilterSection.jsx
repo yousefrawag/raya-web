@@ -18,6 +18,7 @@ const FilterSection = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [dynmicCityes , setDynamicCityes] = useState([])
   const [dynmicOpeartion , setDynmicOpeartion] = useState([])
+     const [activeSelect, setActiveSelect] = useState(null);
 
   // 3. جلب البيانات عند تحميل المكون
   useEffect(() => {
@@ -75,6 +76,8 @@ const FilterSection = () => {
             <div className="w-full">
               <p className="text-[10px] text-slate-400 font-bold mb-1 mr-1">الموقع</p>
               <SelectOne 
+                activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect}
                 data={dynmicCityes} 
                 name="city" 
                 titale="اختر المدينة" 
@@ -95,6 +98,8 @@ const FilterSection = () => {
                 // نمرر البيانات الديناميكية هنا، ولو لسه بتحمل ممكن نعرض نص مؤقت
                 data={isLoading ? ["جاري التحميل..."] : dynamicTypes} 
                 name="propertyType" 
+                  activeSelect={activeSelect}
+  setActiveSelect={setActiveSelect}
                 titale="كل الأنواع" 
                 currentValue={searchData.propertyType} 
                 setFormData={setSearchData} 

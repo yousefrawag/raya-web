@@ -6,11 +6,18 @@ const SelectOne = ({
   data = [],
   name,
   setFormData,
-  titale
+  titale,
+  activeSelect,
+  setActiveSelect
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-const CurrentData = data?.filter((item) => item !== "" && item !== undefined && item !== null)
+
+  const isOpen = activeSelect === name;
+
+  const CurrentData = data?.filter(
+    (item) => item !== "" && item !== undefined && item !== null
+  );
+
   // Normalize item (string OR object)
   const normalizeItem = (item) => {
     if (typeof item === "string") {
@@ -23,13 +30,28 @@ const CurrentData = data?.filter((item) => item !== "" && item !== undefined && 
     };
   };
 
+  const toggleDropdown = () => {
+    setActiveSelect((prev) => (prev === name ? null : name));
+  };
+
   const handleSelect = (value) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value
     }));
-    setIsOpen(false);
     setSearchTerm("");
+    setActiveSelect(null); // يقفل بعد الاختيار
+  };
+
+  const handleReset = () => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: ""
+    }));
+    setSearchTerm("");
+    console.log("click" , currentValue);
+    
+   
   };
 
   return (
@@ -37,8 +59,8 @@ const CurrentData = data?.filter((item) => item !== "" && item !== undefined && 
       {/* Button */}
       <button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full text-right p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent flex justify-between items-center"
+        onClick={toggleDropdown}
+        className="w-full text-right p-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-orange-400 flex justify-between items-center"
       >
         <span className="text-gray-500">
           {currentValue
@@ -65,7 +87,7 @@ const CurrentData = data?.filter((item) => item !== "" && item !== undefined && 
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute z-40 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+        <div className="absolute z-[200] w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
           {/* Search */}
           <div className="p-2 border-b border-gray-200">
             <input
@@ -82,8 +104,8 @@ const CurrentData = data?.filter((item) => item !== "" && item !== undefined && 
             {CurrentData
               ?.filter((item) =>
                 normalizeItem(item)?.label
-                  .toLowerCase()
-                  .includes(searchTerm?.toLowerCase())
+                  ?.toLowerCase()
+                  .includes(searchTerm.toLowerCase())
               )
               ?.map((item) => {
                 const normalized = normalizeItem(item);
@@ -92,32 +114,53 @@ const CurrentData = data?.filter((item) => item !== "" && item !== undefined && 
                 return (
                   <div
                     key={normalized.value}
-                    onClick={() => handleSelect(normalized.value)}
-                    className={`flex items-center justify-between px-4 py-3 cursor-pointer transition-colors ${
+                    className={`flex items-center justify-between px-4 py-3 ${
                       isSelected
                         ? "bg-blue-50 text-blue-700"
                         : "hover:bg-gray-50 text-gray-700"
                     }`}
                   >
-                    <span className="text-sm font-medium">
-                      {(name === "rooms" || name === "bedrooms")
-                        ? `${normalized.label} غرفة`
-                        : normalized.label}
-                    </span>
+                    {/* 👇 clickable area فقط */}
+                    <div
+                      className="flex-1 cursor-pointer"
+                      onClick={() => handleSelect(normalized.value)}
+                    >
+                      <span className="text-sm font-medium">
+                        {(name === "rooms" || name === "bedrooms")
+                          ? `${normalized.label} غرفة`
+                          : normalized.label}
+                      </span>
+                    </div>
 
-                    {isSelected && (
-                      <svg
-                        className="w-5 h-5 text-green-500"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    )}
+                    {/* icons */}
+                    <div className="flex items-center gap-2">
+                      {isSelected && (
+                        <svg
+                          className="w-5 h-5 text-green-500"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
+
+                      {isSelected && (
+                        <button
+                          type="button"
+                          className="text-red-500 px-1"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleReset();
+                          }}
+                        >
+                          x
+                        </button>
+                      )}
+                    </div>
                   </div>
                 );
               })}

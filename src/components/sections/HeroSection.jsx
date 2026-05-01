@@ -1,10 +1,26 @@
-"use client";
+
 
 import Image from "next/image";
 import { HiSearch } from "react-icons/hi";
 import FilterSection from "./FilterSection";
 import rayaLanding from "@/images/Hero-images/raya-landdung.jpeg"
-const HeroSection = () => {
+import { GetHeroEntry } from "@/lib/GetHeroEntry";
+const HeroSection = async() => {
+  const data = await GetHeroEntry()
+  const CurrentItem = data[0]||{}
+  const formatTitle = (title) => {
+  if (!title) return [];
+
+  const words = title.split(" ");
+
+  return [
+    words.slice(0, 2).join(" "),          // استثمر في
+    words.slice(2, 4).join(" "),          // مستقبلك العقاري
+    words.slice(4).join(" ")              // بأمان واحترافية
+  ];
+};
+
+const lines = formatTitle(CurrentItem?.title);
   return (
     <section className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col justify-center">
       
@@ -13,7 +29,7 @@ const HeroSection = () => {
         <div className="relative w-full lg:w-[55%] h-full  hidden sm:block">
           {/* الصورة التي أرفقتها (المبنى التاريخي) */}
           <Image
-            src={rayaLanding}
+            src={CurrentItem?.seriesimagesCutmez[0]?.url || rayaLanding}
             alt="منصة الراية لخدمات الاستثمار والتسويق"
             fill
             priority
@@ -44,14 +60,16 @@ const HeroSection = () => {
               قرص عقارية حصرية في القدس وأريحا
             </div> */}
 
-            <h1 className="text-4xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-tight mt-20 mb-6">
-              استثمر في <br />
-              <span className="text-[#f59e0b]">مستقبلك العقاري</span> <br />
-              بأمان واحترافية
-            </h1>
+<h1 className="text-4xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-tight mt-20 mb-6">
+  {lines[0]} <br />
+  <span className="text-[#f59e0b]">{lines[1]}</span> <br />
+  {lines[2]}
+</h1>
             
             <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-lg leading-relaxed font-medium">
-              نقدم لك أفخم الوحدات السكنية والمشاريع الاستثمارية في القدس، أريحا، وكفر عقب. خبرتنا في السوق الفلسطيني تضمن لك الاختيار الأمثل.
+{
+  CurrentItem?.details?.content[0]?.content[0].value || "غير متوفر"
+}
             </p>
 
             {/* سكشن البحث (FilterSection) - ممتد عرضياً ليأخذ مساحته كما في وصلت */}
