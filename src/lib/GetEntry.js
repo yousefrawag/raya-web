@@ -36,7 +36,8 @@ const item = res.fields;
     projectFeatures,
     propertiesServies ,
     typeOfproject ,
-    videos
+    videos ,
+    youtupeUrl
   } = item;
 
   const seriesimagesCutmez = checkimageprotcoll(images);
@@ -67,7 +68,8 @@ const item = res.fields;
     projectFeatures,
     propertiesServies ,
     typeOfproject ,
-    vidoesCustmez
+    vidoesCustmez ,
+    youtupeUrl
   };
 
 }

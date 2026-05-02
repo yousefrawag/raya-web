@@ -10,6 +10,7 @@ const ProertyContent = ({ data }) => {
   const [activeTab, setActiveTab] = useState('overview');
 const [CurrentImage, setCurrentImage] = useState(null);
 const [CurrentVideo , setCurrentVideo] = useState(null)
+const [YoutubeUrlactive , setYoutupeUrlActive] = useState(null)
 
   const handleWhatsApp = () => {
     const message = `مرحباً، أود الاستفسار عن ${data.title}`;
@@ -246,6 +247,25 @@ const [CurrentVideo , setCurrentVideo] = useState(null)
             </div>
 </div>
     ))}
+    {
+      data?.youtupeUrl &&             <div
+            // key={`image-${index}`}
+            className="relative aspect-square rounded-xl overflow-hidden shadow-sm group cursor-pointer"
+            onClick={() => setYoutupeUrlActive(data?.youtupeUrl)}
+            >
+            {/* الصورة */}
+          
+ <iframe width="560" height="315" src={data?.youtupeUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen={true}></iframe>
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+
+            {/* Zoom Icon */}
+            <MdOutlineZoomOutMap className="text-orange-500 text-4xl transform scale-75 group-hover:scale-100 transition duration-300" />
+
+            </div>
+</div>   
+
+    }
   </div>
 )}
             </div>
@@ -310,6 +330,18 @@ const [CurrentVideo , setCurrentVideo] = useState(null)
           onMouseEnter={(e) => e.target.play()}
          
         />
+  </div>
+)}
+      {YoutubeUrlactive && (
+  <div
+    className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-10"
+    onClick={() => setYoutupeUrlActive(null)}
+  >
+    <button onClick={() => setYoutupeUrlActive(null)} className='absolute top-3 w-10 h-10 text-white rounded-full bg-orange-500 right-5 text-xl cursor-pointer'>
+      x
+    </button>
+  <iframe width="560" height="315" src={YoutubeUrlactive} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen={true}></iframe>
+
   </div>
 )}
     </div>
