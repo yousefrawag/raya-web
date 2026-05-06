@@ -75,6 +75,22 @@ const property = await getPropertiey(id)
 
   return (
     <div className="min-h-screen  bg-gray-50">
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "RealEstateListing",
+      "name": property.title,
+      "description": property.details,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": property.city,
+        "addressRegion": "Palestine"
+      }
+    })
+  }}
+/>
       <div className="container mx-auto px-3 ">
       {/* Header */}
       <div className="p-4  mt-25 ">
