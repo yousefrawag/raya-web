@@ -27,7 +27,7 @@ export async function generateMetadata({ searchParams }) {
   const areaText = area ? `منطقة ${area}` : ''
   const bedroomsText = bedrooms ? `${bedrooms} غرف` : ''
 
-  const title = `${typeText} ${operationText} ${cityText} | شركة الراية العقارية`
+  const title = `${typeText} ${operationText} ${cityText} | منصة الراية العقارية`
 
   const description = `
 استعرض أفضل ${typeText} ${operationText} ${cityText}

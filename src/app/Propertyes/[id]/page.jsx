@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
     }
   }
 
-  const title = `${project.title} في ${project.city} | عقار ${project.typeOfproject} من شركة الراية`
+  const title = `${project.title} في ${project.city} | عقار ${project.typeOfproject} من منصة الراية`
 
   const description = `
 ${project.title} عقار ${project.typeOfproject} في ${project.city}.
