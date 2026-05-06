@@ -71,9 +71,7 @@ const lines = formatTitle(CurrentItem?.title);
   CurrentItem?.details?.content[0]?.content[0].value || "غير متوفر"
 }
             </p>
-<span>
-  تيست
-</span>
+
             {/* سكشن البحث (FilterSection) - ممتد عرضياً ليأخذ مساحته كما في وصلت */}
             <div className="w-full lg:w-[135%] xl:w-[150%] relative group">
               <div className="bg-white p-3 rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-50">

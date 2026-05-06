@@ -65,7 +65,11 @@ const generateKeywords = () => {
 
 export const metadata = {
   metadataBase: new URL("https://www.rayapal.net"),
-
+icons: {
+    icon: "/icon.png", // سيقوم Next.js بالبحث عنها في مجلد public تلقائياً
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
   title: {
     default: "عقارات القدس وفلسطين | شقق للبيع والإيجار | الراية العقارية",
     template: "%s | الراية العقارية"
