@@ -6,6 +6,6 @@ export default function robots() {
         allow: "/",
       },
     ],
-    sitemap: "https://www.rayapal.net/sitemap.xml",
+    sitemap: "https://www.rayapal.com/sitemap.xml",
   };
 }

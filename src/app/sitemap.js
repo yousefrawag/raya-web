@@ -1,5 +1,5 @@
 export default async function sitemap() {
-  const baseUrl = "https://www.rayapal.net";
+  const baseUrl = "https://www.rayapal.com";
 
   // 🔥 الصفحات الثابتة
   const staticPages = [

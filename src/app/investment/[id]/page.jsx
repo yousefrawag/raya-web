@@ -29,19 +29,19 @@ export async function generateMetadata({ params }) {
   ].join(', ');
 
   const description = investment.details ? investment.details.substring(0, 160).replace(/(\r\n|\n|\r)/gm, " ") : `فرصة استثمارية استثنائية: ${investment.type} بمساحة ${investment.area} متر مربع في ${investment.city}. السعر: ${Number(investment.price).toLocaleString()} دولار.`;
-  const mainImage = investment.seriesimagesCutmez && investment.seriesimagesCutmez.length > 0 ? investment.seriesimagesCutmez[0].url : "https://your-domain.com/default-share-image.jpg"; // ضع صورة افتراضية للمشاركة
+  const mainImage = investment.seriesimagesCutmez && investment.seriesimagesCutmez.length > 0 ? investment.seriesimagesCutmez[0].url : "https://i.postimg.cc/g0KvYfbB/Screenshot-2025-10-20-174821.png"; // ضع صورة افتراضية للمشاركة
 
   return {
     title: `${investment.title} | ${investment.type} في ${investment.city} | فرصة استثمارية من الراية`,
     description: description,
     keywords: keywords,
     alternates: {
-      canonical: `https://your-domain.com/investment/${id}`, // ضع رابط موقعك الحقيقي هنا
+      canonical: `https://www.rayapal.com/investment/${id}`, // ضع رابط موقعك الحقيقي هنا
     },
     openGraph: {
       title: `${investment.title} - فرصة استثمارية عقارية`,
       description: description,
-      url: `https://your-domain.com/investment/${id}`,
+      url: `https://www.rayapal.com/investment/${id}`,
       siteName: 'الراية للعقارات',
       images: [
         {
