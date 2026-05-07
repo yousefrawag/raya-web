@@ -105,7 +105,7 @@ const RegionFilter = () => {
                 {/* Content */}
                 <div className="p-6 flex flex-col gap-3">
                   <Link  href={{
-    pathname: "/Propertyes",
+    pathname: "/properties",
     query: {
   
       city: region.region ? region.region : region.name,

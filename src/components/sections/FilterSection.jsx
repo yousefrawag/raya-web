@@ -112,7 +112,7 @@ const FilterSection = () => {
         <div className="md:col-span-4 flex items-center gap-2 pr-2">
           <Link
             href={{
-              pathname: "/Propertyes",
+              pathname: "/properties",
               query: searchData,
             }}
             className="flex-1 h-14 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl md:rounded-[1.5rem] flex items-center justify-center gap-2 font-bold transition-all shadow-lg hover:shadow-xl active:scale-95"

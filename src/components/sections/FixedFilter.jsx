@@ -164,7 +164,7 @@ const regions = [
     area:"" ,
     region:""
   })
-  router.push("/Propertyes")
+  router.push("/properties")
   };
 useEffect(() => {
   setFilters({
@@ -190,7 +190,7 @@ useEffect(() => {
   const relatedLocations = regions?.find(item => item.name === filters.city )
   setRelatedLocations(relatedLocations?.locations)
   startTransition(() => {
-    router.push(`/Propertyes?${query.toString()}`);
+    router.push(`/properties?${query.toString()}`);
   });
 }, [filters]);
 
