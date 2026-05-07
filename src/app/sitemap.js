@@ -1,57 +1,68 @@
 export default async function sitemap() {
   const baseUrl = "https://www.rayapal.com";
 
-  // 🔥 الصفحات الثابتة
+  // 1. الصفحات الثابتة (Static Pages)
   const staticPages = [
-    "",
-    "/map",
-    "/investment",
-    "/blogs",
-    "/properties",
+    "",            // الصفحة الرئيسية
+    "/map",        // الخريطة
+    "/investment", // استثمار
+    "/blogs",      // المدونة
+    "/properties", // العقارات
   ];
 
-  // 🔥 المناطق
+  // 2. هيكل البيانات للمناطق والأحياء (باللغة العربية كما تستخدمها في البحث)
   const regions = [
     {
-      id: "jerusalem",
+      name: "القدس",
       locations: [
-        "sur-baher",
-        "shuafat",
-        "beit-hanina",
-        "kafr-aqab",
-        "jabal-al-mukaber",
-        "ras-al-amud"
+        "صور باهر",
+        "شعفاط",
+        "بيت صفافا",
+        "كفر عقب",
+        "بيت حنينا",
+        "جبل المكبر",
+        "ام طوبا",
+        "راس العمود"
       ]
     },
     {
-      id: "jericho",
-      locations: ["jericho", "al-bawaba"]
+      name: "اريحا",
+      locations: ["اريحا", "البوابه"]
     },
     {
-      id: "ramallah",
-      locations: ["ramallah", "al-bireh", "al-masayef"]
+      name: "رام الله",
+      locations: ["رام الله", "البيره", "المصايف"]
     }
   ];
 
-  // 🔥 توليد روابط المناطق
-  const regionPages = regions.flatMap(region => {
-    return [
-      {
-        url: `${baseUrl}/${region.id}`,
-        lastModified: new Date(),
-      },
-      ...region.locations.map(loc => ({
-        url: `${baseUrl}/${region.id}/${loc}`,
-        lastModified: new Date(),
-      }))
-    ];
-  });
-
-  // 🔥 الصفحات الثابتة
-  const staticUrls = staticPages.map(page => ({
+  // 3. تحويل الصفحات الثابتة لروابط Sitemap
+  const staticUrls = staticPages.map((page) => ({
     url: `${baseUrl}${page}`,
     lastModified: new Date(),
+    changeFrequency: 'daily',
+    priority: 1.0,
   }));
 
-  return [...staticUrls, ...regionPages];
+  // 4. توليد روابط البحث الديناميكية للمناطق والأحياء
+  const dynamicUrls = regions.flatMap((region) => {
+    // رابط المدينة الرئيسي (مثل: /properties?city=القدس)
+    const cityUrl = {
+      url: `${baseUrl}/properties?city=${encodeURIComponent(region.name)}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    };
+
+    // روابط الأحياء داخل كل مدينة (مثل: /properties?city=القدس&location=كفر عقب)
+    const locationUrls = region.locations.map((loc) => ({
+      url: `${baseUrl}/properties?city=${encodeURIComponent(region.name)}&region=${encodeURIComponent(loc)}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    }));
+
+    return [cityUrl, ...locationUrls];
+  });
+
+  return [...staticUrls, ...dynamicUrls];
 }
