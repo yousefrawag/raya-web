@@ -136,7 +136,7 @@ description:
     type: "website",
     images: [
       {
-        url: "https://i.postimg.cc/g0KvYfbB/Screenshot-2025-10-20-174821.png", // حط صورة عندك
+        url: "https://www.rayapal.com/icon.png", // حط صورة عندك
         width: 1200,
         height: 630,
         alt: "عقارات القدس - الراية العقارية",
@@ -149,7 +149,7 @@ description:
     title: "عقارات القدس وفلسطين",
     description:
       "ابحث عن شقق للبيع والإيجار في أفضل مناطق فلسطين بسهولة.",
-    images: ["https://i.postimg.cc/g0KvYfbB/Screenshot-2025-10-20-174821.png"],
+    images: ["https://www.rayapal.com/icon.png"],
   },
 
   category: "real estate",

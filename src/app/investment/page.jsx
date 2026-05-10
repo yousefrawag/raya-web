@@ -1,4 +1,4 @@
-// "use client";
+export const revalidate = 0;
 import { GetAllinvestment } from '@/lib/GetAllinvestment';
 import Link from 'next/link';
 // import React, { useState } from 'react';
