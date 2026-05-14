@@ -22,7 +22,7 @@ const HeroSection = async() => {
 
 const lines = formatTitle(CurrentItem?.title);
   return (
-    <section className="relative w-full min-h-screen bg-white overflow-hidden flex flex-col justify-center">
+    <section className="relative w-full min-h-screen bg-white  flex flex-col justify-center">
       
       {/* 1. هيكل الخلفية (تصميم وصلت: الصورة يسار مع منحنى انسيابي) */}
       <div className="absolute inset-0 z-0 flex flex-row-reverse">

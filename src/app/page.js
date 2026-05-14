@@ -98,7 +98,7 @@ export default function Home() {
             },
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+970-XXX-XXXXXX",
+              "telephone": " +972568700632",
               "contactType": "customer service"
             }
           })

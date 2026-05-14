@@ -87,7 +87,7 @@ const SelectOne = ({
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute z-[200] w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+        <div className="absolute z-[200px] w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
           {/* Search */}
           <div className="p-2 border-b border-gray-200">
             <input

@@ -27,6 +27,7 @@ const FilterSection = () => {
         const { types , cityes , opeartions } = await getFullTypes();
         // تأكد من إضافة قيمة افتراضية لو الداتا فاضية
         setDynamicTypes(types?.length > 0 ? types : ["شقة", "فيلا" , "مستودع"]);
+      console.log("deynmivtypes" , dynamicTypes)
         setDynamicCityes(cityes?.length > 0 ? cityes : [
     "القدس", "صور باهر", "شعفاط", "كفر عقب", "بيت حنينا", "جبل المكبر", "اريحا", "رام الله", "البيرة"
   ]) 

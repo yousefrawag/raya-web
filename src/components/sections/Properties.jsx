@@ -127,7 +127,7 @@ const Properties =  async () => {
 
         {/* View More Button */}
         <div className="text-center mt-12">
-          <Link href="/Propertyes" className="bg-gradient-to-r cursor-pointer from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+          <Link href="/properties" className="bg-gradient-to-r cursor-pointer from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
             عرض المزيد من العقارات
           </Link>
         </div>
