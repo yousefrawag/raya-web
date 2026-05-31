@@ -10,6 +10,12 @@ const nextConfig = {
       "images.ctfassets.net",
       "images.pexels.com",
     ],
+        remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.ctfassets.net",
+      },
+    ],
   },
 
   async redirects() {

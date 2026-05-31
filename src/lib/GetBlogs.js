@@ -12,7 +12,8 @@ export async function GetBlogs() {
          const { blogTietal,
                     blogCatgeoray ,
                     blogDeatils ,
-                    blogImage
+                    blogImage ,
+                    slug
 
           } = item.fields
          const blogImageCutmez = checkimageprotcoll(blogImage)
@@ -22,9 +23,11 @@ export async function GetBlogs() {
  id , blogTietal , blogCatgeoray ,
                     blogDeatils ,
                     blogImageCutmez ,
-                    createdAt
+                    createdAt ,
+                    slug
          }
   })
   
   return customezData;
 }
+ 

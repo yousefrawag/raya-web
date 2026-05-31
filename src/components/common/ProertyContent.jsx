@@ -17,7 +17,52 @@ const [YoutubeUrlactive , setYoutupeUrlActive] = useState(null)
     const whatsappUrl = `https://wa.me/${+972568700632}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
+const hasFeatures =
+  (data?.projectFeatures?.length ?? 0) > 0 ||
+  (data?.propertiesServies?.length ?? 0) > 0;
 
+const hasMap = !!(data?.map || data?.d3map);
+
+const hasPayment =
+  !!data?.firstPayemnt ||
+  !!data?.installemntPeriod;
+
+const hasGallery =
+  (data?.seriesimagesCutmez?.length ?? 0) > 0 ||
+  (data?.vidoesCustmez?.length ?? 0) > 0 ||
+  !!data?.youtupeUrl;
+
+const tabs = [
+  {
+    id: "overview",
+    label: "نظرة عامة",
+    icon: Square,
+  },
+  {
+    id: "features",
+    label: "المميزات",
+    icon: Star,
+    show: hasFeatures,
+  },
+  {
+    id: "map",
+    label: "الخريطة",
+    icon: MapPin,
+    show: hasMap,
+  },
+  {
+    id: "payment",
+    label: "خيارات الدفع",
+    icon: CreditCard,
+    show: hasPayment,
+  },
+  {
+    id: "gallery",
+    label: "المعرض",
+    icon: ImageIcon,
+    show: hasGallery,
+  },
+].filter((item) => item.show !== false);
   const heroImage = data?.seriesimagesCutmez ? 
     data?.seriesimagesCutmez[selectedImage]?.url :
     "https://via.placeholder.com/800x450?text=No+Image";
@@ -93,41 +138,44 @@ const [YoutubeUrlactive , setYoutupeUrlActive] = useState(null)
         <div className="lg:col-span-2">
           {/* Info Bar */}
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 mb-8 flex flex-wrap items-center justify-around gap-4">
-             <QuickInfo icon={<Bed className="text-amber-500" />} label="غرف نوم" value={data.bedrooms} />
+          {
+            data.bedrooms &&  <QuickInfo icon={<Bed className="text-amber-500" />} label="غرف نوم" value={data.bedrooms} />
+          }  
+         
              <div className="w-px h-10 bg-slate-100 hidden md:block"></div>
-             <QuickInfo icon={<Bath className="text-amber-500" />} label="حمامات" value={data.bathrooms} />
+       {
+            data.bathrooms &&        <QuickInfo icon={<Bath className="text-amber-500" />} label="حمامات" value={data.bathrooms} />
+          }
              <div className="w-px h-10 bg-slate-100 hidden md:block"></div>
-             <QuickInfo icon={<Square className="text-amber-500" />} label="المساحة" value={`${data.area} م²`} />
+            {
+              data.area &&             <QuickInfo icon={<Square className="text-amber-500" />} label="المساحة" value={`${data.area} م²`} />
+
+            }
           </div>
 
           {/* Tabs Container */}
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             <div className="bg-slate-50/50 border-b border-gray-100 overflow-x-auto">
-              <nav className="flex flex-col lg:flex-row whitespace-nowrap px-4">
-                {[
-                  { id: 'overview', label: 'نظرة عامة', icon: Square },
-                  { id: 'features', label: 'المميزات', icon: Star },
-                  { id: 'map', label: 'الخريطة', icon: MapPin },
-                  { id: 'payment', label: 'خيارات الدفع', icon: CreditCard },
-                  { id: 'gallery', label: 'المعرض', icon: ImageIcon },
-                ].map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center py-5 px-6 font-bold text-sm transition-all relative ${
-                      activeTab === tab.id
-                        ? 'text-amber-600'
-                        : 'text-gray-400 hover:text-gray-600'
-                    }`}
-                  >
-                    <tab.icon size={16} className="ml-2" />
-                    {tab.label}
-                    {activeTab === tab.id && (
-                      <div className="absolute bottom-0 right-0 left-0 h-1 bg-amber-500 rounded-t-full"></div>
-                    )}
-                  </button>
-                ))}
-              </nav>
+           <nav className="flex flex-col lg:flex-row whitespace-nowrap px-4">
+  {tabs.map((tab) => (
+    <button
+      key={tab.id}
+      onClick={() => setActiveTab(tab.id)}
+      className={`flex items-center py-5 px-6 font-bold text-sm transition-all relative ${
+        activeTab === tab.id
+          ? "text-amber-600"
+          : "text-gray-400 hover:text-gray-600"
+      }`}
+    >
+      <tab.icon size={16} className="ml-2" />
+      {tab.label}
+
+      {activeTab === tab.id && (
+        <div className="absolute bottom-0 right-0 left-0 h-1 bg-amber-500 rounded-t-full"></div>
+      )}
+    </button>
+  ))}
+</nav>
             </div>
 
             <div className="p-8">
@@ -136,61 +184,142 @@ const [YoutubeUrlactive , setYoutupeUrlActive] = useState(null)
                   <h3 className="text-xl font-black text-slate-800 mb-4 border-r-4 border-amber-500 pr-4">وصف العقار</h3>
                   <p className="text-gray-600 leading-relaxed text-lg mb-8">{data.details}</p>
                   
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <DetailBox label="سنة البناء" value={data?.buildingage} />
-                    <DetailBox label="المواقف" value={data?.barkingStauts} />
-                    <DetailBox label="الأثاث" value={data?.furniture} />
-                    <DetailBox label="النوع" value={data.typeOfproject} />
+                        <div className="grid md:grid-cols-2 gap-4">
+
+            {data?.buildingage && (
+              <DetailBox
+                label="سنة البناء"
+                value={data.buildingage}
+              />
+            )}
+
+            {data?.barkingStauts && (
+              <DetailBox
+                label="المواقف"
+                value={data.barkingStauts}
+              />
+            )}
+
+            {data?.furniture && (
+              <DetailBox
+                label="الأثاث"
+                value={data.furniture}
+              />
+            )}
+
+            {data?.typeOfproject && (
+              <DetailBox
+                label="النوع"
+                value={data.typeOfproject}
+              />
+            )}
+
                   </div>
                 </div>
               )}
 
-              {activeTab === 'features' && (
-                <div className="grid md:grid-cols-2 gap-8 animate-in fade-in duration-500">
-                   <div>
-                     <h4 className="font-black text-lg mb-4 text-slate-800">مميزات المشروع</h4>
-                     <div className="space-y-3">
-                        {data?.projectFeatures?.map((f, i) => (
-                          <div key={i} className="flex items-center gap-3 text-gray-700">
-                            <Check className="text-green-500" size={18} /> {f}
-                          </div>
-                        ))}
-                     </div>
-                   </div>
-                   <div>
-                     <h4 className="font-black text-lg mb-4 text-slate-800">الخدمات القريبة</h4>
-                     <div className="space-y-3">
-                        {data?.propertiesServies?.map((s, i) => (
-                          <div key={i} className="flex items-center gap-3 text-gray-700">
-                            <Check className="text-amber-500" size={18} /> {s}
-                          </div>
-                        ))}
-                     </div>
-                   </div>
-                </div>
+                {activeTab === "features" && hasFeatures && (
+        <div className="grid md:grid-cols-2 gap-8 animate-in fade-in duration-500">
+
+          {(data?.projectFeatures?.length ?? 0) > 0 && (
+            <div>
+              <h4 className="font-black text-lg mb-4 text-slate-800">
+                مميزات المشروع
+              </h4>
+
+              <div className="space-y-3">
+                {data.projectFeatures.map((f, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 text-gray-700"
+                  >
+                    <Check
+                      className="text-green-500"
+                      size={18}
+                    />
+                    {f}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {(data?.propertiesServies?.length ?? 0) > 0 && (
+            <div>
+              <h4 className="font-black text-lg mb-4 text-slate-800">
+                الخدمات القريبة
+              </h4>
+
+              <div className="space-y-3">
+                {data.propertiesServies.map((s, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 text-gray-700"
+                  >
+                    <Check
+                      className="text-amber-500"
+                      size={18}
+                    />
+                    {s}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </div>
               )}
 
-              {activeTab === "map" && <div className="rounded-2xl overflow-hidden h-96"><MapSection map3d={data?.d3map} map={data?.map} /></div>}
+              {activeTab === "map" && hasMap && (
+  <div className="rounded-2xl overflow-hidden h-96">
+    <MapSection
+      map3d={data?.d3map}
+      map={data?.map}
+    />
+  </div>
+)}
 
-              {activeTab === 'payment' && (
-                <div className="grid md:grid-cols-2 gap-6 animate-in fade-in duration-500">
-                  <div className="p-6 bg-amber-50 rounded-2xl border border-amber-100 flex items-center gap-4">
-                     <div className="bg-amber-500 p-3 rounded-xl text-white"><CreditCard size={24}/></div>
-                     <div>
-                       <p className="text-xs text-amber-700 font-bold">الدفعة الأولى</p>
-                       <p className="font-black text-lg text-slate-800">{data?.firstPayemnt}</p>
-                     </div>
-                  </div>
-                  <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-4">
-                     <div className="bg-slate-800 p-3 rounded-xl text-white"><FileText size={24}/></div>
-                     <div>
-                       <p className="text-xs text-slate-500 font-bold">مدة السداد</p>
-                       <p className="font-black text-lg text-slate-800">{data?.installemntPeriod}</p>
-                     </div>
-                  </div>
-                </div>
-              )}
+           {activeTab === "payment" && hasPayment && (
+  <div className="grid md:grid-cols-2 gap-6 animate-in fade-in duration-500">
 
+    {data?.firstPayemnt && (
+      <div className="p-6 bg-amber-50 rounded-2xl border border-amber-100 flex items-center gap-4">
+        <div className="bg-amber-500 p-3 rounded-xl text-white">
+          <CreditCard size={24} />
+        </div>
+
+        <div>
+          <p className="text-xs text-amber-700 font-bold">
+            الدفعة الأولى
+          </p>
+
+          <p className="font-black text-lg text-slate-800">
+            {data.firstPayemnt}
+          </p>
+        </div>
+      </div>
+    )}
+
+    {data?.installemntPeriod && (
+      <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-4">
+        <div className="bg-slate-800 p-3 rounded-xl text-white">
+          <FileText size={24} />
+        </div>
+
+        <div>
+          <p className="text-xs text-slate-500 font-bold">
+            مدة السداد
+          </p>
+
+          <p className="font-black text-lg text-slate-800">
+            {data.installemntPeriod}
+          </p>
+        </div>
+      </div>
+    )}
+
+  </div>
+)}
              {activeTab === 'gallery' && (
   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 animate-in fade-in duration-500">
     
@@ -359,11 +488,20 @@ const QuickInfo = ({ icon, label, value }) => (
   </div>
 );
 
-const DetailBox = ({ label, value }) => (
-  <div className="flex justify-between items-center p-4 bg-slate-50 rounded-xl">
-    <span className="text-slate-500 font-bold text-sm">{label}:</span>
-    <span className="text-slate-800 font-black">{value || 'غير متوفر'}</span>
-  </div>
-);
+const DetailBox = ({ label, value }) => {
+  if (!value) return null;
+
+  return (
+    <div className="flex justify-between items-center p-4 bg-slate-50 rounded-xl">
+      <span className="text-slate-500 font-bold text-sm">
+        {label}:
+      </span>
+
+      <span className="text-slate-800 font-black">
+        {value}
+      </span>
+    </div>
+  );
+};
 
 export default ProertyContent;

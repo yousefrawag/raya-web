@@ -115,6 +115,7 @@ const categories = [
                 <Image
                   src={post.blogImageCutmez?.url}
                   alt={post.blogTietal}
+                
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />

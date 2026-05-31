@@ -8,7 +8,18 @@ import Link from 'next/link';
 // import { useNavigate, useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const navItems = [
+    { id: '/', label: 'الرئيسية' },
+    { id: '/regions', label: 'المناطق' },
+    { id: '/properties', label: 'العقارات' },
+        { id: '/investment', label: 'إستثمار' }, 
+    { id: '/contracting', label: 'المقاولات' }, 
 
+    { id: '/engineering-consultation', label: 'إستشارات هندسية' }, 
+    
+    { id: '/map', label: 'الخريطة' },
+    { id: '/blogs', label: "المدونة" }, 
+  ];
 
   return (
     <footer className="bg-slate-900 text-white py-12">
@@ -49,7 +60,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h4 className="text-lg font-bold mb-4">روابط سريعة</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-2 grid grid-cols-2">
               <li>
                 <Link href='/' 
                  
@@ -76,24 +87,52 @@ const Footer = () => {
                   خدماتنا
                 </Link>
               </li>
-              <li>
+                       <li>
                 <Link 
-                 href='/#projects'
-        
+                href='/regions'
+                  
                   className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
                 >
-                  إستثمار
+                  المناطق
                 </Link>
               </li>
-              <li>
+                   <li>
                 <Link 
-                href='/#properties'
+                href='/properties'
                   
                   className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
                 >
                   العقارات
                 </Link>
               </li>
+              <li>
+                <Link 
+                 href='/investment'
+        
+                  className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
+                >
+                  إستثمار
+                </Link>
+              </li>
+                     <li>
+                <Link 
+                 href='/contracting'
+        
+                  className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
+                >
+                  مقاولات
+                </Link>
+              </li>
+                     <li>
+                <Link 
+                 href='/engineering-consultation'
+        
+                  className="text-gray-400 hover:text-amber-500 transition-colors duration-300"
+                >
+                  إستشارات هندسية
+                </Link>
+              </li>
+         
               <li>
   
               </li>

@@ -44,7 +44,8 @@ priec ,
 projectFeatures ,
 typeOfproject ,
 furniture ,
-propertiesServies
+propertiesServies ,
+region
 
 
           } = item.fields
@@ -56,6 +57,7 @@ installemnt ,
 installemntPeriod ,
 installemntPermonth ,
 map ,
+region ,
 lat ,
 opeartion ,
 barkingStauts ,

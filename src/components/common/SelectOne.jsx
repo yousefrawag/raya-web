@@ -55,7 +55,7 @@ const SelectOne = ({
   };
 
   return (
-    <div className="relative w-full">
+    <div className={`relative w-full ${isOpen ? "z-50" : "z-10"}`}>
       {/* Button */}
       <button
         type="button"
@@ -87,7 +87,7 @@ const SelectOne = ({
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute z-[200px] w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+        <div className="absolute z-[2000px] w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
           {/* Search */}
           <div className="p-2 border-b border-gray-200">
             <input

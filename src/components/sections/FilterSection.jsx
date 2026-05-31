@@ -42,11 +42,7 @@ const FilterSection = () => {
     fetchTypes();
   }, []);
 
-  const cities = [
-    "القدس", "صور باهر", "شعفاط", "كفر عقب", "بيت حنينا", "جبل المكبر", "اريحا", "رام الله", "البيرة"
-  ];
 
-  const OpeartionType = ["بيع", "إيجار" , "إستثمار"];
 
   return (
     <div className="w-full bg-white rounded-[2rem] md:rounded-[3rem] p-2 md:p-4 transition-all">
@@ -65,6 +61,13 @@ const FilterSection = () => {
             {op}
           </button>
         ))}
+           <Link
+         href="/investment"
+            
+            className={`px-6 py-2 rounded-full text-sm font-bold transition-all bg-transparent text-slate-500 hover:bg-slate-50`}
+          >
+          إستثمار
+          </Link>
       </div>
 
       {/* 2. شبكة المدخلات */}
@@ -72,7 +75,7 @@ const FilterSection = () => {
         
         {/* اختيار الموقع */}
         <div className="md:col-span-4 relative group border-l border-transparent md:border-slate-100 px-4 py-2">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-5">
             <HiOutlineLocationMarker className="text-amber-500 text-xl" />
             <div className="w-full">
               <p className="text-[10px] text-slate-400 font-bold mb-1 mr-1">الموقع</p>

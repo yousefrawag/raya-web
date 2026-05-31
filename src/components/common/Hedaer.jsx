@@ -20,11 +20,15 @@ const Header = () => {
 
   const navItems = [
     { id: '/', label: 'الرئيسية' },
-    // { id: '/Projects', label: 'مشاريع' },
+    { id: '/regions', label: 'المناطق' },
     { id: '/properties', label: 'العقارات' },
-    { id: '/investment', label: 'إستثمار' },
+        { id: '/investment', label: 'إستثمار' }, 
+    { id: '/contracting', label: 'المقاولات' }, 
+
+    { id: '/engineering-consultation', label: 'إستشارات هندسية' }, 
+    
     { id: '/map', label: 'الخريطة' },
-    { id: '/blogs', label: "المدونة" },
+    { id: '/blogs', label: "المدونة" }, 
   ];
 
   return (

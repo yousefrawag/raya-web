@@ -4,6 +4,7 @@ import Header from "@/components/common/Hedaer";
 import WhatsAppButton from "@/components/common/WhatsAppButton";
 import Footer from "@/components/common/Footer";
 import 'leaflet/dist/leaflet.css';
+import ScrollToTop from "@/components/common/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -165,6 +166,7 @@ export default function RootLayout({ children }) {
         <Header />
         <main>{children}</main>
         <Footer />
+        <ScrollToTop />
         <WhatsAppButton />
       </body>
     </html>

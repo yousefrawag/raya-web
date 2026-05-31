@@ -1,5 +1,4 @@
-export const revalidate = 60;
-
+export const revalidate = 86400;
 // استيراد المكونات الخاصة بك
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";

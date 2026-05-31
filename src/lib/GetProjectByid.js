@@ -1,9 +1,9 @@
-import { client , checkimageprotcoll } from "../utils/ContentfullClient";
+import { client2 , checkimageprotcoll } from "../utils/ContentfullClient";
 
 export async function GetProjectByid(id) {
 console.log("id-project" , id);
 
-  const res = await client.getEntry(id);
+  const res = await client2.getEntry(id);
   console.log("res project data", res?.fields);
 const item = res.fields;
  if (!item) return null; // لو مفيش entry

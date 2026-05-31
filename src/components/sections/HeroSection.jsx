@@ -48,7 +48,7 @@ const lines = formatTitle(CurrentItem?.title);
       </div>
 
       {/* 2. المحتوى (هوية الراية: ألوانك ونصوصك الخاصة) */}
-      <div className="relative z-20 container mx-auto px-6 lg:px-16 w-full">
+      <div className="relative z-20 container mx-auto px-6 lg:px-10 w-full">
         <div className="grid lg:grid-cols-2 items-center">
           
           {/* الجانب الأيمن: نصوص "الراية" وألوانها */}
@@ -60,13 +60,13 @@ const lines = formatTitle(CurrentItem?.title);
               قرص عقارية حصرية في القدس وأريحا
             </div> */}
 
-<h1 className="text-4xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-tight mt-20 mb-6">
+<h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-tight mt-20 mb-6 w-full text-center md:text-right lg:text-right">
   {lines[0]} <br />
   <span className="text-[#f59e0b]">{lines[1]}</span> <br />
   {lines[2]}
 </h1>
             
-            <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-lg leading-relaxed font-medium">
+            <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-lg p-2  font-medium">
 {
   CurrentItem?.details?.content[0]?.content[0].value || "غير متوفر"
 }

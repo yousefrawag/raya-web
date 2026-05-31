@@ -2,8 +2,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Bed, Bath, Square, Phone, Mail, MessageCircle, Star, Check, Image as ImageIcon, FileText, CreditCard, User } from 'lucide-react';
-import MapSection from '@/components/common/MapSection';
-import PropertiesRelated from '@/components/sections/PropertiesRelated';
+import Script from "next/script";
+
 import { propertiesData } from "@/data/index";
 import { getPropertiey } from '@/lib/GetEntry';
 import ProertyContent from '@/components/common/ProertyContent';
@@ -29,12 +29,14 @@ ${project.title} عقار ${project.typeOfproject} في ${project.city}.
 ${project.details?.slice(0, 140) || 'مشروع عقاري مميز بموقع استراتيجي وأنظمة سداد مرنة.'}
   `.trim()
 
+  
+
   return {
     title,
     description,
 
     alternates: {
-      canonical: `/Propertyes/${id}`
+      canonical: `/properties/${id}`
     },
 
     openGraph: {
@@ -60,37 +62,51 @@ const property = await getPropertiey(id)
   
 
 
-  // if (!property) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center">
-  //       <div className="text-center">
-  //         <h2 className="text-2xl font-bold text-slate-800 mb-4">العقار غير موجود</h2>
-  //         <Link href="/" className="text-amber-600 hover:text-amber-700">العودة للرئيسية</Link>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+ const schema = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+
+    name: property.title,
+
+    description: property.details,
+
+    url: `https://rayapal.com/properties/${id}`,
+
+    image: property.seriesimagesCutmez?.map(
+      (img) => img.url
+    ),
+
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: property.city,
+      addressCountry: "Palestine"
+    },
+
+    numberOfRooms: property.bedrooms || undefined,
+
+    floorSize: property.area
+      ? {
+          "@type": "QuantitativeValue",
+          value: property.area,
+          unitCode: "MTK"
+        }
+      : undefined,
+
+  
+  };
+
 
 
 
   return (
     <div className="min-h-screen  bg-gray-50">
-      <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "RealEstateListing",
-      "name": property.title,
-      "description": property.details,
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": property.city,
-        "addressRegion": "Palestine"
-      }
-    })
-  }}
-/>
+    <Script
+        id="property-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schema),
+        }}
+      />
       <div className="container mx-auto px-3 ">
       {/* Header */}
       <div className="p-4  mt-25 ">
@@ -101,14 +117,14 @@ const property = await getPropertiey(id)
             /
           </Link>
         
-            <Link href="/Propertyes" className="inline-flex items-center text-slate-900 hover:text-amber-700 transition-colors">
+            <Link href="/properties" className="inline-flex items-center text-slate-900 hover:text-amber-700 transition-colors">
             
             العقارات
             /
           </Link>
                  <Link 
                   href={{
-    pathname: "/Propertyes",
+    pathname: "/properties",
     query: {
   
       city: property.city,

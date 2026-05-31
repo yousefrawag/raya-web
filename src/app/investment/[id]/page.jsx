@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { FaMapMarkerAlt, FaRulerCombined, FaDollarSign, FaBuilding, FaHandHoldingUsd, FaFileContract, FaWhatsapp, FaChartLine } from 'react-icons/fa';
 import {GeyINvestmentEntry} from "@/lib/GeyINvestmentEntry"
 import Link from 'next/link';
+import InvestMentHndelimagesClient from '@/components/common/InvestMentHndelimagesClient';
 // 1. تحسين محركات البحث (Dynamic Metadata for SEO)
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -130,86 +131,8 @@ const SingleInvestmentPage = async ({ params }) => {
         </div>
       </div>
       {/* 1. قسم البطل (Hero Section) & معرض الصور (Gallery) */}
-      <section className="bg-white border-b shadow-inner">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            
-            {/* معرض الصور - تصميم شبكي متقدم */}
-            <div className="lg:col-span-7 space-y-4">
-              <div className="relative aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                <Image 
-                  src={images[0].url} 
-                  alt={data.title}
-                  fill
-                  className="object-cover"
-                  priority={true} // تحميل سريع لأول صورة
-                  sizes="(max-w-7xl) 100vw, 700px"
-                />
-              </div>
-              {images.length > 1 && (
-                <div className="grid grid-cols-4 gap-3">
-                  {images.slice(1, 5).map((img, idx) => (
-                    <div key={idx} className="relative aspect-video rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition border border-gray-100">
-                      <Image 
-                        src={img.url} 
-                        alt={`${data.title} - صورة ${idx + 2}`}
-                        fill
-                        className="object-cover"
-                        sizes="200px"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
 
-            {/* ملخص الاستثمار والبيانات المالية */}
-            <div className="lg:col-span-5 space-y-8 bg-white p-8 rounded-3xl border border-gray-100 shadow-xl">
-              <div>
-                <span className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-1.5 rounded-full text-sm font-bold mb-4">
-                  <FaChartLine className="text-base" />
-                  فرصة استثمارية حصرية
-                </span>
-                <h1 className="text-4xl font-extrabold text-gray-900 leading-tight mb-3">{data.title}</h1>
-                <p className="flex items-center text-gray-600 text-lg mb-6">
-                  <FaMapMarkerAlt className="ml-3 text-orange-500 text-xl" />
-                  {data.city} - {data.region}
-                </p>
-
-                {/* كروت البيانات الأساسية */}
-                <div className="grid grid-cols-2 gap-5 mb-8">
-                  <div className="p-5 bg-white border border-gray-100 rounded-2xl shadow-sm text-center flex flex-col items-center">
-                    <FaRulerCombined className="text-3xl text-orange-400 mb-3" />
-                    <p className="text-gray-400 text-sm mb-1">المساحة الإجمالية</p>
-                    <p className="font-extrabold text-2xl text-gray-800">{data.area} م²</p>
-                  </div>
-                  <div className="p-5 bg-white border border-gray-100 rounded-2xl shadow-sm text-center flex flex-col items-center">
-                    <FaBuilding className="text-3xl text-orange-400 mb-3" />
-                    <p className="text-gray-400 text-sm mb-1">نوع العقار</p>
-                    <p className="font-extrabold text-2xl text-gray-800">{data.type}</p>
-                  </div>
-                </div>
-
-                {/* السعر - العنصر الأهم */}
-                <div className="bg-gray-900 text-white p-8 rounded-3xl shadow-2xl relative overflow-hidden">
-                    {/* خلفية جمالية */}
-                    <div className="absolute -bottom-10 -right-10 text-gray-800 text-9xl transform rotate-12 opacity-50">
-                        <FaDollarSign />
-                    </div>
-                    {/* <p className="text-gray-400 text-sm mb-1.5 relative z-10">السعر المطلوب للاستثمار</p>
-                    <p className="text-5xl font-black text-orange-400 relative z-10 leading-none">
-                        {Number(data.price).toLocaleString()} <span className="text-xl font-medium text-white mr-1">دولار</span>
-                    </p> */}
-                </div>
-              </div>
-
-              {/* زر التواصل الرئيسي - WhatsApp */}
-           
-            </div>
-          </div>
-        </div>
-      </section>
-
+<InvestMentHndelimagesClient  images={images} data={data}/>
       {/* 2. قسم التفاصيل والتحليل (Details & Analysis Section) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 lg:mt-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">

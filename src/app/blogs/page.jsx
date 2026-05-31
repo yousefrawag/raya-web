@@ -1,4 +1,4 @@
-export const revalidate = 60;
+export const revalidate = 86400;
 import React from 'react'
 import AllBlogs from '@/components/sections/AllBlogs'
 import { GetBlogs } from '@/lib/GetBlogs'
@@ -25,6 +25,7 @@ export const metadata = {
 }
 const Blogspage = async () => {
   const data =  await GetBlogs()
+  console.log("data-blogs" , data)
   return <AllBlogs data={data} />
 }
 

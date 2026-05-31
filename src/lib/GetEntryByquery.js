@@ -1,12 +1,16 @@
 import { client , checkimageprotcoll } from "../utils/ContentfullClient";
 
-export async function GetEntryByquery(city) {
+export async function GetEntryByquery(city , region) {
   const query = {
     content_type: "arya-properties",
   };
 
   if (city) {
     query["fields.city"] = city || "";
+     
+  }
+    if (region) {
+    query["fields.region"] = region || "";
      
   }
  
@@ -28,14 +32,15 @@ projectFeatures ,
 typeOfproject ,
 barkingStauts ,
 furniture ,
-propertiesServies
+propertiesServies ,
+region
 
 
           } = item.fields
          const seriesimagesCutmez = checkimageprotcoll(images)
             const id = item.sys.id;
          return {
-            title,adress , id , details, area , bathrooms , city,bedrooms ,d3map , seriesimagesCutmez , firstPayemnt , 
+            title,adress , id , region , details, area , bathrooms , city,bedrooms ,d3map , seriesimagesCutmez , firstPayemnt , 
 installemnt ,
 installemntPeriod ,
 installemntPermonth ,

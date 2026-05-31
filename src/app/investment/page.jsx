@@ -1,6 +1,7 @@
-export const revalidate = 0;
+export const revalidate = 86400;
 import { GetAllinvestment } from '@/lib/GetAllinvestment';
 import Link from 'next/link';
+import Image from 'next/image';
 // import React, { useState } from 'react';
 import { 
   HiOutlineLocationMarker, 
@@ -125,17 +126,21 @@ const investmentPrperties = await GetAllinvestment()
               <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-700 rounded-lg text-xs font-black mb-6">
                منصة الراية لخدمات الاستثمار والتسويق
               </span>
-              <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-tight">
-                حول عقارك إلى <span className="text-amber-500">فرصة استثمارية</span> ناجحة
+              <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-tight text-center">
+                حول عقارك إلى <span className="text-amber-500 ">فرصة استثمارية</span> ناجحة
               </h1>
-              <p className="text-gray-600 text-lg mb-8 leading-relaxed font-medium">
+              <p className="text-gray-600 text-xl mb-8 leading-relaxed font-medium">
                 نحن في "الراية" لا نعرض العقارات فحسب، بل نصنع الفرص. اعرض عقارك معنا لتصل إلى أكبر شبكة مستثمرين وتضمن أفضل عائد استثماري في السوق الفلسطيني.
               </p>
               
               <div className="flex flex-wrap gap-4">
-                <button className="flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-amber-500 transition-all shadow-xl shadow-slate-200">
+                <a
+                target='_balank'
+               href={`https://wa.me/+972568700632?text=أرغب في الحصول على استشارة استثمارية بخصوص عقار `} // عدل الرقم ورسالة الـ واتساب
+
+                className="flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-amber-500 transition-all shadow-xl shadow-slate-200">
                   <HiOutlinePlus size={20}/>  تواصل معنا و اعرض عقارك الآن 
-                </button>
+                </a>
            
               </div>
             </div>
@@ -235,19 +240,20 @@ const investmentPrperties = await GetAllinvestment()
 const FeatureCard = ({ icon, title, desc }) => (
   <div className="bg-white p-6 rounded-[2rem] border border-slate-50 shadow-sm hover:shadow-md transition-all">
     <div className="mb-4">{icon}</div>
-    <h4 className="text-lg font-bold text-slate-800 mb-2">{title}</h4>
-    <p className="text-slate-500 text-xs leading-relaxed">{desc}</p>
+    <h4 className="text-xl font-bold text-slate-800 mb-2">{title}</h4>
+    <p className="text-slate-500 text-lg leading-relaxed">{desc}</p>
   </div>
 );
 
 // مكون الكارت المطور
 const PropertyCard = ({ image, title, location, price, area, type, desc  , id}) => (
   <div className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col md:flex-row h-full">
-    <div className="md:w-5/12 relative h-60 md:h-auto overflow-hidden">
-      <img src={image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+    <div className="md:w-6/12 relative h-60 md:h-auto overflow-hidden">
+      <Image    fill
+    sizes="(max-width:768px) 100vw, 50vw" src={image} alt="" className="w-full h-full  group-hover:scale-110 transition-transform duration-700" />
       <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-amber-600 px-4 py-1 rounded-xl text-[10px] font-black uppercase">فرصة حصرية</span>
     </div>
-    <div className="md:w-7/12 p-8 flex flex-col justify-between">
+    <div className="md:w-6/12 p-8 flex flex-col justify-between">
       <div>
         <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-amber-500 transition-colors">{title}</h3>
         <div className="flex items-center text-slate-400 text-xs mb-4">

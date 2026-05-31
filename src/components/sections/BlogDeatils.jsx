@@ -2,179 +2,192 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, Clock, ArrowLeft, Share2 } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, Share2, User, Tag, Bookmark } from "lucide-react";
 
-const BlogDeatils = ({ project }) => {
+const BlogDetails = ({ project }) => {
   if (!project) return null;
 
-  // حساب وقت القراءة التقريبي بناءً على طول المحتوى
+  // حساب وقت القراءة التقريبي
   const readingTime = project.blogDeatils 
     ? Math.ceil(project.blogDeatils.split(' ').length / 200) 
     : 5;
 
+  // تقسيم تفاصيل المدونة إلى مصفوفة فقرات بناءً على الأسطر لتوزيعها بشكل أفضل
+  const allParagraphs = project.blogDeatils 
+    ? project.blogDeatils.split('\n').filter(p => p.trim() !== '') 
+    : [];
+
+  // تقسيم المحتوى: أول فقرتين كمقدمة بارزة، والباقي كجسم المقال الرئيسي
+  const introParagraphs = allParagraphs.slice(0, 2);
+  const mainParagraphs = allParagraphs.slice(2);
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: project.blogTietal,
+        text: project.shortDescription || project.blogTietal,
+        url: window.location.href,
+      }).catch(console.error);
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert("تم نسخ رابط المقال بنجاح!");
+    }
+  };
+
   return (
-    <article className="bg-white min-h-screen" dir="rtl">
-      {/* HERO SECTION - ألوان واضحة */}
-      <div className="relative w-full h-[60vh] min-h-[450px] overflow-hidden">
-        <Image
-          src={project.blogImageCutmez?.url || "/api/placeholder/1200/800"}
-          alt={project.blogTietal}
-          fill
-          className="object-cover"
-          priority
-        />
-        
-        {/* Overlay أسود شفاف - واضح */}
-        <div className="absolute inset-0 bg-black/70" />
-
-        {/* Content overlay */}
-        <div className="absolute inset-0 flex items-end">
-          <div className="w-full px-6 md:px-12 pb-16 md:pb-20">
-            <div className="space-y-5">
-              {/* Category badge - ألوان زاهية */}
-              <span className="bg-amber-500 text-white text-sm font-bold px-4 py-1.5 rounded-full inline-block w-fit shadow-lg">
-                {project.blogCatgeoray || "عقارات"}
-              </span>
-
-              {/* Title - حجم كبير وواضح */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-5xl">
-                {project.blogTietal}
-              </h1>
-
-              {/* Meta info - تاريخ ووقت قراءة فقط */}
-              <div className="flex items-center gap-4 text-white/90">
-                <span className="flex items-center gap-1.5 text-sm">
-                  <Calendar className="w-4 h-4" />
-                  {new Date(project.createdAt).toLocaleDateString("ar-EG", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </span>
-                <span className="text-white/40">|</span>
-                <span className="flex items-center gap-1.5 text-sm">
-                  <Clock className="w-4 h-4" />
-                  {readingTime} دقائق قراءة
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* BREADCRUMB - شريط التنقل */}
-      <div className="border-b border-gray-200 bg-gray-50">
-        <div className="w-full px-6 md:px-12 py-4">
-          <nav className="flex items-center text-sm">
-            <Link href="/" className="text-gray-600 hover:text-amber-600 transition-colors">
-              الرئيسية
-            </Link>
-            <ArrowLeft className="w-3 h-3 mx-2 text-gray-400" />
-            <Link href="/blogs" className="text-gray-600 hover:text-amber-600 transition-colors">
-              المدونة
-            </Link>
-            <ArrowLeft className="w-3 h-3 mx-2 text-gray-400" />
-            <span className="text-gray-900 font-medium truncate max-w-[300px]">
+    <article className="bg-gray-50 min-h-screen text-right pt-20" dir="rtl">
+      
+               <div className="bg-white border-b border-gray-100 ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+          <nav className="flex items-center gap-2 text-sm text-gray-500 font-medium">
+            <Link href="/" className="hover:text-amber-600 transition-colors">الرئيسية</Link>
+            <ArrowLeft className="w-3.5 h-3.5 text-gray-400 rotate-180" />
+            <Link href="/blogs" className="hover:text-amber-600 transition-colors">المدونة</Link>
+            <ArrowLeft className="w-3.5 h-3.5 text-gray-400 rotate-180" />
+            <span className="text-gray-800 font-semibold truncate max-w-[220px] md:max-w-xs">
               {project.blogTietal}
             </span>
           </nav>
         </div>
       </div>
 
-      {/* MAIN CONTENT - مساحة كاملة */}
-      <div className="w-full px-6 md:px-12 py-10 md:py-14">
-        {/* كاتب المقال - اختياري */}
-        <div className="flex items-center justify-between mb-10 p-5 bg-amber-50 rounded-xl border-r-4 border-amber-500">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 bg-amber-500 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-md">
-              {project.author?.charAt(0) || "ر"}
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">كتب بواسطة</p>
-              <h3 className="text-lg font-bold text-gray-800">{project.author || "فريق الراية"}</h3>
-            </div>
-          </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* هيدر المقال الرئيسي (العنوان والتصنيف) */}
+
+
+        {/* 🖼️ قسم الصورة - عرض كامل، نقي وبدون أي طبقة ألوان عازلة */}
+        <div className="relative w-full aspect-[16/9] max-h-[550px] rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-gray-200 mb-10">
+          <Image
+            src={project.blogImageCutmez?.url || "/api/placeholder/1200/800"}
+            alt={project.blogTietal}
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-w-1200px) 100vw, 1200px"
+          />
+        </div>
+        
+  <div className="mb-6 space-y-4">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
+            <Tag className="w-3 h-3" />
+            {project.blogCatgeoray || "عقارات استثمارية"}
+          </span>
           
-          {/* زر مشاركة فقط - شغال pointer */}
-          <button 
-            onClick={() => {
-              // يمكن إضافة وظيفة المشاركة هنا
-              if (navigator.share) {
-                navigator.share({
-                  title: project.blogTietal,
-                  text: project.blogDeatils,
-                  url: window.location.href,
-                });
-              } else {
-                // نسخ الرابط للحالات التي لا تدعم المشاركة
-                navigator.clipboard.writeText(window.location.href);
-                alert("تم نسخ الرابط");
-              }
-            }}
-            className="flex items-center gap-2 bg-white hover:bg-amber-500 text-gray-700 hover:text-white px-5 py-2.5 rounded-lg transition-all duration-300 shadow-sm cursor-pointer border border-gray-200"
-          >
-            <Share2 className="w-4 h-4" />
-            <span className="text-sm font-medium">مشاركة</span>
-          </button>
-        </div>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 leading-snug tracking-tight">
+            {project.blogTietal}
+          </h1>
 
-        {/* CONTENT - يأخذ المساحة الكاملة */}
-        <div className="w-full">
-          {/* مقدمة المقال */}
-          {project.blogDeatils && (
-            <div className="mb-8">
-              <p className="text-xl leading-relaxed text-gray-700 border-r-4 border-amber-500 pr-6 py-3 bg-amber-50/30 rounded-l-lg font-medium">
-                {project.blogDeatils.split('.')[0]}.
-              </p>
-            </div>
-          )}
-
-          {/* المحتوى الرئيسي */}
-          <div className="space-y-6 text-gray-700 leading-relaxed text-lg">
-           <div className="space-y-6 text-gray-700 leading-relaxed text-lg text-justify">
-  {project.blogDeatils.split('\n').map((paragraph, index) => (
-    // نتحقق من أن الفقرة ليست فارغة قبل عرضها
-    paragraph.trim() && (
-      <p key={index} className="mb-4 first-letter:text-2xl">
-        {paragraph}
-      </p>
-    )
-  ))}
-</div>
-
-            {/* فاصل توضيحي */}
-            <div className="my-10 border-b border-gray-200" />
-
-            {/* خاتمة المقال */}
-            <div className="mt-8 p-6 bg-gray-50 rounded-xl">
-              <h2 className="text-2xl font-bold text-gray-800 mb-3">خلاصة المقال</h2>
-              <p className="text-gray-700 leading-relaxed">
-                في الختام، تظل القدس واحدة من أهم المدن التي تحمل فرصًا
-                استثمارية طويلة الأمد في القطاع العقاري. ننصحك بالتواصل مع مستشارينا 
-                للحصول على مزيد من التفاصيل حول الفرص الاستثمارية المتاحة.
-              </p>
-            </div>
+          {/* معلومات الميتا البسيطة */}
+          <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm text-gray-500 pt-2 border-b border-gray-200/60 pb-4">
+            <span className="flex items-center gap-1.5">
+              <Calendar className="w-4 h-4 text-amber-500" />
+              {new Date(project.createdAt || Date.now()).toLocaleDateString("ar-EG", {
+                year: "numeric", month: "long", day: "numeric"
+              })}
+            </span>
+            <span className="text-gray-300">|</span>
+            <span className="flex items-center gap-1.5">
+              <Clock className="w-4 h-4 text-amber-500" />
+              تستغرق القراءة: {readingTime} دقائق
+            </span>
           </div>
         </div>
+        {/* تخطيط الصفحة: المحتوى الرئيسي + الجانب الأيسر (Sidebar) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          
+          {/* العمود الأيمن الكبير: تفاصيل المقال المقسمة بشكل مريح وعصري */}
+          <div className="lg:col-span-2 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
+            
+            {/* 1. مقدمة المقال (الفقرات الأولى المميزة) */}
+            {introParagraphs.length > 0 && (
+              <div className="mb-8 p-5 bg-gradient-to-r from-amber-50/40 to-amber-50 border-r-4 border-amber-500 rounded-l-xl">
+                {introParagraphs.map((para, i) => (
+                  <p key={i} className="text-lg md:text-xl font-medium text-gray-800 leading-relaxed text-justify mb-3 last:mb-0">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            )}
 
-        {/* الوسوم - Tags */}
-        <div className="mt-12 pt-6 border-t border-gray-200">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm text-gray-500 ml-2">الوسوم:</span>
-            {["استثمار عقاري", "بورصة", "عقارات 2024", "نصائح استثمارية"].map((tag) => (
-              <span
-                key={tag}
+            {/* 2. جسم المقال الرئيسي (باقي التفاصيل مقسمة لسهولة القراءة) */}
+            <div className="space-y-6 text-gray-700 text-base md:text-lg leading-relaxed text-justify">
+              {mainParagraphs.length > 0 ? (
+                mainParagraphs.map((paragraph, index) => (
+                  <p key={index} className="transition-all hover:text-gray-900">
+                    {paragraph}
+                  </p>
+                ))
+              ) : (
+                // في حال كان المقال قصيراً ولم يتم تقسيمه بالكامل أعلى
+                allParagraphs.slice(2).map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))
+              )}
+            </div>
+
+            {/* الفاصل التوضيحي البصري */}
+            <div className="my-8 flex items-center gap-4">
+              <div className="h-[1px] bg-gray-200 flex-grow" />
+              <Bookmark className="w-5 h-5 text-amber-500 shrink-0" />
+              <div className="h-[1px] bg-gray-200 flex-grow" />
+            </div>
+
+            {/* 3. خاتمة المقال وخلاصة النصائح العقارية */}
+            <div className="p-6 bg-gray-50 rounded-xl border border-gray-100">
+              <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <span className="w-2 h-5 bg-amber-500 rounded-sm inline-block"></span>
+                خلاصة المقال والتوصية العقارية
+              </h2>
+              <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                في الختام، تظل الاستشارات العقارية المدروسة هي بوابتك الآمنة لتحقيق عوائد استثمارية طويلة الأمد ومستديمة. 
+                نحن في <span className="font-semibold text-amber-600">شركة الراية للتطوير والاستثمار العقاري</span> نضع خبرتنا الطويلة بين يديك لمساعدتك في اتخاذ القرار الأمثل. لا تتردد في التواصل مع أحد مستشارينا العقاريين للحصول على تحليل شامل للفرص المتاحة حالياً بالسوق.
+              </p>
+            </div>
+
+          </div>
+
+          {/* العمود الأيسر (Sidebar): معلومات الكاتب والمشاركة والوسوم */}
+          <div className="space-y-6">
+            
+            {/* بطاقة الكاتب والمشاركة */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center">
+              <div className="w-16 h-16 bg-gradient-to-tr from-amber-500 to-amber-600 rounded-full flex items-center justify-center text-white text-2xl font-black shadow-inner mx-auto mb-3">
+                {project.author?.charAt(0) || "ر"}
+              </div>
+              <span className="text-xs text-gray-400 block mb-1">تأليف ونشر</span>
+              <h3 className="text-md font-bold text-gray-800 mb-4">{project.author || "فريق الراية الخبير"}</h3>
               
-                className="px-3 py-1.5 bg-gray-100 text-black hover:bg-amber-500 hover:text-white rounded-full text-sm transition-colors duration-200"
+              <button 
+                onClick={handleShare}
+                className="w-full flex items-center justify-center gap-2 bg-gray-900 hover:bg-amber-600 text-white font-medium py-2.5 px-4 rounded-xl transition-all duration-300 shadow-sm cursor-pointer"
               >
-                #{tag}
-              </span>
-            ))}
+                <Share2 className="w-4 h-4" />
+                <span className="text-sm">مشاركة المقال الفورية</span>
+              </button>
+            </div>
+
+            {/* صندوق الوسوم الذكي والمحسّن للـ SEO الداخلي */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+              <h4 className="text-sm font-bold text-gray-900 mb-3 border-b border-gray-100 pb-2">الوسوم ذات الصلة</h4>
+              <div className="flex flex-wrap gap-2">
+                {["استثمار عقاري", "الراية العقارية", "عقارات 2026", "نصائح استثمارية", "شقق فاخرة"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2.5 py-1.5 bg-gray-50 text-gray-600 hover:bg-amber-500 hover:text-white border border-gray-100 rounded-lg text-xs font-medium transition-all cursor-pointer"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
           </div>
+
         </div>
       </div>
     </article>
   );
 };
 
-export default BlogDeatils;
+export default BlogDetails;
