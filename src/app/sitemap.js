@@ -7,7 +7,6 @@ export default async function sitemap() {
     "/map",
     "/investment",
     "/blogs",
-     "/regions",
     "/properties",
     "/contracting",
     "/engineering-consultation",
@@ -47,3 +46,44 @@ export default async function sitemap() {
 
   return sitemapEntries;
 }
+
+// ⬇️ الحفاظ الكامل على مصفوفة البيانات الخاصة بك كما هي
+const regionsStructure = [
+  {
+    name: "القدس",
+    slug: "jerusalem",
+    image: "quets", 
+    description: "العاصمة وقلب فلسطين العقاري النابض",
+    locations: [
+      { name: "صور باهر", slug: "sur-baher", image: "surbare" },
+      { name: "شعفاط", slug: "shuafat", image: "quets" },
+      { name: "بيت صفافا", slug: "beit-safafa", image: "quets" },
+      { name: "كفر عقب", slug: "kafr-aqab", image: "akrab" },
+      { name: "بيت حنينا", slug: "beit-hanina", image: "phetahnen" },
+      { name: "جبل المكبر", slug: "jabal-al-mukaber", image: "quets" },
+      { name: "ام طوبا", slug: "umm-tuba", image: "quets" },
+      { name: "راس العمود", slug: "ras-al-amud", image: "quets" },
+    ],
+  },
+  {
+    name: "اريحا",
+    slug: "jericho",
+    image: "phetahnen", 
+    description: "أقدم مدن العالم وعاصمة الاستثمار الاستجمامي والسياحي",
+    locations: [
+      { name: "اريحا", slug: "jericho", image: "phetahnen" },
+      { name: "البوابه", slug: "al-bawaba", image: "akrab" },
+    ],
+  },
+  {
+    name: "رام الله",
+    slug: "ramallah",
+    image: "ramella", 
+    description: "المركز الاستثماري، التجاري، والسكني الأسرع نمواً",
+    locations: [
+      { name: "رام الله", slug: "ramallah", image: "ramella" },
+      { name: "البيره", slug: "al-bireh", image: "ramella" },
+      { name: "المصايف", slug: "al-masyef", image: "ramella" },
+    ],
+  },
+];
