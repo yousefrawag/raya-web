@@ -295,7 +295,7 @@ const ContractingPage = async () => {
                     href={`https://wa.me/+972568700632?text=أود الاستفسار والحصول على عرض سعر لخدمة: ${service.title}`}
                     className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-950 hover:text-amber-600 transition-colors"
                   >
-                    تفاصيل الخدمة وتسيير المتر <HiOutlineChevronRight className="rotate-180" size={16}/>
+                    تفاصيل الخدمة وتسعير المتر <HiOutlineChevronRight className="rotate-180" size={16}/>
                   </a>
                 </div>
               </div>
