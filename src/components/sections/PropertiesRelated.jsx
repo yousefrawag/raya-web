@@ -131,7 +131,7 @@ export default   function  PropertiesRelated ({data}) {
                     </span>
                   </div> */}
                   <Link 
-                    href={`/Propertyes/${property.id}`}
+                    href={`/properties/${property.id}`}
                     className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-semibold py-2.5 px-5 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
                   >
                     <span>تفاصيل</span>
