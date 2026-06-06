@@ -26,7 +26,7 @@ export const metadata = {
   },
 
   keywords: [
-    "استشارات هندسية في فلسطين", "مكتب استشارات هندسية فلسطين", "افضل مهندس معماري في فلسطين", 
+    "استشارات هندسية في فلسطين", "مكتب استشارات هندسية فلسطين", "افضل مهندس معماري في", 
     "تصميم معماري وإنشائي فلسطين", "مكاتب هندسية في القدس ورام الله", "مخططات هندسية للبيع فلسطين", 
     "تراخيص البناء في فلسطين", "اشراف هندسي على المباني فلسطين", "تكلفة التصميم الهندسي في فلسطين", 
     "استشارات عقارية وهندسية فلسطين", "شركات تطوير عقاري وهندسي القدس", "تصميم ديكور داخلي في فلسطين", 
@@ -84,7 +84,7 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "خدمات الاستشارات الهندسية في فلسطين | الراية العقارية",
+    title: "خدمات الاستشارات الهندسية في  | الراية العقارية",
     description: "نصنع الحلول الهندسية ونستخرج تراخيص البناء ونصمم أرقى الديكورات في القدس ورام الله وأريحا.",
     images: ["https://i.postimg.cc/g0KvYfbB/Screenshot-2025-10-20-174821.png"],
   },
@@ -200,7 +200,7 @@ const EngineeringConsultation = async () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-800 rounded-lg text-xs font-black mb-6">
-            قسم الاستشارات والحلول الهندسية المعتمدة في فلسطين
+            قسم الاستشارات والحلول الهندسية المعتمدة في 
           </span>
           
           <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-tight">
@@ -208,7 +208,7 @@ const EngineeringConsultation = async () => {
           </h1>
 
           <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed font-medium mb-8">
-            في منصة الراية، لا نقتصر على الحلول التسويقية، بل نوفر ركيزة هندسية وفنية متكاملة تضمن صياغة مشاريعكم بأعلى معايير الدقة، الجودة، والتصميم المبتكر المتوافق مع متطلبات السوق الفلسطيني.
+            في منصة الراية، لا نقتصر على الحلول التسويقية، بل نوفر ركيزة هندسية وفنية متكاملة تضمن صياغة مشاريعكم بأعلى معايير الدقة، الجودة، والتصميم المبتكر المتوافق مع متطلبات السوق .
           </p>
 
           <div className="flex justify-center">
@@ -235,7 +235,7 @@ const EngineeringConsultation = async () => {
            <FeatureCard 
               icon={<HiOutlineUserGroup className="text-amber-600" size={30}/>}
               title="طاقم مهندسين ذوي خبرة"
-              desc="فريق متخصص مسجل بنقابة المهندسين يمتلك خبرة طويلة بمشاريع فلسطين."
+              desc="فريق متخصص مسجل بنقابة المهندسين يمتلك خبرة طويلة بمشاريع القدس."
            />
            <FeatureCard 
               icon={<HiOutlineShieldCheck className="text-amber-500" size={30}/>}
@@ -253,7 +253,7 @@ const EngineeringConsultation = async () => {
       {/* --- Section 3: خدمات المكاتب الهندسية --- */}
       <section className="max-w-7xl mx-auto px-6 py-20 bg-amber-50/40 rounded-[3rem] my-12">
         <div className="text-center mb-16">
-          <span className="text-amber-600 font-bold text-sm tracking-wider uppercase bg-amber-100/60 px-4 py-1.5 rounded-full">حلولنا الهندسية بفلسطين</span>
+          <span className="text-amber-600 font-bold text-sm tracking-wider uppercase bg-amber-100/60 px-4 py-1.5 rounded-full">حلولنا الهندسية </span>
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-3 mb-4">نصنع الفارق في تفاصيل بنائك</h2>
           <p className="text-slate-500 font-medium max-w-2xl mx-auto">مجموعة واسعة من الحلول الفنية والخدمات الاستشارية التي ترافقك خطوة بخطوة من الفكرة وحتى الاستلام النهائي.</p>
         </div>
@@ -323,11 +323,11 @@ const EngineeringConsultation = async () => {
           </div>
           <div>
             <div className="text-3xl md:text-4xl font-black mb-1 text-slate-950">+12</div>
-            <div className="text-slate-900 text-xs md:text-sm">عاماً من الخبرة الهندسية بفلسطين</div>
+            <div className="text-slate-900 text-xs md:text-sm">عاماً من الخبرة الهندسية </div>
           </div>
           <div>
             <div className="text-3xl md:text-4xl font-black mb-1 text-slate-950">100%</div>
-            <div className="text-slate-900 text-xs md:text-sm">مطابقة لكود البناء الفلسطيني</div>
+            <div className="text-slate-900 text-xs md:text-sm">مطابقة لكود البناء </div>
           </div>
         </div>
       </section>
@@ -342,7 +342,7 @@ const EngineeringConsultation = async () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
           {[
-            { step: "01", title: "الاستشارة الفنية المبدئية", desc: "جلسة عمل أولية لفهم طموحاتك، دراسة مساحة وموقع الأرض في فلسطين، وتقدير ميزانية البناء التقديرية للتصميم." },
+            { step: "01", title: "الاستشارة الفنية المبدئية", desc: "جلسة عمل أولية لفهم طموحاتك، دراسة مساحة وموقع الأرض في  وتقدير ميزانية البناء التقديرية للتصميم." },
             { step: "02", title: "التخطيط ورسم المخططات", desc: "إعداد المقترحات المعمارية الأولى وتوزيع المساحات الداخلية والخارجية (2D) ومناقشتها وتعديلها خطوة بخطوة." },
             { step: "03", title: "التصاميم النهائية والـ 3D", desc: "تطوير المخططات الإنشائية والتنفيذية الكاملة، خرائط التراخيص للبلدية، واللقطات ثلاثية الأبعاد (3D Perspective) للواجهات." },
             { step: "04", title: "الإشراف الهندسي الميداني", desc: "النزول إلى الموقع لمطابقة أعمال الحفر، فحص التربة، حديد التسليح وصب الخرسانة المسلحة لضمان السلامة المطلقة لعقارك." }
@@ -399,7 +399,7 @@ const EngineeringConsultation = async () => {
       <section className="max-w-4xl mx-auto px-6 py-20">
         <div className="text-center mb-12">
           <span className="text-amber-600 font-bold text-xs uppercase bg-amber-50 px-4 py-1.5 rounded-full">دليل المعرفة الهندسي</span>
-          <h2 className="text-2xl md:text-3xl font-black text-slate-900 mt-3 mb-2">الأسئلة الشائعة حول المكاتب الهندسية بفلسطين</h2>
+          <h2 className="text-2xl md:text-3xl font-black text-slate-900 mt-3 mb-2">الأسئلة الشائعة حول المكاتب الهندسية </h2>
           <p className="text-slate-500 text-sm font-medium">إجابات سريعة وموثوقة على أهم الأسئلة التي تدور في ذهنك قبل بدء التصميم أو الترخيص</p>
         </div>
 
@@ -414,7 +414,7 @@ const EngineeringConsultation = async () => {
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
             <h3 className="text-base font-bold text-slate-900 mb-2">📐 كيف يتم حساب تكلفة التصميم المعماري والديكور الداخلي لديكم؟</h3>
             <p className="text-slate-600 text-xs leading-relaxed">
-              تعتمد التكلفة على مساحة العقار الإجمالية بالمتر المربع ونوع التصميم المطلوب (مودرن، كلاسيك، تجاري) ونقدم باقات تنافسية ممتازة تناسب كافة المستثمرين والعملاء بفلسطين.
+              تعتمد التكلفة على مساحة العقار الإجمالية بالمتر المربع ونوع التصميم المطلوب (مودرن، كلاسيك، تجاري) ونقدم باقات تنافسية ممتازة تناسب كافة المستثمرين والعملاء .
             </p>
           </div>
 
