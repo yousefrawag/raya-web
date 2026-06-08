@@ -25,7 +25,7 @@ export const metadata = {
     canonical: "https://www.rayapal.com/contracting",
   },
 
-keywords: [
+  keywords: [
     // ⬇️ كلماتك الأصلية كاملة ومضمونة 100% بدون أي تعديل أو حذف:
     "شركة مقاولات في فلسطين", "مكتب مقاولات رام الله", "شركات مقاولات في القدس", 
     "مقاول بناء عظم فلسطين", "سعر متر البناء عظم في فلسطين", "تشطيب شقق ومباني رام الله", 
@@ -84,7 +84,6 @@ keywords: [
 
 const ContractingPage = async () => {
   
-  // خدمات المقاولات بصور مباشرة ومجربة من Unsplash تظهر فوراً
   const contractingServices = [
     {
       id: "structural",
@@ -109,7 +108,7 @@ const ContractingPage = async () => {
       num: "03",
       title: "بناء الشاليهات والاستراحات السياحية العصرية",
       badge: "تخصصنا الإنشائي في أريحا البوابة",
-      desc: "نظراً للنمو الاستثماري المتسارع في أريحا، نفرد قسماً خاصاً لبناء وتجهيز الشاليهات السياحية من الألف إلى الياء. ندمج بين سرعة التنفيذ والجمالية العالية؛ من حفر وبناء المسابح العصرية بأنظمة فلترة متطورة، وتخطيط الساحات الخارجية (اللاندسكيب)، وبناء غرف الضيافة الحديثة والمظلات الخشبية (البرجولات) لتجهيز مشروع استثماري مدر للأرباح.",
+      desc: "نظراً للنمو الاستثماري المتسارع في أريحا, نفرد قسماً خاصاً لبناء وتجهيز الشاليهات السياحية من الألف إلى الياء. ندمج بين سرعة التنفيذ والجمالية العالية؛ من حفر وبناء المسابح العصرية بأنظمة فلترة متطورة، وتخطيط الساحات الخارجية (اللاندسكيب)، وبناء غرف الضيافة الحديثة والمظلات الخشبية (البرجولات) لتجهيز مشروع استثماري مدر للأرباح.",
       features: ["تنفيذ مسابح انسيابية (Overflow) معزولة بالكامل", "تجهيز الحدائق وأنظمة الري الحديثة والنوافير المتطورة", "بناء أسوار خرسانية شاهقة لتأمين خصوصية كاملة للمصطافين"],
       img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80"
     },
@@ -124,7 +123,7 @@ const ContractingPage = async () => {
     }
   ];
 
-  // الـ Schema الاحترافية الكاملة المتوافقة مع محركات البحث لعرض تفاصيل الشركة ومقاولاتها
+  // 🛠️ تم تمديد وتطوير الـ Schema وإضافة الـ FAQPage لتغطية كافة المدن جغرافياً بذكاء
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -152,9 +151,17 @@ const ContractingPage = async () => {
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "حي بيت حنينا / رام الله وضواحيها",
-          "addressLocality": "Jerusalem / Ramallah",
+          "addressLocality": "Jerusalem / Ramallah / Jericho",
           "addressCountry": "PS"
         },
+        // ➕ إضافة النطاق الجغرافي الموسع لإخبار محرك البحث بتغطية بقية المدن بالتساوي
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Jerusalem" },
+          { "@type": "AdministrativeArea", "name": "Ramallah" },
+          { "@type": "AdministrativeArea", "name": "Jericho" },
+          { "@type": "AdministrativeArea", "name": "Al-Bireh" },
+          { "@type": "AdministrativeArea", "name": "Kfar Aqab" }
+        ],
         "geo": {
           "@type": "GeoCoordinates",
           "latitude": "31.8265",
@@ -174,7 +181,7 @@ const ContractingPage = async () => {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "بناء عظم وهياكل خرسانية",
+                "name": "بناء عظم وهياكل خرسانية وتعهدات إنشائية",
                 "description": "أعمال الحفر وتأسيس القواعد وصب الخرسانة المسلحة وتجهيز الأبراج والفلل الإسكانية في فلسطين."
               }
             },
@@ -182,12 +189,43 @@ const ContractingPage = async () => {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "التشطيبات الفاخرة سوبر ديلوكس",
+                "name": "التشطيبات الفاخرة سوبر ديلوكس وتلبيس الحجر",
                 "description": "تلبيس الحجر القدسي وأعمال القصارة والدهانات والكهرباء والسباكة والفرش الكامل للتسليم الفوري."
               }
             }
           ]
         }
+      },
+      // ➕ إضافة الـ FAQ Schema لمساعدة الأسئلة الشائعة على الظهور بشكل احترافي في جوجل
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.rayapal.com/contracting/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "ما هي المزايا التي توفرها شركة الراية عند بناء العظم؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "نحن نوفر عقوداً قانونية متكاملة تضمن جودة الاسمنت والحديد المسلح المعتمد من نقابة المهندسين ومختبرات فحص المواد مع الالتزام التام بالمخططات الهندسية المعمارية والإنشائية، وتأمين كادر عمالي ماهر ذو خبرة طويلة ببناء الفلل والإسكانات."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "هل يمكنني التعاقد معكم على التشطيب الداخلي فقط دون العظم؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "بكل تأكيد. نقدم خدمات التشطيب الجزئي أو الكلي للمباني والشقق المستلمة على العظم. نضع باقة مخصصة تشمل أعمال الديكور والجبسم بورد، التمديدات الصحية والكهربائية الفنية، والدهانات الفاخرة بناءً على رغبة العميل وبما يتناسب مع ميزانيته."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "ما هي المدن والمناطق التي تغطيها شركة الراية للمقاولات؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "تغطي طواقمنا ومعداتنا الإنشائية كافة أحياء وضواحي القدس (بيت حنينا، شعفاط، كفر عقب) بالإضافة إلى مدينة رام الله والبيرة بالكامل (الماصيون، الطيرة، المصايف) وجميع مشاريع بناء المنتجعات، الفلل، والاستراحات والشاليهات السياحية الفاخرة في مدينة أريحا (أريحا البوابة والديوك)."
+            }
+          }
+        ]
       }
     ]
   };
@@ -202,7 +240,7 @@ const ContractingPage = async () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* --- Section 1: Hero Section (بهويتك المشرقة والنقية تماماً) --- */}
+      {/* --- Section 1: Hero Section --- */}
       <section className="relative py-28 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-amber-50">
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 right-20 w-72 h-72 bg-amber-600/20 rounded-full blur-3xl animate-float"></div>
@@ -235,10 +273,10 @@ const ContractingPage = async () => {
         </div>
       </section>
 
-      {/* --- Section 2: عرض الخدمات بشكل مميز واحترافي مع صور Unsplash المباشرة البارزة --- */}
+      {/* --- Section 2: عرض الخدمات --- */}
       <section className="max-w-7xl mx-auto px-6 py-20">
         <div className="text-center mb-20">
-          <span className="text-amber-600 font-bold text-sm tracking-wider uppercase bg-amber-50 px-4 py-1.5 rounded-full">خدمات التعهدات والإنشان</span>
+          <span className="text-amber-600 font-bold text-sm tracking-wider uppercase bg-amber-50 px-4 py-1.5 rounded-full">خدمات التعهدات والإنشاءات</span>
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-3 mb-4">حلول مقاولات متكاملة من الألف إلى الياء</h2>
           <p className="text-slate-500 font-medium max-w-2xl mx-auto text-sm md:text-base">
             سواء كنت ترغب في بناء عمارة سكنية، أو تشطيب شقة عظم، أو تأسيس شاليه سياحي؛ نوفر طواقم فنية متخصصة ومقاولين أكفاء تحت إشراف هندسي مباشر.
@@ -251,7 +289,6 @@ const ContractingPage = async () => {
               key={service.id}
               className={`flex flex-col lg:items-center gap-12 lg:gap-16 ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}
             >
-              {/* بلوك الصورة المبتكر المعالج للمقاسات والثبات البصري */}
               <div className="w-full lg:w-1/2 relative">
                 <div className="absolute -inset-2 bg-gradient-to-tr from-amber-500 to-amber-200 rounded-[2.5rem] opacity-20 blur-lg transition-all"></div>
                 <div className="relative h-72 md:h-[400px] w-full rounded-[2.5rem] overflow-hidden border border-amber-100 shadow-sm bg-amber-50/50">
@@ -267,7 +304,6 @@ const ContractingPage = async () => {
                 </div>
               </div>
 
-              {/* بلوك النصوص والمميزات */}
               <div className="w-full lg:w-1/2">
                 <span className="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-md">
                   {service.badge}
@@ -304,7 +340,7 @@ const ContractingPage = async () => {
         </div>
       </section>
 
-      {/* --- Section 3: قيم الراية في التنفيذ (بألوان الهوية الفاتحة بالكامل) --- */}
+      {/* --- Section 3: قيم الراية في التنفيذ --- */}
       <section className="bg-amber-50/40 py-20 rounded-[3rem] my-12 max-w-7xl mx-auto px-6 border border-amber-100/50">
         <div className="text-center mb-16">
           <span className="text-amber-600 font-bold text-sm bg-white border border-amber-100 px-4 py-1.5 rounded-full">دستور العمل لـ الراية</span>
@@ -345,16 +381,15 @@ const ContractingPage = async () => {
         </div>
       </section>
 
-      {/* --- Section 4: آلية التسعير وحساب تكلفة البناء (معدل بالكامل بألوان مشرقة ومحتوى كروي متناسق وخفيف) --- */}
+      {/* --- Section 4: آلية التسعير وحساب تكلفة البناء --- */}
       <section className="max-w-7xl mx-auto px-6 py-16 bg-white">
         <div className="bg-gradient-to-br from-amber-50 via-white to-amber-50 border border-amber-200/80 p-8 md:p-12 rounded-[2.5rem] shadow-sm">
           <div className="max-w-5xl">
             <span className="inline-block px-3 py-1 bg-amber-100 text-amber-800 font-bold text-[11px] rounded-md mb-4">ثقافة معمارية واقتصادية</span>
             <h3 className="text-2xl md:text-3xl font-black mb-4 text-slate-900">كيف نحدد تكلفة بناء العظم والتشطيب الفاخر  </h3>
             
-            {/* نص الـ SEO الثري والمكثف (+350 كلمة إضافية مدمجة بسلاسة لتوافق السيو والمقاولات) */}
             <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 font-normal">
-              تختلف تكلفة متر البناء  بناءً على عدة محددات جغرافية وفنية؛ منها طبيعة التربة (صخرية تتطلب حفر كبيراً أم رملية بحاجة لقواعد شريطية معقدة)، والموقع الجغرافي ونظام البلديات في القدس أو رام الله وضواحيها، بالإضافة إلى درجة ونوع مواد التشطيب (ديلوكس، سوبر ديلوكس، أو تجاري). نحن في الراية نقدم دراسة جدوى فنية مجانية وحساب كميات دقيق يمنع الهدر المالي ويوفر عليك ما يصل إلى 15% من التكلفة الكلية للمواد.
+              تختلف تكلفة متر البناء بناءً على عدة محددات جغرافية وفنية؛ منها طبيعة التربة (صخرية تتطلب حفر كبيراً أم رملية بحاجة لقواعد شريطية معقدة)، والموقع الجغرافي ونظام البلديات في القدس أو رام الله وضواحيها، بالإضافة إلى درجة ونوع مواد التشطيب (ديلوكس، سوبر ديلوكس، أو تجاري). نحن في الراية نقدم دراسة جدوى فنية مجانية وحساب كميات دقيق يمنع الهدر المالي ويوفر عليك ما يصل إلى 15% من التكلفة الكلية للمواد.
               <br/><br/>
               إن سوق المقاولات العامة والتطوير العقاري يشهد تطوراً ملحوظاً، والاعتماد على مقاول مرخص ومسجل رسمياً يحميك من المشاكل الإنشائية والقانونية. يبدأ مسار المقاولات الناجح عبر تحليل دقيق لخرائط فحص التربة وتحديد منسوب التأسيس الصحيح لمنع حدوث أي هبوط جزئي في المستقبل في الهياكل الخرسانية المسلحة. 
               عند تعاملك مع طاقم التعهدات التابع لنا، نضمن توفير عمال بناء وحرفيين على أعلى مستوى من التدريب، بجانب تزويد الورش بأحدث المعدات والأدوات الإنشائية لضمان دقة زوايا البناء واستقامة الجدران والطوب. نتحمل المسؤولية القانونية الكاملة عن توريد الرمل النظيف والبحص والخرسانة الجاهزة الخاضعة للفحوصات المخبرية المعتمدة لضمان تحقيق قوة الكسر المطلوبة بعد 28 يوماً من الصب والمتابعة الفنية المستمرة برفع منسوب المياه لترطيب الإسمنت.
@@ -371,7 +406,7 @@ const ContractingPage = async () => {
         </div>
       </section>
 
-      {/* --- Section 5: قسم الأسئلة الشائعة حول المقاولات العامة في فلسطين --- */}
+      {/* --- Section 5: قسم الأسئلة الشائعة --- */}
       <section className="max-w-4xl mx-auto px-6 py-16">
         <div className="text-center mb-12">
           <span className="text-amber-600 font-bold text-xs uppercase bg-amber-50 px-4 py-1.5 rounded-full">المعرفة الإنشائية</span>
@@ -388,7 +423,7 @@ const ContractingPage = async () => {
           </div>
           
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-            <h3 className="text-base font-bold text-slate-900 mb-2">💎 هل يمكنني التعاقد معكم على التشطيب الداخلي فقط دون العظم؟</h3>
+            <h3 className="text-base font-bold text-slate-900 mb-2">💎 هل يمكنني التعاقد معكم على التشطيب الداخلي فقط دون العظم?</h3>
             <p className="text-slate-600 text-xs md:text-sm leading-relaxed font-normal">
               بكل تأكيد. نقدم خدمات التشطيب الجزئي أو الكلي للمباني والشقق المستلمة على العظم. نضع باقة مخصصة تشمل أعمال الديكور والجبسم بورد، التمديدات الصحية والكهربائية الفنية، والدهانات الفاخرة بناءً على رغبة العميل وبما يتناسب مع ميزانيته.
             </p>
@@ -397,8 +432,39 @@ const ContractingPage = async () => {
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
             <h3 className="text-base font-bold text-slate-900 mb-2">📍 ما هي المدن والمناطق التي تغطيها شركة الراية للمقاولات؟</h3>
             <p className="text-slate-600 text-xs md:text-sm leading-relaxed font-normal">
-              تغطي طواقمنا ومعداتنا الإنشائية كافة أحياء وضواحي القدس (بيت حنينا، شعفاط، كفر عقب) بالإضافة إلى مدينة رام الله والبيرة بالكامل (الماصيون، الطيرة، المصايف) وجميع مشاريع بناء المنتجعات، الفلل، والاستراحات والشاليهات السياحية الفاخرة في مدينة أريحا (أريحا البوابة والديوك).
+              تغطي طواقمنا ومعداتنا الإنشائية كافة أحياء وضواحي القدس (بيت حنينا، شعفاط، كفر عقب) بالإضافة إلى مدينة رام الله والبيرة بالكامل (الماصيون، الطيرة، المصايف) وجميع مشاريع بناء المنتجعات، الفلل، والاستراحات والشاليهات السياحية الفاخرة in مدينة أريحا (أريحا البوابة والديوك).
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ➕ --- Section 6: إضافة قسم السيو المحلي الموجه للمناطق (Geo-Targeted Internal Links) --- */}
+      <section className="bg-gradient-to-br from-amber-50 via-white to-amber-50 border border-amber-200/80 rounded-[3rem] py-12 px-8 max-w-7xl mx-auto my-12">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-lg font-bold text-slate-900 mb-4">نطاق خدمات المقاولات والتطوير العقاري الشامل</h3>
+          <p className="text-gray-700 text-md leading-relaxed mb-8">
+            بصفتنا شركة مقاولات رائدة ومسجلة، نمتلك القدرة التشغيلية على تغطية وإدارة الأوراش والمشاريع في مختلف المحافظات والبلدات الفلسطينية بكفاءة عالية وأيدي مهنية خبيرة.
+          </p>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-right border-t border-slate-800 pt-8">
+            <div>
+              <h4 className="text-sm font-black text-slate-900 mb-2">📍 القدس وضواحيها</h4>
+              <p className="text-[11px] text-gray-700 leading-relaxed">
+                نوفر مقاول عظم وتشطيبات ديلوكس في **بيت حنينا**, وأعمال حفر وبناء إسكانات في **كفر عقب**, بالإضافة لتجديد البيوت في **شعفاط**, عناتا، والرام بالتوافق مع اشتراطات التراخيص والمواصفات.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-sm font-black text-slate-900 mb-2">📍 رام الله والبيرة</h4>
+              <p className="text-[11px] text-gray-700 leading-relaxed">
+                تعهدات إنشائية متكاملة لبناء الأبراج السكنية في **الماصيون**, **الطيرة**, والمصايف. أسعار متر بناء منافسة وضمان جودة الباطون والحديد في المزارع والبيرة وكافة قرى المحافظة.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-sm font-black text-slate-900 mb-2">📍 أريحا والأغوار</h4>
+              <p className="text-[11px] text-gray-700 leading-relaxed">
+                متخصصون في بناء الفلل المودرن والشاليهات السياحية في **أريحا البوابة**, **الديوك**, والنويعمة. تنفيذ مسابح أوفر فلو معزولة بالكامل، لاندسكيب، وبناء أسوار الخصوصية الشاهقة.
+              </p>
+            </div>
           </div>
         </div>
       </section>
