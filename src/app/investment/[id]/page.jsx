@@ -1,3 +1,4 @@
+export const revalidate = 86400;
 import React from 'react';
 import Image from 'next/image';
 import { FaMapMarkerAlt, FaRulerCombined, FaDollarSign, FaBuilding, FaHandHoldingUsd, FaFileContract, FaWhatsapp, FaChartLine } from 'react-icons/fa';
@@ -84,7 +85,8 @@ const SingleInvestmentPage = async ({ params }) => {
   
   // جلب كافة تفاصيل العقار الاستثماري
   const data = await GeyINvestmentEntry(id);
-
+const currentphoneNumber = `${data?.whatssapfolow1}`
+const defaultPhone = "+972568700632"
   // حالة عدم وجود بيانات
   if (!data) {
     return (
@@ -234,7 +236,7 @@ const SingleInvestmentPage = async ({ params }) => {
                 فريق خبراء الراية للعقارات جاهز لمناقشة كافة التفاصيل الفنية والمالية، وتقديم استشارة مخصصة لتحديد مدى ملاءمة هذا العقار لأهدافك الاستثمارية.
             </p>
             <a 
-                href={`https://wa.me/+972568700632?text=أرغب في الحصول على استشارة استثمارية بخصوص عقار ID: ${data?.title}`} // عدل الرقم ورسالة الـ واتساب
+                href={`https://wa.me/${currentphoneNumber || defaultPhone}?text=أرغب في الحصول على استشارة استثمارية بخصوص عقار ID: ${data?.title}`} // عدل الرقم ورسالة الـ واتساب
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="inline-flex items-center gap-3 bg-white text-gray-900 font-bold px-10 py-4 rounded-full text-lg shadow-lg hover:bg-gray-100 transition-all"

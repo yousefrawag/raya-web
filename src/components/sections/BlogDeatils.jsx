@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, Clock, ArrowLeft, Share2, User, Tag, Bookmark } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, Share2, User, Tag, Bookmark, Video } from "lucide-react";
 
 const BlogDetails = ({ project }) => {
   if (!project) return null;
@@ -34,10 +34,26 @@ const BlogDetails = ({ project }) => {
     }
   };
 
+  // دالة مساعدة لتحويل رابط يوتيوب العادي إلى رابط Embed صالح للـ iframe
+  const getEmbedUrl = (url) => {
+    if (!url) return null;
+    let videoId = "";
+    if (url.includes("youtu.be/")) {
+      videoId = url.split("youtu.be/")[1]?.split(/[?#]/)[0];
+    } else if (url.includes("youtube.com/watch")) {
+      videoId = url.split("v=")[1]?.split(/[&#]/)[0];
+    } else if (url.includes("youtube.com/embed/")) {
+      videoId = url.split("embed/")[1]?.split(/[?#]/)[0];
+    }
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+  };
+
+  const videoEmbedUrl = getEmbedUrl(project.youtupeUrl);
+
   return (
     <article className="bg-gray-50 min-h-screen text-right pt-20" dir="rtl">
       
-               <div className="bg-white border-b border-gray-100 ">
+      <div className="bg-white border-b border-gray-100 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
           <nav className="flex items-center gap-2 text-sm text-gray-500 font-medium">
             <Link href="/" className="hover:text-amber-600 transition-colors">الرئيسية</Link>
@@ -57,18 +73,18 @@ const BlogDetails = ({ project }) => {
 
 
         {/* 🖼️ قسم الصورة - عرض كامل، نقي وبدون أي طبقة ألوان عازلة */}
-        <div className="relative w-full aspect-[16/9] max-h-[550px] rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-gray-200 mb-10">
+        <div className="relative w-full aspect-[16/9] max-h-[550px]  overflow-hidden shadow-md border border-gray-100 bg-gray-200 mb-10">
           <Image
             src={project.blogImageCutmez?.url || "/api/placeholder/1200/800"}
             alt={project.blogTietal}
             fill
-            className="object-cover"
+            // className="object-cover"
             priority
             sizes="(max-w-1200px) 100vw, 1200px"
           />
         </div>
         
-  <div className="mb-6 space-y-4">
+        <div className="mb-6 space-y-4">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
             <Tag className="w-3 h-3" />
             {project.blogCatgeoray || "عقارات استثمارية"}
@@ -125,6 +141,26 @@ const BlogDetails = ({ project }) => {
                 ))
               )}
             </div>
+
+            {/* 📺 قسم الفيديو من اليوتيوب - يظهر فقط إذا كان الرابط موجوداً وصالحاً */}
+            {videoEmbedUrl && (
+              <div className="mt-10 mb-6 space-y-4">
+                <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                  <Video className="w-5 h-5 text-amber-500" />
+                  الشرح المرئي للموضوع
+                </h3>
+                <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-md border border-gray-100 bg-black">
+                  <iframe
+                    className="absolute top-0 right-0 w-full h-full"
+                    src={videoEmbedUrl}
+                    title={project.blogTietal}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
 
             {/* الفاصل التوضيحي البصري */}
             <div className="my-8 flex items-center gap-4">
@@ -191,3 +227,4 @@ const BlogDetails = ({ project }) => {
 };
 
 export default BlogDetails;
+

@@ -1,11 +1,15 @@
 import { client , checkimageprotcoll } from "../utils/ContentfullClient";
 
-export async function GetBlogs() {
+export async function GetBlogs(blogCatgeoray) {
   const query = {
     content_type: "raya-blogs",
   };
 
 
+  if (blogCatgeoray) {
+    query["fields.blogCatgeoray"] = blogCatgeoray || "";
+     
+  }
   const res = await client.getEntries(query);
   console.log("res", res?.items);
   const customezData = res.items?.map((item) => {

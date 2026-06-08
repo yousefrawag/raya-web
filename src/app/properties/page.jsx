@@ -1,6 +1,5 @@
-
+export const revalidate = 86400;
 import React from 'react'
-
 import AllProperties from '@/components/sections/AllProperties'
 import mapImage from "@/images/Hero-images/srp-map-bg-ar.svg"
 import Script from "next/script";

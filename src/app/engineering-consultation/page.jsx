@@ -24,7 +24,7 @@ export const metadata = {
   alternates: {
     canonical: "https://www.rayapal.com/engineering-consultation",
   },
-
+ 
   keywords: [
     "استشارات هندسية في فلسطين", "مكتب استشارات هندسية فلسطين", "افضل مهندس معماري في", 
     "تصميم معماري وإنشائي فلسطين", "مكاتب هندسية في القدس ورام الله", "مخططات هندسية للبيع فلسطين", 

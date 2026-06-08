@@ -13,8 +13,9 @@ const [CurrentVideo , setCurrentVideo] = useState(null)
 const [YoutubeUrlactive , setYoutupeUrlActive] = useState(null)
 
   const handleWhatsApp = () => {
+     const phoneNumber = '+972568700632'
     const message = `مرحباً، أود الاستفسار عن ${data.title}`;
-    const whatsappUrl = `https://wa.me/${+972568700632}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/+${data?.whatssapfolow ||phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 const hasFeatures =
@@ -409,7 +410,10 @@ const tabs = [
                <div className="flex items-center p-4 bg-slate-50 rounded-xl gap-4">
                   <Phone className="text-amber-500" size={20} />
                   <span className="font-bold text-slate-700">
-                    +972568700632
+                    {
+                      data?.whatssapfolow || "+972568700632"
+                    }
+                  
                   </span>
                </div>
                <div className="flex items-center p-4 bg-slate-50 rounded-xl gap-4">

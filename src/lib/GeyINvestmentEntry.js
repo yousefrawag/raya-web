@@ -18,7 +18,7 @@ export async function GeyINvestmentEntry(id) {
     
     const { title , details, area  , city  , images  , 
 
-
+whatssapfolow1 ,
 type ,
 region ,
 price
@@ -31,7 +31,7 @@ price
  
   
   return {
-                title , id:res.sys.id , details, area  , city   , seriesimagesCutmez ,
+                title , id:res.sys.id , details, area  , city   , seriesimagesCutmez , whatssapfolow1 ,
 type ,
 region ,
 price

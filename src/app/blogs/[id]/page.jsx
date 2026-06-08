@@ -1,7 +1,8 @@
 import React from 'react'
 import BlogDetails from '@/components/sections/BlogDeatils'
 import { GetBlogEntry } from '@/lib/GetBlogEntry'
-
+import RelatedPlogs from '@/components/sections/RelatedPlogs';
+import { GetBlogs } from '@/lib/GetBlogs';
 // الـ Keywords العقارية المستهدفة (أكثر من 200 كلمة دلالية مدمجة وسياقية)
 const estateKeywords = [
   "استثمار عقاري", "عقارات للبيع", "شقق فاخرة", "منصه الراية العقارية", "شراء شقة", "استثمار طويل الأجل", 
@@ -52,6 +53,7 @@ export async function generateMetadata({ params }) {
 const BlogPage = async ({ params }) => {
   const { id } = await params
   const project = await GetBlogEntry(id)
+  const data = await GetBlogs(project?.blogCatgeoray)
 
   if (!project) {
     return <div className="text-center py-20 text-gray-600">المقال غير موجود</div>
@@ -92,6 +94,8 @@ const BlogPage = async ({ params }) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <BlogDetails project={project} />
+
+      <RelatedPlogs  data={data}/> 
     </>
   )
 }

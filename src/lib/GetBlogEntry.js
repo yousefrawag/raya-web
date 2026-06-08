@@ -12,7 +12,8 @@ const item = res.fields;
  blogTietal,
                     blogCatgeoray ,
                     blogDeatils ,
-                    blogImage
+                    blogImage ,
+                    youtupeUrl
   } = item;
 
   const blogImageCutmez = checkimageprotcoll(blogImage)
@@ -21,6 +22,7 @@ const item = res.fields;
      blogTietal,
                     blogCatgeoray ,
                     blogDeatils ,
+                    youtupeUrl ,
     id: res.sys.id,
     createdAt:res.sys.createdAt ,
     blogImageCutmez
