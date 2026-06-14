@@ -74,12 +74,12 @@ const tabs = [
       <div className="flex flex-col lg:flex-row gap-4 py-8">
         
         {/* الصورة الرئيسية الكبيرة */}
-        <div className="relative w-full lg:w-[75%] h-[400px] md:h-[500px] rounded-2xl overflow-hidden group shadow-lg">
+        <div className="relative w-full lg:w-[75%] h-[400px] md:h-[500px]  overflow-hidden group shadow-lg">
           <Image
             src={decodeURIComponent(heroImage) }
             alt={data.title}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className=" transition-transform duration-700 group-hover:scale-105"
             unoptimized
             priority
           />
@@ -113,7 +113,7 @@ const tabs = [
               <button
                 key={index}
                 onClick={() => setSelectedImage(index)}
-                className={`relative flex-shrink-0 w-24 h-24 lg:w-full lg:h-32 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
+                className={`relative flex-shrink-0 w-24 h-24  cursor-pointer lg:w-full lg:h-32 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
                   selectedImage === index 
                   ? 'border-amber-500 ring-4 ring-amber-500/10' 
                   : 'border-transparent grayscale-[40%] hover:grayscale-0'

@@ -46,7 +46,7 @@ if (propertiesServerdata?.length === 0) {
                 src={decodeURIComponent(property.seriesimagesCutmez[0]?.url)}
                   alt={property.title}
                   unoptimized
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-64  group-hover:scale-105 transition-transform duration-500"
                 />
                 
                 {/* Type Badge */}

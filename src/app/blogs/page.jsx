@@ -25,7 +25,7 @@ export const metadata = {
 }
 const Blogspage = async () => {
   const data =  await GetBlogs()
-  console.log("data-blogs" , data)
+
   return <AllBlogs data={data} />
 }
 

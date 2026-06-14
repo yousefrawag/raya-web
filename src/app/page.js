@@ -13,7 +13,7 @@ import ProjectServerDataLanding from "@/components/sections/ProjectServerDataLan
 import BlogServerRendering from "@/components/sections/BlogServerRendering";
 import InvestMentServer from "@/components/sections/InvestMentServer";
 import ScrollToHash from "@/components/common/ScrollToHash";
-
+import Script from "next/script";
 // --- استيراد دالة الكلمات المفتاحية اللي عملناها ---
 // ملاحظة: لو الدالة في ملف خارجي استوردها، لو لا، حطها هنا فوق الـ metadata
 const regions = [
@@ -72,35 +72,80 @@ export const metadata = {
 };
 
 export default function Home() {
+
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "@id": "https://www.rayapal.com/#realestateagent",
+      "name": "الراية العقارية",
+      "url": "https://www.rayapal.com",
+      "logo": "https://www.rayapal.com/icon.png",
+      "image": "https://www.rayapal.com/og-image.png",
+      "description": "المنصة الرائدة والأولى في سوق العقارات الفلسطيني لبيع وتأجير الشقق، الأراضي، والفلل في القدس، رام الله، أريحا، وباقي المدن الفلسطينية.",
+      "telephone": "+972568700632",
+      "priceRange": "$$$",
+      "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "حي بيت حنينا / رام الله وضواحيها / القدس/ صورباهر",
+          "addressLocality": "Jerusalem / Ramallah / Jericho",
+          "addressCountry": "PS"
+        },
+        // ➕ إضافة النطاق الجغرافي الموسع لإخبار محرك البحث بتغطية بقية المدن بالتساوي
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Jerusalem" },
+          { "@type": "AdministrativeArea", "name": "Ramallah" },
+          { "@type": "AdministrativeArea", "name": "Jericho" },
+          { "@type": "AdministrativeArea", "name": "Al-Bireh" },
+          { "@type": "AdministrativeArea", "name": "Kfar Aqab" }
+        ],
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "31.7683",
+        "longitude": "35.2137"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+972568700632",
+        "contactType": "customer service",
+        "availableLanguage": ["Arabic", "English"]
+      },
+      // هنا السحر لربط موقعك بباقي المدن دون خسارة القدس:
+      "areaServed": allServedAreas.map(area => ({
+        "@type": "AdministrativeArea",
+        "name": area
+      }))
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.rayapal.com/#website",
+      "url": "https://www.rayapal.com",
+      "name": "الراية العقارية",
+      "description": "ابحث عن شقق للبيع والايجار وأراضي في فلسطين",
+      "inLanguage": "ar",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.rayapal.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ];
   return (
     <div className="w-full">
       {/* 1. إضافة Schema.org لتعريف الموقع لجوجل كشركة (Structured Data) */}
-      <script
+      <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "RealEstateAgent",
-            "name": "الراية العقارية",
-            "url": "https://www.rayapal.com",
-            "logo": "https://www.rayapal.com/icon.png",
-            "description": "أفضل شركة عقارات في القدس وفلسطين لبيع وتأجير الشقق والأراضي.",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Jerusalem",
-              "addressCountry": "PS"
-            },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": "31.7683",
-              "longitude": "35.2137"
-            },
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "telephone": " +972568700632",
-              "contactType": "customer service"
-            }
-          })
+          __html: JSON.stringify(
+       structuredData
+          )
         }}
       />
 

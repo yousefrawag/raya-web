@@ -7,16 +7,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Building } from 'lucide-react';
+
 import Link from "next/link";
 import { 
   HiOutlineLocationMarker, 
   HiOutlineArrowsExpand, 
-  HiOutlineSearch,
-  HiOutlineBadgeCheck,
-  HiOutlineTrendingUp,
-  HiOutlineShieldCheck,
-  HiOutlineUserGroup,
-  HiOutlinePlus
+
 } from 'react-icons/hi';
 export default function LandingProject({data}) {
  console.log("data" , data);
@@ -85,11 +81,12 @@ export default function LandingProject({data}) {
 }
 const PropertyCard = ({ image, title, location, price, area, type, desc , id }) => (
   <div className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col md:flex-row h-full">
-    <div className="md:w-5/12 relative h-60 md:h-auto overflow-hidden">
-      <img src={image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+    <div className="md:w-6/12 relative h-60 md:h-auto overflow-hidden">
+      <Image    fill
+    sizes="(max-width:768px) 100vw, 50vw" src={image} alt="" className="w-full h-full  group-hover:scale-110 transition-transform duration-700" />
       <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-amber-600 px-4 py-1 rounded-xl text-[10px] font-black uppercase">فرصة حصرية</span>
     </div>
-    <div className="md:w-7/12 p-8 flex flex-col justify-between">
+    <div className="md:w-6/12 p-8 flex flex-col justify-between">
       <div>
         <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-amber-500 transition-colors">{title}</h3>
         <div className="flex items-center text-slate-400 text-xs mb-4">
