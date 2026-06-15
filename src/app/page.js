@@ -81,7 +81,7 @@ export default function Home() {
       "name": "الراية العقارية",
       "url": "https://www.rayapal.com",
       "logo": "https://www.rayapal.com/icon.png",
-      "image": "https://www.rayapal.com/og-image.png",
+      "image": "https://www.rayapal.com/icon.png",
       "description": "المنصة الرائدة والأولى في سوق العقارات الفلسطيني لبيع وتأجير الشقق، الأراضي، والفلل في القدس، رام الله، أريحا، وباقي المدن الفلسطينية.",
       "telephone": "+972568700632",
       "priceRange": "$$$",
@@ -117,10 +117,10 @@ export default function Home() {
         "availableLanguage": ["Arabic", "English"]
       },
       // هنا السحر لربط موقعك بباقي المدن دون خسارة القدس:
-      "areaServed": allServedAreas.map(area => ({
-        "@type": "AdministrativeArea",
-        "name": area
-      }))
+      // "areaServed": allServedAreas.map(area => ({
+      //   "@type": "AdministrativeArea",
+      //   "name": area
+      // }))
     },
     {
       "@context": "https://schema.org",
