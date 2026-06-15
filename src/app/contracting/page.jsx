@@ -2,6 +2,7 @@ export const revalidate = 86400;
 import React from 'react';
 import Image from 'next/image';
 import Script from 'next/script';
+import Link from 'next/link';
 import { 
   HiOutlineChevronRight,
   HiOutlineOfficeBuilding,
@@ -12,6 +13,7 @@ import {
   HiOutlineClock,
   HiOutlineHome
 } from 'react-icons/hi';
+import { GetAllconstraction } from '@/lib/GetAllconstraction';
 
 // 📈 تهيئة الـ SEO المتقدم لخدمات المقاولات العامة والبناء لمنصة الراية في فلسطين
 export const metadata = {
@@ -83,6 +85,7 @@ export const metadata = {
 };
 
 const ContractingPage = async () => {
+  const data = await GetAllconstraction()
   
   const contractingServices = [
     {
@@ -284,7 +287,7 @@ const ContractingPage = async () => {
         </div>
 
         <div className="space-y-24">
-          {contractingServices.map((service, index) => (
+          {data?.map((service, index) => (
             <div 
               key={service.id}
               className={`flex flex-col lg:items-center gap-12 lg:gap-16 ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}
@@ -293,26 +296,26 @@ const ContractingPage = async () => {
                 <div className="absolute -inset-2 bg-gradient-to-tr from-amber-500 to-amber-200 rounded-[2.5rem] opacity-20 blur-lg transition-all"></div>
                 <div className="relative h-72 md:h-[400px] w-full rounded-[2.5rem] overflow-hidden border border-amber-100 shadow-sm bg-amber-50/50">
                   <img 
-                    src={service.img}
+                    src={service.seriesimagesCutmez[0]?.url}
                     alt={service.title}
                     className="h-full w-full object-cover hover:scale-105 transition-transform duration-700"
                     loading="lazy"
                   />
                   <span className="absolute bottom-6 right-6 bg-amber-500 text-slate-950 font-black text-xl h-12 w-12 rounded-xl flex items-center justify-center shadow-sm">
-                    {service.num}
+                 { `0${index + 1}`}
                   </span>
                 </div>
               </div>
 
               <div className="w-full lg:w-1/2">
                 <span className="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-md">
-                  {service.badge}
+                  {service.badg}
                 </span>
                 <h3 className="text-2xl md:text-3xl font-black text-slate-900 mt-3 mb-4">
                   {service.title}
                 </h3>
                 <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 font-normal">
-                  {service.desc}
+                  {service.details?.slice(0 , 200) + "..."} 
                 </p>
 
                 <ul className="space-y-3">
@@ -325,14 +328,14 @@ const ContractingPage = async () => {
                 </ul>
 
                 <div className="mt-8">
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`https://wa.me/+972568700632?text=أود الاستفسار والحصول على عرض سعر لخدمة: ${service.title}`}
+                  <Link
+                    // target="_blank"
+                    // rel="noopener noreferrer"
+                    href={`contracting/${service?.slug}`}
                     className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-950 hover:text-amber-600 transition-colors"
                   >
-                    تفاصيل الخدمة وتسعير المتر <HiOutlineChevronRight className="rotate-180" size={16}/>
-                  </a>
+                    تفاصيل الخدمة  <HiOutlineChevronRight className="rotate-180" size={16}/>
+                  </Link>
                 </div>
               </div>
             </div>
