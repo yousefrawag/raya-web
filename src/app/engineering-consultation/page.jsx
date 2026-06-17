@@ -12,6 +12,8 @@ import {
   HiOutlineOfficeBuilding,
   HiOutlineClipboardList
 } from 'react-icons/hi';
+import { GetAllConslutions } from '@/lib/GetAllConslutions';
+import Link from 'next/link';
 
 // 📈 تهيئة الـ SEO المتقدم والمتوافق كلياً مع الاستشارات الهندسية لمنصة الراية في فلسطين
 export const metadata = {
@@ -92,6 +94,7 @@ export const metadata = {
 };
 
 const EngineeringConsultation = async () => {
+  const data = await GetAllConslutions()
   
   const servicesData = [
     {
@@ -259,7 +262,7 @@ const EngineeringConsultation = async () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {servicesData.map((service) => (
+          {data.map((service) => (
             <div 
               key={service.id} 
               className="group bg-white rounded-[2rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between"
@@ -269,7 +272,7 @@ const EngineeringConsultation = async () => {
                   <Image 
                     fill
                     sizes="(max-w: 768px) 100vw, (max-w: 1200px) 50vw, 25vw"
-                    src={service.image} 
+                    src={service.seriesimagesCutmez[0]?.url} 
                     alt={service.title} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                     loading="lazy"
@@ -285,7 +288,7 @@ const EngineeringConsultation = async () => {
                     {service.title}
                   </h3>
                   <p className="text-slate-600 text-xs leading-relaxed font-normal line-clamp-5">
-                    {service.description}
+                    {service.details?.substring(0 , 100)}
                   </p>
                 </div>
               </div>
@@ -296,14 +299,14 @@ const EngineeringConsultation = async () => {
                   <span className="truncate text-slate-500">القدس • رام الله • أريحا</span>
                 </div>
                 
-                <a 
-                  target="_blank"
+                <Link
+                 
                   rel="noopener noreferrer"
-                  href={`https://wa.me/+972568700632?text=أود الاستفسار بشكل مفصل عن خدمة: ${service.title}`}
+                  href={`/engineering-consultation/${service.slug}`}
                   className="w-full flex items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-xl font-bold text-xs hover:bg-amber-500 transition-all group-hover:shadow-lg group-hover:shadow-amber-500/10"
                 >
-                  طلب الخدمة الفنية
-                </a>
+                تفاصيل الخدمة
+                </Link>
               </div>
             </div>
           ))}
