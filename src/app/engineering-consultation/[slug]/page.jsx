@@ -192,11 +192,11 @@ const SingleConslutionPage = async ({ params }) => {
 
             {/* العمود الأيسر: يحتوي على الصورة المعمارية بزوايا انسيابية (Left Side) */}
             <div className="w-full lg:col-span-5 relative">
-              <div className="relative h-72 md:h-[420px] w-full rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl">
+              <div className="relative h-72 md:h-[420px] w-full  overflow-hidden border border-slate-100 shadow-xl">
                 <img 
                   src={data.seriesimagesCutmez?.[0]?.url || "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80"}
                   alt={data.title}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full"
                 />
               </div>
             </div>
