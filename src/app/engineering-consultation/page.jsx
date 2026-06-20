@@ -274,7 +274,7 @@ const EngineeringConsultation = async () => {
                     sizes="(max-w: 768px) 100vw, (max-w: 1200px) 50vw, 25vw"
                     src={service.seriesimagesCutmez[0]?.url} 
                     alt={service.title} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    className="w-full h-full  group-hover:scale-110 transition-transform duration-700" 
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>

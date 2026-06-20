@@ -298,7 +298,7 @@ const ContractingPage = async () => {
                   <img 
                     src={service.seriesimagesCutmez[0]?.url}
                     alt={service.title}
-                    className="h-full w-full object-cover hover:scale-105 transition-transform duration-700"
+                    className="h-full w-full  hover:scale-105 transition-transform duration-700"
                     loading="lazy"
                   />
                   <span className="absolute bottom-6 right-6 bg-amber-500 text-slate-950 font-black text-xl h-12 w-12 rounded-xl flex items-center justify-center shadow-sm">
