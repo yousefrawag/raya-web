@@ -3,6 +3,7 @@ import BlogDetails from '@/components/sections/BlogDeatils'
 import { GetBlogEntry } from '@/lib/GetBlogEntry'
 import RelatedPlogs from '@/components/sections/RelatedPlogs';
 import { GetBlogs } from '@/lib/GetBlogs';
+
 // الـ Keywords العقارية المستهدفة (أكثر من 200 كلمة دلالية مدمجة وسياقية)
 const estateKeywords = [
   "استثمار عقاري", "عقارات للبيع", "شقق فاخرة", "منصه الراية العقارية", "شراء شقة", "استثمار طويل الأجل", 

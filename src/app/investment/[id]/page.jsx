@@ -5,6 +5,8 @@ import { FaMapMarkerAlt, FaRulerCombined, FaDollarSign, FaBuilding, FaHandHoldin
 import {GeyINvestmentEntry} from "@/lib/GeyINvestmentEntry"
 import Link from 'next/link';
 import InvestMentHndelimagesClient from '@/components/common/InvestMentHndelimagesClient';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 // 1. تحسين محركات البحث (Dynamic Metadata for SEO)
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -102,7 +104,32 @@ const defaultPhone = "+972568700632"
       </div>
     );
   }
-
+  const richTextOptions = {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node) => {
+        const { title, file } = node.data.target.fields;
+        return (
+          <img
+            src={`https:${file.url}`}
+            alt={title || 'صورة'}
+            className="rounded-xl my-6 w-full object-cover shadow-lg border border-gray-100"
+          />
+        );
+      },
+      [BLOCKS.HEADING_3]: (node, children) => (
+        <h3 className="text-2xl font-bold mt-8 mb-4 text-slate-800">{children}</h3>
+      ),
+      [BLOCKS.PARAGRAPH]: (node, children) => (
+        <p className="mb-4">{children}</p>
+      ),
+      [BLOCKS.OL_LIST]: (node, children) => (
+        <ol className="list-decimal pr-6 space-y-2 mb-4">{children}</ol>
+      ),
+      [BLOCKS.UL_LIST]: (node, children) => (
+        <ul className="list-disc pr-6 space-y-2 mb-4">{children}</ul>
+      ),
+    },
+  };
   // معالجة الصور (تأكد من وجود مصفوفة صور)
   const images = data.seriesimagesCutmez && data.seriesimagesCutmez.length > 0 
     ? data.seriesimagesCutmez 
@@ -144,9 +171,20 @@ const defaultPhone = "+972568700632"
             {/* وصف العقار */}
             <div className="bg-white p-10 rounded-3xl shadow-lg border border-gray-100">
               <h3 className="text-2xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-100">وصف الفرصة الاستثمارية</h3>
-              <div className="prose prose-lg prose-orange max-w-none text-gray-700 leading-relaxed whitespace-pre-wrap">
+               {
+                data.details2 ? (
+                  // ✅ الحالة الجديدة (Rich Text): نحول الـ JSON إلى عناصر
+                  <div className="prose prose-lg max-w-none text-slate-600 leading-relaxed font-medium text-base md:text-lg">
+                    {documentToReactComponents(data.details2, richTextOptions)}
+                  </div>
+                ) : (
+                  // ❌ الحالة القديمة (نص عادي): نعرضه مع احترام الأسطر الجديدة
+                            <div className="prose prose-lg prose-orange max-w-none text-gray-700 leading-relaxed whitespace-pre-wrap">
                 {data.details}
               </div>
+                )
+              }
+
             </div>
 
             {/* قسم إضافي مقترح: التحليل المالي (Financial Analysis) */}

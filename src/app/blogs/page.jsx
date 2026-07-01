@@ -1,4 +1,4 @@
-export const revalidate = 86400;
+// export const revalidate = 86400;
 import React from 'react'
 import AllBlogs from '@/components/sections/AllBlogs'
 import { GetBlogs } from '@/lib/GetBlogs'

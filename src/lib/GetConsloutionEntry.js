@@ -19,6 +19,8 @@ console.log("res-engenaring-consolution" , res);
   const {
     title,
     details,
+    details2,
+
     images,
     badg,
     features,
@@ -34,6 +36,7 @@ console.log("res-engenaring-consolution" , res);
     seriesimagesCutmez,
     id: item.sys.id,
     details,
+     details2,
     badg,
     features,
     whatssapfolow,

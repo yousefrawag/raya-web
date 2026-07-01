@@ -21,7 +21,8 @@ export async function GeyINvestmentEntry(id) {
 whatssapfolow1 ,
 type ,
 region ,
-price
+price ,
+details2
 
           } = item
 
@@ -34,6 +35,7 @@ price
                 title , id:res.sys.id , details, area  , city   , seriesimagesCutmez , whatssapfolow1 ,
 type ,
 region ,
-price
+price ,
+details2
   };
 }

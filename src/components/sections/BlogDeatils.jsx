@@ -3,10 +3,36 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock, ArrowLeft, Share2, User, Tag, Bookmark, Video } from "lucide-react";
-
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 const BlogDetails = ({ project }) => {
   if (!project) return null;
-
+  const richTextOptions = {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node) => {
+        const { title, file } = node.data.target.fields;
+        return (
+          <img
+            src={`https:${file.url}`}
+            alt={title || 'صورة'}
+            className="rounded-xl my-6 w-full object-cover shadow-lg border border-gray-100"
+          />
+        );
+      },
+      [BLOCKS.HEADING_3]: (node, children) => (
+        <h3 className="text-2xl font-bold mt-8 mb-4 text-slate-800">{children}</h3>
+      ),
+      [BLOCKS.PARAGRAPH]: (node, children) => (
+        <p className="mb-4">{children}</p>
+      ),
+      [BLOCKS.OL_LIST]: (node, children) => (
+        <ol className="list-decimal pr-6 space-y-2 mb-4">{children}</ol>
+      ),
+      [BLOCKS.UL_LIST]: (node, children) => (
+        <ul className="list-disc pr-6 space-y-2 mb-4">{children}</ul>
+      ),
+    },
+  };
   // حساب وقت القراءة التقريبي
   const readingTime = project.blogDeatils 
     ? Math.ceil(project.blogDeatils.split(' ').length / 200) 
@@ -114,8 +140,17 @@ const BlogDetails = ({ project }) => {
           
           {/* العمود الأيمن الكبير: تفاصيل المقال المقسمة بشكل مريح وعصري */}
           <div className="lg:col-span-2 bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
-            
-            {/* 1. مقدمة المقال (الفقرات الأولى المميزة) */}
+
+           {
+     project.details2 ? (
+       // ✅ الحالة الجديدة (Rich Text): نحول الـ JSON إلى عناصر
+       <div className="prose prose-lg max-w-none text-slate-600 leading-relaxed font-medium text-base md:text-lg">
+         {documentToReactComponents(project.details2, richTextOptions)}
+       </div>
+     ) : (
+       // ❌ الحالة القديمة (نص عادي): نعرضه مع احترام الأسطر الجديدة
+     <>
+        {/* 1. مقدمة المقال (الفقرات الأولى المميزة) */}
             {introParagraphs.length > 0 && (
               <div className="mb-8 p-5 bg-gradient-to-r from-amber-50/40 to-amber-50 border-r-4 border-amber-500 rounded-l-xl">
                 {introParagraphs.map((para, i) => (
@@ -141,6 +176,10 @@ const BlogDetails = ({ project }) => {
                 ))
               )}
             </div>
+     </>
+     )
+   }   
+         
 
             {/* 📺 قسم الفيديو من اليوتيوب - يظهر فقط إذا كان الرابط موجوداً وصالحاً */}
             {videoEmbedUrl && (

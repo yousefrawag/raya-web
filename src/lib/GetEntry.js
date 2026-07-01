@@ -38,7 +38,8 @@ const item = res.fields;
     typeOfproject ,
     videos ,
     youtupeUrl ,
-    whatssapfolow
+    whatssapfolow ,
+    details2
   } = item;
 
   const seriesimagesCutmez = checkimageprotcoll(images);
@@ -71,7 +72,8 @@ const item = res.fields;
     typeOfproject ,
     vidoesCustmez ,
     youtupeUrl ,
-    whatssapfolow
+    whatssapfolow ,
+    details2
   };
 
 }

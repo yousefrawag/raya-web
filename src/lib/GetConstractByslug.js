@@ -18,6 +18,7 @@ export async function GetConstractByslug(slug) {
   const {
     title,
     details,
+    details2,
     images,
     badg,
     features,
@@ -38,5 +39,6 @@ export async function GetConstractByslug(slug) {
     whatssapfolow,
     youtupeUrl,
     slug: itemSlug,
+    details2
   };
 }

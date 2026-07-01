@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { GetConstractByslug } from '@/lib/GetConstractByslug';
 import { HiOutlineCheckCircle, HiOutlineChevronRight , HiOutlinePlus } from 'react-icons/hi';
 import GallerySlider from '@/components/common/GallerySlider'; 
-
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 // ==========================================
 // 1. إعداد الـ SEO الديناميكي المتقدم
 // ==========================================
@@ -51,7 +52,32 @@ export async function generateMetadata({ params }) {
 const SingleConstractionService = async ({ params }) => {
   const { slug } = await params;
   const data = await GetConstractByslug(slug);
-
+  const richTextOptions = {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node) => {
+        const { title, file } = node.data.target.fields;
+        return (
+          <img
+            src={`https:${file.url}`}
+            alt={title || 'صورة'}
+            className="rounded-xl my-6 w-full object-cover shadow-lg border border-gray-100"
+          />
+        );
+      },
+      [BLOCKS.HEADING_3]: (node, children) => (
+        <h3 className="text-2xl font-bold mt-8 mb-4 text-slate-800">{children}</h3>
+      ),
+      [BLOCKS.PARAGRAPH]: (node, children) => (
+        <p className="mb-4">{children}</p>
+      ),
+      [BLOCKS.OL_LIST]: (node, children) => (
+        <ol className="list-decimal pr-6 space-y-2 mb-4">{children}</ol>
+      ),
+      [BLOCKS.UL_LIST]: (node, children) => (
+        <ul className="list-disc pr-6 space-y-2 mb-4">{children}</ul>
+      ),
+    },
+  };
   if (!data) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 text-slate-900" dir="rtl">
@@ -122,10 +148,20 @@ const SingleConstractionService = async ({ params }) => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6 leading-[1.25] tracking-tight">
                 {title}
               </h1>
-              
+               {
+                data.details2 ? (
+                  // ✅ الحالة الجديدة (Rich Text): نحول الـ JSON إلى عناصر
+                  <div className="prose prose-lg max-w-none text-slate-600 leading-relaxed font-medium text-base md:text-lg">
+                    {documentToReactComponents(data.details2, richTextOptions)}
+                  </div>
+                ) : (
+                  // ❌ الحالة القديمة (نص عادي): نعرضه مع احترام الأسطر الجديدة
               <p className="text-slate-700 text-lg leading-relaxed whitespace-pre-line font-medium max-w-2xl">
                 {description}
               </p>
+                )
+              }
+          
                 <div className="flex justify-center mt-5">
                         <a
                           target="_blank"

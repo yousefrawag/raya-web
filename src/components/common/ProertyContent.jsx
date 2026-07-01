@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { MapPin, Bed, Bath, Square, Phone, Mail, MessageCircle, Star, Check, Image as ImageIcon, FileText, CreditCard , PlayIcon } from 'lucide-react';
 import MapSection from '@/components/common/MapSection';
 import { MdOutlineZoomOutMap } from "react-icons/md";
-
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 const ProertyContent = ({ data }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [activeTab, setActiveTab] = useState('overview');
@@ -67,7 +68,32 @@ const tabs = [
   const heroImage = data?.seriesimagesCutmez ? 
     data?.seriesimagesCutmez[selectedImage]?.url :
     "https://via.placeholder.com/800x450?text=No+Image";
-
+  const richTextOptions = {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node) => {
+        const { title, file } = node.data.target.fields;
+        return (
+          <img
+            src={`https:${file.url}`}
+            alt={title || 'صورة'}
+            className="rounded-xl my-6 w-full object-cover shadow-lg border border-gray-100"
+          />
+        );
+      },
+      [BLOCKS.HEADING_3]: (node, children) => (
+        <h3 className="text-2xl font-bold mt-8 mb-4 text-slate-800">{children}</h3>
+      ),
+      [BLOCKS.PARAGRAPH]: (node, children) => (
+        <p className="mb-4">{children}</p>
+      ),
+      [BLOCKS.OL_LIST]: (node, children) => (
+        <ol className="list-decimal pr-6 space-y-2 mb-4">{children}</ol>
+      ),
+      [BLOCKS.UL_LIST]: (node, children) => (
+        <ul className="list-disc pr-6 space-y-2 mb-4">{children}</ul>
+      ),
+    },
+  };
   return (
     <div className="max-w-7xl mx-auto px-4" dir="rtl">
       {/* --- القسم المطور: Hero + Gallery --- */}
@@ -183,7 +209,18 @@ const tabs = [
               {activeTab === 'overview' && (
                 <div className="animate-in fade-in duration-500">
                   <h3 className="text-xl font-black text-slate-800 mb-4 border-r-4 border-amber-500 pr-4">وصف العقار</h3>
-                  <p className="text-gray-600 leading-relaxed text-lg mb-8">{data.details}</p>
+                  {
+                   data.details2 ? (
+                     // ✅ الحالة الجديدة (Rich Text): نحول الـ JSON إلى عناصر
+                     <div className="prose prose-lg max-w-none text-slate-600 leading-relaxed font-medium text-base md:text-lg">
+                       {documentToReactComponents(data.details2, richTextOptions)}
+                     </div>
+                   ) : (
+                     // ❌ الحالة القديمة (نص عادي): نعرضه مع احترام الأسطر الجديدة
+                    <p className="text-gray-600 leading-relaxed text-lg mb-8">{data.details}</p>
+                   )
+                 }
+             
                   
                         <div className="grid md:grid-cols-2 gap-4">
 

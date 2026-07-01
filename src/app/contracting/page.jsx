@@ -319,7 +319,7 @@ const ContractingPage = async () => {
                 </p>
 
                 <ul className="space-y-3">
-                  {service.features.map((feat, fIdx) => (
+                  {service.features?.slice(0 , 4)?.map((feat, fIdx) => (
                     <li key={fIdx} className="flex items-center gap-2 text-slate-800 text-xs md:text-sm font-semibold">
                       <HiOutlineCheckCircle className="text-amber-500 shrink-0" size={18} />
                       {feat}

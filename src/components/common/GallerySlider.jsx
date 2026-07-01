@@ -94,13 +94,13 @@ export default function GallerySlider({ images = [], videoUrl = "" }) {
               <HiChevronRight size={32} />
             </button>
 
-            <div className="w-full max-w-5xl max-h-[75vh] flex justify-center items-center rounded-2xl overflow-hidden shadow-2xl relative">
+            <div className="w-full  max-h-[75vh] flex justify-center items-center rounded-2xl overflow-hidden shadow-2xl relative">
               {media[currentIndex].type === 'video' ? (
                 <div className="w-full aspect-video rounded-2xl overflow-hidden">
                   <iframe className="w-full h-full" src={media[currentIndex].url} frameBorder="0" allow="autoplay; fullscreen" allowFullScreen></iframe>
                 </div>
               ) : (
-                <img src={media[currentIndex].url} className="max-w-full max-h-[75vh]" alt="عرض مكبر" />
+                <img src={media[currentIndex].url} className="max-w-full  max-h-[75vh]" alt="عرض مكبر" />
               )}
             </div>
 
