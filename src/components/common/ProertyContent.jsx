@@ -118,11 +118,11 @@ const tabs = [
               <span className="inline-block bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3">
                 {data.typeOfproject}
               </span>
-              <h1 className="text-3xl md:text-4xl font-black mb-2 drop-shadow-md">{data.title}</h1>
-              <div className="flex items-center text-white/90 font-medium">
+              {/* <h1 className="text-3xl md:text-4xl font-black mb-2 drop-shadow-md">{data.title}</h1> */}
+              {/* <div className="flex items-center text-white/90 font-medium">
                 <MapPin size={18} className="ml-1 text-amber-400" />
                 {data.city}
-              </div>
+              </div> */}
             </div>
             {/* السعر إن وجد أو حالة العقار */}
             {/* <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 hidden md:block">
