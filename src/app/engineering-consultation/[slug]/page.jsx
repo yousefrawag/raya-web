@@ -162,7 +162,7 @@ const SingleConslutionPage = async ({ params }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white" dir="rtl">
+    <div className="min-h-screen bg-white pt-7" dir="rtl">
       <Script
         id="engineering-service-schema"
         type="application/ld+json"

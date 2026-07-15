@@ -2,7 +2,15 @@ export const revalidate = 86400;
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, MapPin, Bed, Bath, Square, Phone, Mail, MessageCircle, Star, Check, Image as ImageIcon, FileText, CreditCard, User } from 'lucide-react';
+import { 
+  HiOutlineChevronRight,
+  HiOutlineCheckCircle,
+  HiOutlinePlus,
+  HiOutlineShieldCheck,
+  HiOutlineLightBulb,
+  HiOutlineDocumentText,
+  HiOutlineClock
+} from 'react-icons/hi';
 import Script from "next/script";
 
 import { propertiesData } from "@/data/index";
@@ -111,38 +119,18 @@ const property = await getPropertiey(id)
       <div className="container mx-auto px-3 ">
       {/* Header */}
       <div className="p-4  mt-25 ">
-        <div className="  flex gap-1 flex-col lg:flex-row lg:gap-4">
-          <Link href="/" className="inline-flex items-center text-slate-900 hover:text-amber-700 transition-colors">
-            
-            العودة للرئيسية
-            /
-          </Link>
-        
-            <Link href="/properties" className="inline-flex items-center text-slate-900 hover:text-amber-700 transition-colors">
-            
-            العقارات
-            /
-          </Link>
-                 <Link 
-                  href={{
-    pathname: "/properties",
-    query: {
-  
-      city: property.city,
-   
-    },
-  }} className="inline-flex items-center text-slate-900 hover:text-amber-700 transition-colors">
-            
-            {property?.city}
-            /
-          </Link>
-          
-                <span className="inline-flex items-center text-amber-700 transition-colors">
-          
-            {property?.title}
-          </span>
-        </div>
+          <nav className="flex flex-wrap items-center gap-1.5 text-xs md:text-sm font-bold text-slate-400 mt-4">
+                <Link href="/" className="hover:text-amber-500 transition-colors">الرئيسية</Link>
+                <HiOutlineChevronRight className="rotate-180 text-slate-300" size={14} />
+                <Link href="/properties" className="hover:text-amber-500 transition-colors">العقارات</Link>
+                <HiOutlineChevronRight className="rotate-180 text-slate-300" size={14} />
+                   <Link href={`/properties/?city=${property?.city}`} className="hover:text-amber-500 transition-colors">{property?.city}</Link>
+                <HiOutlineChevronRight className="rotate-180 text-slate-300" size={14} />
+                <span className="text-slate-600 font-extrabold">{property.title}</span>
+              </nav> 
       </div>
+
+  
 <ProertyContent data={property}/>
 
     <h2 className='text-slate-900 text-2xl'> عقارات ذات صلة </h2>
