@@ -28,6 +28,7 @@ const Header = () => {
     { id: '/engineering-consultation', label: 'إستشارات هندسية' }, 
     
     { id: '/map', label: 'الخريطة' },
+     { id: '/add-Property', label: 'أضف عقارك' },
     { id: '/blogs', label: "المدونة" }, 
   ];
 
@@ -56,7 +57,7 @@ const Header = () => {
           </Link>
 
           {/* 2. Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navItems.map((item) => {
               const isActive = pathname === item.id;
               return (
