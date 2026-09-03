@@ -62,7 +62,7 @@ const lines = formatTitle(CurrentItem?.title);
 
 <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-tight mt-20 mb-6 w-full text-center md:text-right lg:text-right">
   {lines[0]} <br />
-  <span className="text-[#f59e0b]">{lines[1]}</span> <br />
+  <span className="text-[#f59e0b]">{lines[1]} يوسف رواج</span> <br />
   {lines[2]}
 </h1>
             
