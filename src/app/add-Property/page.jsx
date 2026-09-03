@@ -26,7 +26,7 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: 'https://alraya.com/add-property',
+    canonical: 'https://www.rayapal.com/add-property',
   },
 
   openGraph: {
@@ -35,13 +35,13 @@ export const metadata = {
     description:
       'شارك مشروعك العقاري مع منصة الراية واستفد من خدمات التسويق العقاري والاستشارات الهندسية.',
 
-    url: 'https://alraya.com/add-property',
+    url: 'https://www.rayapal.com/add-property',
 
     type: 'website',
 
     images: [
       {
-        url: 'https://alraya.com/og-image.jpg',
+        url: 'https://www.rayapal.com/icon.png',
         width: 1200,
         height: 630,
         alt: 'منصة الراية العقارية',
@@ -58,7 +58,7 @@ export const metadata = {
     description:
       'شارك مشروعك العقاري مع منصة الراية واستفد من خدمات التسويق العقاري والاستشارات الهندسية.',
 
-    images: ['https://alraya.com/og-image.jpg'],
+    images: ['https://www.rayapal.com/icon.png'],
   },
 };
 
@@ -73,8 +73,8 @@ const schemaData = {
   provider: {
     '@type': 'Organization',
     name: 'منصة الراية',
-    url: 'https://alraya.com',
-    logo: 'https://alraya.com/logo.png',
+    url: 'https://www.rayapal.com',
+    logo: 'https://www.rayapal.com/icon.png',
 
     contactPoint: {
       '@type': 'ContactPoint',
@@ -107,7 +107,7 @@ const schemaData = {
 
     target: {
       '@type': 'EntryPoint',
-      urlTemplate: 'https://alraya.com/add-property',
+      urlTemplate: 'https://www.rayapal.com/add-property',
 
       actionPlatform: [
         'http://schema.org/DesktopWebPlatform',
