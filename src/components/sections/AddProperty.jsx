@@ -577,6 +577,36 @@ const AddProperty = () => {
           />
         </div>
 
+     <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            رقم القطعة
+          </label>
+
+          <input
+            type="text"
+            name="project.plotNumber"
+            value={formData.project.plotNumber}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition outline-none bg-gray-50 hover:bg-white text-slate-800"
+            placeholder="رقم القطعة"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            رقم الحوض
+          </label>
+
+          <input
+            type="text"
+            name="project.basinNumber"
+            value={formData.project.basinNumber}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition outline-none bg-gray-50 hover:bg-white text-slate-800"
+            placeholder="رقم الحوض"
+          />
+        </div>
+
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             حالة العقار *
@@ -669,35 +699,7 @@ const AddProperty = () => {
           </select>
         </div>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            رقم القطعة
-          </label>
-
-          <input
-            type="text"
-            name="project.plotNumber"
-            value={formData.project.plotNumber}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition outline-none bg-gray-50 hover:bg-white text-slate-800"
-            placeholder="رقم القطعة"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            رقم الحوض
-          </label>
-
-          <input
-            type="text"
-            name="project.basinNumber"
-            value={formData.project.basinNumber}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition outline-none bg-gray-50 hover:bg-white text-slate-800"
-            placeholder="رقم الحوض"
-          />
-        </div>
+   
 
         <div className="md:col-span-2">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
