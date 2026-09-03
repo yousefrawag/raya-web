@@ -274,24 +274,24 @@ const AddProperty = () => {
   // ==========================================
   // دالة رفع الملفات
   // ==========================================
-  const uploadFiles = async (files) => {
-    const uploaded = [];
+//   const uploadFiles = async (files) => {
+//     const uploaded = [];
 
-    for (const file of files) {
-      const formData = new FormData();
+//     for (const file of files) {
+//       const formData = new FormData();
 
-      formData.append('file', file);
+//       formData.append('file', file);
 
-      const res = await authFetch.post('/upload', formData);
+//       const res = await authFetch.post('/upload', formData);
 
-      uploaded.push({
-        fileURL: res.data.url,
-        fileID: res.data.public_id,
-      });
-    }
+//       uploaded.push({
+//         fileURL: res.data.url,
+//         fileID: res.data.public_id,
+//       });
+//     }
 
-    return uploaded;
-  };
+//     return uploaded;
+//   };
 
   // ==========================================
   // دالة الإرسال
@@ -344,6 +344,9 @@ const AddProperty = () => {
     setLoading(true);
 
     try {
+          const formData = new FormData();
+
+      formData.append('file', file);
       let payload = {
         client: formData.client,
         project: {
@@ -356,12 +359,9 @@ const AddProperty = () => {
         payload.project.imagesURLs.length > 0
       ) {
         const files = payload.project.imagesURLs;
+        formData.append("files" , files)
 
-        if (files[0] instanceof File) {
-          const uploaded = await uploadFiles(files);
-
-          payload.project.imagesURLs = uploaded;
-        }
+     
       }
 
       const response = await authFetch.post(
@@ -816,7 +816,7 @@ const AddProperty = () => {
             </div>
           ) : null}
 
-          {/* 
+          
           <div className="md:col-span-2">
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               رفع صور المشروع (اختياري)
@@ -834,7 +834,7 @@ const AddProperty = () => {
               يمكنك رفع أكثر من صورة (حجم كل صورة لا يتجاوز 5 ميجابايت)
             </p>
           </div>
-          */}
+         
 
         </div>
       </div>
@@ -907,7 +907,7 @@ const AddProperty = () => {
           <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
 
             <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-800 rounded-lg text-xs font-black mb-6">
-              شارك مشروعك مع منصة الراية just teats
+              شارك مشروعك مع منصة الراية 
             </span>
 
             <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-tight">
@@ -916,9 +916,7 @@ const AddProperty = () => {
                 معنا
               </span>
             </h1>
-            <h1 className='text-xl text-red'>
-                just teats
-            </h1>
+        
 
             <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed font-medium mb-8">
               في منصة الراية، نوفر لك فرصة لعرض مشروعك أمام آلاف المستفيدين والمستثمرين، مع دعم فني وهندسي متكامل لضمان وصول رسالتك بأفضل صورة.

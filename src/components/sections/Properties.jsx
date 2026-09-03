@@ -14,7 +14,7 @@ const Properties =  async () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-            العقارات المتاحة +++12
+            العقارات المتاحة
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             اكتشف مجموعة متنوعة من العقارات المتميزة للبيع والإيجار
