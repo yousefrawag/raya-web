@@ -1,4 +1,5 @@
 import AddProperty from '../../components/sections/AddProperty';
+import Script from "next/script";
 
 export const metadata = {
   title: 'أضف عقارك مع منصة الراية | تسويق عقاري واستشارات هندسية',
@@ -131,17 +132,20 @@ const schemaData = {
   },
 };
 
-export default function Page() {
+export default function AddPropertyPage() {
   return (
-    <>
-      <script
+    <div>
+      <Script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(schemaData),
+              dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+       schemaData
+          )
         }}
+    
       />
 
       <AddProperty />
-    </>
+    </div>
   );
 }

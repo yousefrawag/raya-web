@@ -907,7 +907,7 @@ const AddProperty = () => {
           <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
 
             <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-800 rounded-lg text-xs font-black mb-6">
-              شارك مشروعك مع منصة الراية
+              شارك مشروعك مع منصة الراية just teats
             </span>
 
             <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-tight">
