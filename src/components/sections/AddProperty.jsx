@@ -916,6 +916,9 @@ const AddProperty = () => {
                 معنا
               </span>
             </h1>
+            <h1 className='text-xl text-red'>
+                just teats
+            </h1>
 
             <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed font-medium mb-8">
               في منصة الراية، نوفر لك فرصة لعرض مشروعك أمام آلاف المستفيدين والمستثمرين، مع دعم فني وهندسي متكامل لضمان وصول رسالتك بأفضل صورة.
