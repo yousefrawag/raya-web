@@ -296,100 +296,48 @@ const AddProperty = () => {
   // ==========================================
   // دالة الإرسال
   // ==========================================
-  const handleSubmit = async () => {
-    setError('');
+const handleSubmit = async () => {
+  setError('');
 
-    // Validation Step 1
-    if (!validateStep1()) {
-      setCurrentStep(1);
+  // Validations...
+  if (!validateStep1()) { setCurrentStep(1); setTimeout(() => { formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); return; }
+  if (!validateStep2()) { setCurrentStep(2); setTimeout(() => { formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); return; }
+  if (!validateStep3()) { setCurrentStep(3); setTimeout(() => { formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); return; }
 
-      setTimeout(() => {
-        formRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-      }, 100);
+  setLoading(true);
 
-      return;
+  try {
+    const formDatafiles = new FormData();
+
+    // 1. تجميع البيانات النصية (client + project) في كائن واحد
+    const payload = {
+      client: formData.client,
+      project: { ...formData.project },
+    };
+    // إزالة الملفات من الكائن لأننا سنرفقها بشكل منفصل
+    const files = payload.project.imagesURLs || [];
+    delete payload.project.imagesURLs;
+
+    // 2. إضافة البيانات النصية كـ JSON في حقل واحد
+    formDatafiles.append('data', JSON.stringify(payload));
+
+    // 3. إرفاق الملفات
+    if (files.length > 0 && files[0] instanceof File) {
+      files.forEach((file) => formDatafiles.append('files', file));
     }
 
-    // Validation Step 2
-    if (!validateStep2()) {
-      setCurrentStep(2);
-
-      setTimeout(() => {
-        formRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-      }, 100);
-
-      return;
-    }
-
-    // Validation Step 3
-    if (!validateStep3()) {
-      setCurrentStep(3);
-
-      setTimeout(() => {
-        formRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-      }, 100);
-
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-          const formData = new FormData();
-
-      formData.append('file', file);
-      let payload = {
-        client: formData.client,
-        project: {
-          ...formData.project,
-        },
-      };
-
-      if (
-        payload.project.imagesURLs &&
-        payload.project.imagesURLs.length > 0
-      ) {
-        const files = payload.project.imagesURLs;
-        formData.append("files" , files)
-
-     
-      }
-
-      const response = await authFetch.post(
-        '/sharedProperty',
-        payload
-      );
-
-      console.log('Response:', response.data);
-
-      setIsSubmitted(true);
-    } catch (err) {
-      console.error('Submission error:', err);
-
-      const backendError =
-        err?.response?.data?.error ||
-        err?.response?.data?.message ||
-        'حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً';
-
-      // منع React من محاولة عرض object
-      if (typeof backendError === 'string') {
-        setError(backendError);
-      } else {
-        setError('حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً');
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+    // 4. إرسال الطلب (بدون تحديد Content-Type يدوياً)
+    const response = await authFetch.post('/sharedProperty', formDatafiles);
+    console.log('Response:', response.data);
+    setIsSubmitted(true);
+  } catch (err) {
+    console.error('Submission error:', err);
+    const backendError = err?.response?.data?.error || err?.response?.data?.message || 'حدث خطأ أثناء الإرسال';
+    setError(typeof backendError === 'string' ? backendError : 'حدث خطأ أثناء الإرسال');
+  } finally {
+    setLoading(false);
+  }
+};
 
   // ==========================================
   // Step 1
