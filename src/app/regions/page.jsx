@@ -51,6 +51,7 @@ const regionsStructure = [
         {
     name: "بيرزيت",
     slug: "birzeit",
+    image: ramella
   }
     ],
   },
