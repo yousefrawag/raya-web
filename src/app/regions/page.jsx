@@ -20,7 +20,7 @@ const regionsStructure = [
     description: "العاصمة وقلب فلسطين العقاري النابض",
     locations: [
       { name: "صور باهر", slug: "sur-baher", image: surbare },
-      { name: "شعfاط", slug: "shuafat", image: quets },
+      { name: "شعفاط", slug: "shuafat", image: quets },
       { name: "بيت صفافا", slug: "beit-safafa", image: quets },
       { name: "كفر عقب", slug: "kafr-aqab", image: akrab },
       { name: "بيت حنينا", slug: "beit-hanina", image: phetahnen },
@@ -48,6 +48,10 @@ const regionsStructure = [
       { name: "رام الله", slug: "ramallah", image: ramella },
       { name: "البيره", slug: "al-bireh", image: ramella },
       { name: "المصايف", slug: "al-masyef", image: ramella },
+        {
+    name: "بيرزيت",
+    slug: "birzeit",
+  }
     ],
   },
 ];
