@@ -59,19 +59,23 @@ export const regions = [
     name: "رام الله",
     slug: "ramallah",
 
-    locations: [
-      {
-        name: "رام الله",
-        slug: "ramallah",
-      },
-      {
-        name: "البيره",
-        slug: "al-bireh",
-      },
-      {
-        name: "المصايف",
-        slug: "al-masyef",
-      },
-    ],
+locations: [
+  {
+    name: "رام الله",
+    slug: "ramallah",
+  },
+  {
+    name: "البيره",
+    slug: "al-bireh",
+  },
+  {
+    name: "المصايف",
+    slug: "al-masyef",
+  },
+  {
+    name: "بيرزيت",
+    slug: "birzeit",
+  },
+],
   },
 ];
