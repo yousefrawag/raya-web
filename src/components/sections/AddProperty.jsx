@@ -19,6 +19,7 @@ const AddProperty = () => {
     project: {
       estateType: '',
       governoate: '',
+      pymentType:"",
       city: '',
       projectSatatus: '',
       operationType: '',
@@ -709,6 +710,24 @@ const handleSubmit = async () => {
             </select>
           </div>
 
+   <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+             نوع العمله؟ *
+            </label>
+
+            <select
+              name="project.pymentType"
+              value={formData.project.pymentType}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition outline-none bg-gray-50 hover:bg-white text-slate-800"
+              required
+            >
+              <option value="">اختر</option>
+              <option value="دولار">دولار</option>
+               <option value="شيكل">شيكل</option>
+              <option value="دينار">دينار</option>
+            </select>
+          </div>
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               السعر الإجمالي
