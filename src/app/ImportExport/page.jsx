@@ -1,7 +1,6 @@
 export const revalidate = 86400;
 import React from 'react';
 import Script from 'next/script';
-import TradeMap from '@/components/sections/Trademap';
 import AddImportExportRequest from '@/components/sections/AddImportExportRequest';
 import {
   HiOutlineShieldCheck,
@@ -259,134 +258,13 @@ const ImportExportPage = () => {
       />
 
       {/* --- HERO SECTION الأصلي القديم --- */}
-      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-amber-50/40 via-white to-amber-50/20">
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <span className="inline-block px-4 py-1.5 bg-amber-100 text-amber-800 rounded-full text-xs font-bold mb-6">
-            منصة الراية للاستيراد والتصدير
-          </span>
-          
-          <h1 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-tight">
-            نربط العالم <span className="text-amber-500">بجسر تجاري</span> من القدس
-          </h1>
-
-          <p className="text-slate-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-medium mb-10">
-            من خلال شبكتنا الواسعة من الموردين والمشترين حول العالم، نقدم حلولاً متكاملة للاستيراد والتصدير تضمن وصول منتجاتك بأمان وسرعة.
-          </p>
-
-          <div className="flex justify-center">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={`https://wa.me/+972568700632?text=مرحباً شركة الراية، أود الاستفسار عن خدمات الاستيراد والتصدير.`}
-              className="flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-amber-500 hover:text-slate-900 transition-all shadow-xl shadow-slate-200"
-            >
-              <HiOutlinePlus size={20}/> اطلب عرض سعر الآن
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* --- MAP SECTION --- */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <TradeMap />
-        </div>
-      </section>
-
-      {/* --- SERVICES SECTION --- */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <div className="text-center mb-16">
-          <span className="text-amber-600 font-bold text-sm bg-amber-50 px-4 py-1.5 rounded-full">خدماتنا الشاملة</span>
-          <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-3 mb-3">حلول الاستيراد والتصدير والشحن والتخزين</h2>
-          <p className="text-slate-500 max-w-2xl mx-auto">تغطية متكاملة لخدمات الشحن البحري والجوي، فحص البضائع في الصين، والتخليص الجمركي.</p>
-        </div>
-
-        <div className="space-y-20">
-          {services.map((service, idx) => (
-            <div 
-              key={service.id}
-              id={service.id}
-              className={`flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-16 ${idx % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}
-            >
-              <div className="w-full lg:w-1/2 relative">
-                <div className="absolute -inset-2 bg-gradient-to-tr from-amber-400/30 to-amber-200/30 rounded-[2.5rem] blur-lg transition-all"></div>
-                <div className="relative h-72 md:h-[400px] w-full rounded-[2.5rem] overflow-hidden border border-amber-200 shadow-sm bg-amber-50/50">
-                  <img 
-                    src={service.img}
-                    alt={`${service.title} - شركة استيراد وتصدير في القدس`}
-                    className="h-full w-full object-cover hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                  <span className="absolute bottom-6 right-6 bg-amber-500 text-slate-950 font-black text-xl h-12 w-12 rounded-xl flex items-center justify-center shadow-sm">
-                    {service.num}
-                  </span>
-                </div>
-              </div>
-
-              <div className="w-full lg:w-1/2">
-                <span className="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-md">
-                  {service.badge}
-                </span>
-                <h3 className="text-2xl md:text-3xl font-black text-slate-900 mt-3 mb-4">
-                  {service.title}
-                </h3>
-                <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
-                  {service.desc}
-                </p>
-
-                <ul className="space-y-3">
-                  {service.features.map((feat, fIdx) => (
-                    <li key={fIdx} className="flex items-center gap-2 text-slate-800 text-xs md:text-sm font-semibold">
-                      <HiOutlineCheckCircle className="text-amber-500 shrink-0" size={18} />
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* --- WHY US SECTION الأصلي القديم --- */}
-      <section className="py-16 max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <span className="text-amber-600 font-bold text-xs bg-amber-50 px-4 py-1.5 rounded-full">لماذا نحن</span>
-          <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-3 mb-3">ثقتكم تبدأ من خبرتنا</h2>
-          <p className="text-slate-500 text-sm md:text-base max-w-xl mx-auto">نعمل بمعايير عالمية ونقدم خدمات لوجستية وتجارية تلبي تطلعاتكم.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {whyUs.map((item, idx) => (
-            <div key={idx} className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition text-center flex flex-col items-center">
-              <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6">
-                {item.icon}
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+   
 
       {/* --- ADD REQUEST SECTION --- */}
       <AddImportExportRequest />
 
       {/* --- FAQ SECTION (آخر سكشن في الصفحة بعد تقديم الطلب) --- */}
-      <section className="max-w-5xl mx-auto px-6 py-16 mb-12">
-        <div className="text-center mb-12">
-          <span className="text-amber-600 font-bold text-xs bg-amber-50 px-4 py-1.5 rounded-full">الأسئلة الشائعة</span>
-          <h2 className="text-3xl font-black text-slate-900 mt-3 mb-2">دليل وإرشادات الاستيراد والتصدير والتخليص الجمركي</h2>
-        </div>
-        <div className="space-y-6">
-          {faqs.map((faq, idx) => (
-            <div key={idx} className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-              <h3 className="text-lg font-bold text-slate-900 mb-2">{faq.q}</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">{faq.a}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+
     </div>
   );
 };
