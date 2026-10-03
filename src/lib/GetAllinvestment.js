@@ -10,7 +10,7 @@ export async function GetAllinvestment() {
 
 
   const res = await client.getEntries(query);
-  console.log("res", res);
+
   const customezData = res.items?.map((item) => {
          const { title , details, area  , city  , images  , 
 

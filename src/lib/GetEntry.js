@@ -7,7 +7,7 @@ console.log("id" , id);
 
 
   const res = await client.getEntry(id);
-  console.log("res property", res?.fields);
+ 
 const item = res.fields;
 
   if (!item) return null; // لو مفيش entry

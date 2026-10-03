@@ -10,7 +10,7 @@ export async function GeyINvestmentEntry(id) {
 
 
   const res = await client.getEntry(id);
-  console.log("res-investment", res?.fields);
+
   const item = res.fields
    if (!item) return null; // لو مفيش entry
  

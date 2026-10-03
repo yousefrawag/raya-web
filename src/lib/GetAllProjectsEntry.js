@@ -13,7 +13,7 @@ export async function GetAllProjectsEntry(city) {
 
 
   const res = await client.getEntries(query);
-  console.log("res", res);
+
   const customezData = res.items?.map((item) => {
          const { title,adress , details, area , numberofunits , city,buildingheight ,map3d , images , firstPayemnt , 
 installemnt ,

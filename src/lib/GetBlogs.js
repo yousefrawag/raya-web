@@ -11,7 +11,7 @@ export async function GetBlogs(blogCatgeoray) {
      
   }
   const res = await client.getEntries(query);
-  console.log("res", res?.items);
+
   const customezData = res.items?.map((item) => {
          const { blogTietal,
                     blogCatgeoray ,

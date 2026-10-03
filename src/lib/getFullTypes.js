@@ -3,7 +3,7 @@ import { getProperties } from './GetpropertiesEntry'
 
 const getFullTypes = async() => {
     const properties = await getProperties()
-    console.log("properties" , properties?.length);
+  
     
     const types = [...new Set(properties?.map((item) => item.typeOfproject))]
     const cityes = [...new Set(properties?.map((item) => item.city))]

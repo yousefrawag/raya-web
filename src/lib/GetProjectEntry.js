@@ -26,7 +26,7 @@ export async function GetProjectEntry(city ,projectType ,region ,bedrooms ,area 
   }
 
   const res = await client.getEntries(query);
-  console.log("res -projects-map", res);
+
   const customezData = res.items?.map((item) => {
          const { title,adress , details, area , projectType, numberofunits , city,buildingheight ,map3d , images , firstPayemnt , 
 installemnt ,

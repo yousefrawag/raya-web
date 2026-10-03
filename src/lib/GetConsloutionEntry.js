@@ -8,7 +8,7 @@ export async function GetConsloutionEntry(slug) {
   };
 
   const res = await client.getEntries(query);
-console.log("res-engenaring-consolution" , res);
+
 
   const item = res.items?.[0];
 

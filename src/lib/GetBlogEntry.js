@@ -1,7 +1,7 @@
 import { client , checkimageprotcoll } from "../utils/ContentfullClient";
 
 export async function GetBlogEntry(id) {
-console.log("id-project" , id);
+
 
   const res = await client.getEntry(id);
 

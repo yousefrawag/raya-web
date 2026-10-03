@@ -7,13 +7,9 @@ import { getProperties } from '@/lib/GetpropertiesEntry';
 
 import MapPageContentent from '@/components/sections/MapPageContentent';
 export async function generateMetadata({ searchParams }) {
+   const {city , propertyType , area, bedrooms ,region , opeartion} = await searchParams
   const params = {
-    city: searchParams?.city,
-    propertyType: searchParams?.propertyType,
-    area: searchParams?.area,
-    bedrooms: searchParams?.bedrooms,
-    region: searchParams?.region,
-    opeartion: searchParams?.opeartion
+city , propertyType , area, bedrooms ,region , opeartion
   }
 
   const cityText = params.city ? `في ${params.city}` : 'في القدس'

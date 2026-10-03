@@ -5,7 +5,7 @@ export async function GetAllConslutions() {
     content_type: "engineering-consultation",
   };
   const res = await client.getEntries(query);
-  console.log("res", res);
+
   const customezData = res.items?.map((item) => {
          const { title , details, images,badg ,features , whatssapfolow ,youtupeUrl , slug
 

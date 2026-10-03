@@ -28,7 +28,7 @@ export async function getProperties(city ,  propertyType , area, bedrooms ,regio
     query["fields.region"] = region || "";
   }
   const res = await client.getEntries(query);
-  console.log("res", res);
+
   const customezData = res.items?.map((item) => {
          const { title,adress , details, area , bathrooms , city,bedrooms ,d3map , images , firstPayemnt , 
 installemnt ,

@@ -17,7 +17,7 @@ export async function GetEntryByquery(city , region) {
 
 
   const res = await client.getEntries(query);
-  console.log("res from query city related", res);
+
   const customezData = res.items?.map((item) => {
          const { title,adress , details, area , bathrooms , city,bedrooms ,d3map , images , firstPayemnt , 
 installemnt ,
