@@ -38,19 +38,19 @@ const Footer = () => {
               إلى حقيقة بالخبرة والنزاهة والخدمة الشخصية المتميزة.
             </p>
             <div className="flex  gap-4 space-x-4 space-x-reverse">
-              <a target='_blank' href="https://www.facebook.com/akaratalraya" className="bg-amber-500 p-3 rounded-full transition-colors duration-300">
+              <a target='_blank' rel='noopener noreferrer' aria-label='صفحة الراية على فيسبوك' href="https://www.facebook.com/akaratalraya" className="bg-amber-500 p-3 rounded-full transition-colors duration-300">
                 <Facebook size={20} />
               </a>
-              <a target='_blank' href="https://www.instagram.com/akaratalraya/" className="bg-amber-500 p-3 rounded-full transition-colors duration-300">
+              <a target='_blank' rel='noopener noreferrer' aria-label='حساب الراية على إنستجرام' href="https://www.instagram.com/akaratalraya/" className="bg-amber-500 p-3 rounded-full transition-colors duration-300">
                 <Instagram size={20} />
               </a>
-                 <a target='_blank' href="https://x.com/akaratalraya" className="bg-amber-500 p-3 rounded-full transition-colors duration-300">
+                 <a target='_blank' rel='noopener noreferrer' aria-label='حساب الراية على X' href="https://x.com/akaratalraya" className="bg-amber-500 p-3 rounded-full transition-colors duration-300">
                 <FaXTwitter size={20} />
               </a>
-                    <a href="https://www.tiktok.com/@akaratalraya?_r=1&_t=ZS-94U8XiehrcW" target='_blank' className="bg-amber-500 p-3 rounded-full transition-colors duration-300">
+                    <a href="https://www.tiktok.com/@akaratalraya?_r=1&_t=ZS-94U8XiehrcW" target='_blank' rel='noopener noreferrer' aria-label='حساب الراية على تيك توك' className="bg-amber-500 p-3 rounded-full transition-colors duration-300">
                 <FaTiktok size={20} />
               </a>
-                        <a target='_blank' href="https://www.snapchat.com/add/akaratalraya?share_id=u2bNKV7lgWE&locale=en-EG" className="bg-amber-500 p-3 rounded-full transition-colors duration-300">
+                        <a target='_blank' rel='noopener noreferrer' aria-label='حساب الراية على سناب شات' href="https://www.snapchat.com/add/akaratalraya?share_id=u2bNKV7lgWE&locale=en-EG" className="bg-amber-500 p-3 rounded-full transition-colors duration-300">
                 <FaSnapchatGhost size={20} />
               </a>
             

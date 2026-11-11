@@ -92,6 +92,8 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "إغلاق القائمة" : "فتح القائمة"}
+            aria-expanded={isOpen}
             className="md:hidden p-2 text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
           >
             {isOpen ? <X size={26} /> : <Menu size={26} />}

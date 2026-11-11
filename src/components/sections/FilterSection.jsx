@@ -14,33 +14,20 @@ const FilterSection = ({ options }) => {
     opeartion: "بيع",
   });
 
-  // 2. حالة لتخزين الأنواع القادمة من الداتابيز
-  const [dynamicTypes, setDynamicTypes] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [dynmicCityes , setDynamicCityes] = useState([])
-  const [dynmicOpeartion , setDynmicOpeartion] = useState([])
-     const [activeSelect, setActiveSelect] = useState(null);
-
-  // 3. جلب البيانات عند تحميل المكون
-  useEffect(() => {
-    const fetchTypes = async () => {
-      try {
-        const { types , cityes , opeartions } = options || {};
-        // تأكد من إضافة قيمة افتراضية لو الداتا فاضية
-        setDynamicTypes(types?.length > 0 ? types : ["شقة", "فيلا" , "مستودع"]);
-        setDynamicCityes(cityes?.length > 0 ? cityes : [
-    "القدس", "صور باهر", "شعفاط", "كفر عقب", "بيت حنينا", "جبل المكبر", "اريحا", "رام الله", "البيرة"
-  ]) 
-  setDynmicOpeartion(opeartions)
-      } catch (error) {
-        console.error("Error fetching types:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchTypes();
-  }, []);
+  // 2. القوائم جاية جاهزة من السيرفر → بنحطها في الـ state من أول render.
+  // قبل كده كانت بتتحط في useEffect بعد الـ hydration، فالتبويبات (بيع/إيجار) كانت بتظهر متأخر
+  // وتزق المحتوى لتحت (Layout Shift / CLS).
+  const [dynamicTypes] = useState(() =>
+    options?.types?.length > 0 ? options.types : ["شقة", "فيلا", "مستودع"]
+  );
+  const isLoading = false;
+  const [dynmicCityes] = useState(() =>
+    options?.cityes?.length > 0
+      ? options.cityes
+      : ["القدس", "صور باهر", "شعفاط", "كفر عقب", "بيت حنينا", "جبل المكبر", "اريحا", "رام الله", "البيرة"]
+  );
+  const [dynmicOpeartion] = useState(() => options?.opeartions || []);
+  const [activeSelect, setActiveSelect] = useState(null);
 
 
 

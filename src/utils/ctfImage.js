@@ -9,3 +9,9 @@ export function ctfImage(url, width = 800, quality = 70) {
   const [base] = url.split("?");
   return `${encodeURI(base)}?w=${width}&q=${quality}&fm=webp`;
 }
+
+// srcset جاهز لصور Contentful: المتصفح بيختار أصغر نسخة تكفي مقاس الكارت على الجهاز
+export function ctfSrcSet(url, widths = [400, 640, 800], quality = 55) {
+  if (!url || typeof url !== "string" || !url.includes("images.ctfassets.net")) return undefined;
+  return widths.map((w) => `${ctfImage(url, w, quality)} ${w}w`).join(", ");
+}

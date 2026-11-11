@@ -1,14 +1,46 @@
 
 
-import Image from "next/image";
+import { preload } from "react-dom";
 import { User } from "lucide-react";
 import FilterSection from "./FilterSection";
-import rayaLanding from "@/images/Hero-images/raya-landdung.jpeg"
 import { GetHeroEntry } from "@/lib/GetHeroEntry";
 import getFullTypes from "@/lib/getFullTypes";
+import { ctfImage } from "@/utils/ctfImage";
+
+const BLANK_PIXEL = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+// تابلت: الصورة بعرض الشاشة، ديسكتوب: 55% من العرض
+const HERO_SIZES = "(max-width: 1023px) 100vw, 55vw";
+
+const getHeroImage = (cmsUrl) => {
+  if (cmsUrl) {
+    return {
+      avif: null,
+      webp: `${ctfImage(cmsUrl, 600, 55)} 600w, ${ctfImage(cmsUrl, 900, 55)} 900w`,
+      fallback: ctfImage(cmsUrl, 900, 55),
+    };
+  }
+  // اتعملوا من src/images/Hero-images/raya-landdung.jpeg بـ sharp (AVIF/WebP جودة 45)
+  return {
+    avif: "/hero/raya-hero-600.avif 600w, /hero/raya-hero-900.avif 900w",
+    webp: "/hero/raya-hero-600.webp 600w, /hero/raya-hero-900.webp 900w",
+    fallback: "/hero/raya-hero-900.webp",
+  };
+};
+
 const HeroSection = async() => {
   const [data, filterOptions] = await Promise.all([GetHeroEntry(), getFullTypes()])
   const CurrentItem = data[0]||{}
+  const heroImage = getHeroImage(CurrentItem?.seriesimagesCutmez?.[0]?.url);
+
+  // preload للصورة في الـ <head> عشان المتصفح يبدأ ينزلها فوراً (للتابلت والديسكتوب بس)
+  preload(heroImage.avif ? "/hero/raya-hero-900.avif" : heroImage.fallback, {
+    as: "image",
+    fetchPriority: "high",
+    imageSrcSet: heroImage.avif || heroImage.webp,
+    imageSizes: HERO_SIZES,
+    type: heroImage.avif ? "image/avif" : undefined,
+    media: "(min-width: 640px)",
+  });
   const formatTitle = (title) => {
   if (!title) return [];
 
@@ -29,22 +61,32 @@ const lines = formatTitle(CurrentItem?.title);
       <div className="absolute inset-0 z-0 flex flex-row-reverse">
         <div className="relative w-full lg:w-[55%] h-full  hidden sm:block">
           {/* الصورة التي أرفقتها (المبنى التاريخي) */}
-          <Image
-            src={CurrentItem?.seriesimagesCutmez[0]?.url || rayaLanding}
-            alt="منصة الراية لخدمات الاستثمار والتسويق"
-            fill
-            priority
-            // الصورة مخفية على الموبايل (hidden sm:block) بس priority كان بيعملها preload بعرض 100vw،
-            // فالموبايل كان بينزّل صورة كبيرة مش هتظهر أصلاً. 1px على الموبايل = أصغر نسخة ممكنة.
-            // وعلى الديسكتوب الصورة 55% من العرض مش 100%.
-            sizes="(max-width: 639px) 1px, (max-width: 1023px) 100vw, 55vw"
-            quality={70}
-            className="object-cover object-center"
-            style={{
-              // القناع الانسيابي الذي يجعل الصورة تندمج مع الخلفية البيضاء من جهة اليمين
-              clipPath: 'ellipse(100% 100% at 100% 50%)'
-            }}
-          />
+          {/* ⚡ صورة الـ Hero هي الـ LCP على الديسكتوب:
+              - بدل /_next/image (على Hostinger مش بيتعمله cache في الـ CDN وكان بياخد 1-2 ثانية و185KB)
+                بنستخدم ملفات جاهزة متضغطة في public/hero (AVIF ~92KB) والـ CDN بيخزنها.
+              - على الموبايل الصورة مخفية، فالـ <source> الأول بيدي صورة فاضية 1px → صفر تحميل.
+              - لو اترفعت صورة Hero من Contentful بنطلبها مصغّرة من Contentful Images API. */}
+          <picture>
+            <source media="(max-width: 639px)" srcSet={BLANK_PIXEL} />
+            {heroImage.avif && (
+              <source type="image/avif" srcSet={heroImage.avif} sizes={HERO_SIZES} />
+            )}
+            <img
+              src={heroImage.fallback}
+              srcSet={heroImage.webp}
+              sizes={HERO_SIZES}
+              alt="منصة الراية لخدمات الاستثمار والتسويق"
+              fetchPriority="high"
+              decoding="async"
+              width={900}
+              height={1286}
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              style={{
+                // القناع الانسيابي الذي يجعل الصورة تندمج مع الخلفية البيضاء من جهة اليمين
+                clipPath: 'ellipse(100% 100% at 100% 50%)'
+              }}
+            />
+          </picture>
           {/* طبقة شفافة خفيفة لتحسين التباين إذا لزم الأمر */}
           <div className="absolute inset-0 bg-black/5 lg:hidden"></div>
         </div>
@@ -97,7 +139,7 @@ const lines = formatTitle(CurrentItem?.title);
                </div>
                <div className="flex flex-col">
                   <span className="text-sm font-black text-slate-900">+500 عميل</span>
-                  <span className="text-xs text-slate-400 font-bold">يثقون بنا في الراية</span>
+                  <span className="text-xs text-slate-500 font-bold">يثقون بنا في الراية</span>
                </div>
             </div>
           </div>

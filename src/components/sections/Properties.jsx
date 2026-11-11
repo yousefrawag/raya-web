@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Bed, Bath, Square, MapPin, Heart, Star } from 'lucide-react';
 import { getProperties } from '@/lib/GetpropertiesEntry';
 import { GetallEntry } from '@/lib/GetallEntry';
-import { ctfImage } from '@/utils/ctfImage';
+import { ctfImage, ctfSrcSet } from "@/utils/ctfImage";
 const Properties =  async () => {
   const data = await GetallEntry()
 
@@ -44,7 +44,9 @@ const Properties =  async () => {
   property.seriesimagesCutmez[0]?.url ? 
     <div className="relative overflow-hidden">
       <img
-        src={ctfImage(property.seriesimagesCutmez[0].url, 640)}
+        src={ctfImage(property.seriesimagesCutmez[0].url, 640, 55)}
+        srcSet={ctfSrcSet(property.seriesimagesCutmez[0].url)}
+        sizes="(max-width:768px) 100vw, (max-width:1024px) 50vw, 400px"
         alt={property.title}
         width={640}
         height={256}

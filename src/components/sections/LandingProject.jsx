@@ -51,12 +51,12 @@ const PropertyCard = ({ image, title, location, price, area, type, desc , id }) 
     <div className="md:w-6/12 relative h-60 md:h-auto overflow-hidden">
       <Image    fill
     sizes="(max-width:768px) 90vw, 25vw" src={image} alt={title || "فرصة استثمارية"} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-      <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-amber-600 px-4 py-1 rounded-xl text-[10px] font-black uppercase">فرصة حصرية</span>
+      <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-amber-700 px-4 py-1 rounded-xl text-[10px] font-black uppercase">فرصة حصرية</span>
     </div>
     <div className="md:w-6/12 p-8 flex flex-col justify-between">
       <div>
         <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-amber-500 transition-colors">{title}</h3>
-        <div className="flex items-center text-slate-400 text-xs mb-4">
+        <div className="flex items-center text-slate-500 text-xs mb-4">
           <HiOutlineLocationMarker className="text-amber-500 ml-1" size={16}/> {location}
         </div>
         <p className="text-slate-500 text-xs leading-relaxed mb-6 line-clamp-2">{desc}</p>

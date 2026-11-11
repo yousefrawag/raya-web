@@ -44,7 +44,7 @@ if (propertiesServerdata?.length === 0) {
                 width={400}               // حجم مناسب للبطاقة
                 height={300}  
                 loading="lazy"
-                src={ctfImage(property.seriesimagesCutmez[0]?.url, 640)}
+                src={ctfImage(property.seriesimagesCutmez[0]?.url, 480, 55)}
                   alt={property.title}
                   unoptimized
                   className="w-full h-64  group-hover:scale-105 transition-transform duration-500"
