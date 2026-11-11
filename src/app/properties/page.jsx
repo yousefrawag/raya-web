@@ -15,7 +15,8 @@ export async function generateMetadata({ searchParams }) {
     bedrooms,
     region,
     opeartion // لاحظت وجود خطأ إملائي في كلمة operation في الكود الأصلي، سأبقيها كما هي لتعمل مع الـ API الخاص بك
-  } = searchParams || {}
+  } = (await searchParams) || {}
+  const hasFilters = [city, propertyType, area, bedrooms, region, opeartion].some(Boolean)
 
   // --- . تحسين النصوص لتكون أكثر جاذبية (SEO copywriting) ---
   const cityText = city ? `في ${city}` : 'في القدس وفلسطين';
@@ -59,13 +60,10 @@ export async function generateMetadata({ searchParams }) {
     description,
     keywords: currentKeywords, // إضافة الكلمات المفتاحية بناءً على الفلترة
 
-    // تحسين الـ Canonical ليكون رابط كامل وصحيح
+    // الـ canonical دايماً /properties من غير فلاتر:
+    // كل تركيبة فلتر كانت بتبقى صفحة مستقلة وده كان بيعمل صفحات مكررة كتير
     alternates: {
-      canonical: `https://www.rayapal.com/properties?${new URLSearchParams(
-        Object.entries(searchParams || {}).filter(
-          ([, v]) => typeof v === 'string' && v !== ''
-        )
-      ).toString()}`
+      canonical: 'https://www.rayapal.com/properties'
     },
 
     // تحسين الـ OpenGraph لمشاركة الروابط
@@ -87,11 +85,10 @@ export async function generateMetadata({ searchParams }) {
     },
 
     // إضافة إعدادات الروبوتات لهذه الصفحة تحديداً
-    robots: {
-      index: true,
-      follow: true,
-      nocache: true, // لأن نتائج البحث متغيرة باستمرار
-    },
+    // صفحات الفلاتر: noindex بس follow → جوجل يدخل العقارات اللي جواها من غير ما يفهرس الفلتر نفسه
+    robots: hasFilters
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
 
     twitter: {
       card: 'summary_large_image',

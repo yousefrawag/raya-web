@@ -1,6 +1,7 @@
 import React from 'react';
 import Script from 'next/script';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { GetConstractByslug } from '@/lib/GetConstractByslug';
 import { HiOutlineCheckCircle, HiOutlineChevronRight , HiOutlinePlus } from 'react-icons/hi';
 import GallerySlider from '@/components/common/GallerySlider'; 
@@ -13,7 +14,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const data = await GetConstractByslug(slug);
 
-  if (!data) return { title: 'الخدمة غير متوفرة | الراية' };
+  if (!data) notFound();
 
   const serviceTitle = data?.title || "خدمات المقاولات";
   
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }) {
       title: `${serviceTitle} | الراية للمقاولات`,
       description: data?.details ? data.details.substring(0, 150) + '...' : `اكتشف مميزات ${serviceTitle} معنا.`,
       url: `https://www.rayapal.com/contracting/${slug}`,
-      images: [{ url: data?.seriesimagesCutmez?.[0]?.url || "https://www.rayapal.com/og-image.png", width: 1200, height: 630, alt: serviceTitle }],
+      images: [{ url: data?.seriesimagesCutmez?.[0]?.url || "https://www.rayapal.com/icon.png", alt: serviceTitle }],
       locale: "ar_PS",
       type: "article",
     },
@@ -79,14 +80,7 @@ const SingleConstractionService = async ({ params }) => {
     },
   };
   if (!data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 text-slate-900" dir="rtl">
-        <div className="text-center">
-          <h1 className="text-4xl font-black mb-4">عذراً، الخدمة غير موجودة!</h1>
-          <Link href="/contracting" className="text-amber-500 font-bold hover:underline">العودة لصفحة المقاولات</Link>
-        </div>
-      </div>
-    );
+    notFound();
   }
 
   const title = data?.title || "عنوان الخدمة";

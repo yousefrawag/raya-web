@@ -29,9 +29,9 @@ const Loading = () => {
         </div>
 
         {/* الكلمات الذهبية المستهدفة */}
-        <h1 className="text-3xl md:text-4xl font-black text-amber-800 mb-3 tracking-tight">
+        <p className="text-3xl md:text-4xl font-black text-amber-800 mb-3 tracking-tight">
           منصة <span className="text-amber-500">الراية</span>
-        </h1>
+        </p>
         
         <p className="text-amber-700/80 text-sm md:text-base font-bold tracking-wide max-w-xs md:max-w-md opacity-90">
           للتطوير والاستثمار العقاري والمقاولات العامة

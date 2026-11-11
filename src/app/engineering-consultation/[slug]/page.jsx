@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const data = await GetConsloutionEntry(slug);
 
-  if (!data) return { title: "الخدمة غير موجودة | منصة الراية" };
+  if (!data) notFound();
 
   return {
     metadataBase: new URL("https://www.rayapal.com"),

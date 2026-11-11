@@ -14,8 +14,10 @@ city , propertyType , area, bedrooms ,region , opeartion
 
   const cityText = params.city ? `في ${params.city}` : 'في القدس'
   const typeText = params.propertyType || 'عقارات'
-  const operationText = params.opeartion
-    
+  const operationText = params.opeartion || 'للبيع والإيجار'
+  // أي فلتر = نسخة من نفس الصفحة → noindex عشان ميبقاش عندنا آلاف الصفحات المكررة
+  const hasFilters = Object.values(params).some(Boolean)
+
 
   const title = `${typeText} ${operationText} ${cityText} | خريطة تفاعلية`
   const description = `استعرض ${typeText} ${operationText} ${cityText} على خريطة تفاعلية. فلترة حسب السعر، المساحة، عدد الغرف والموقع.`
@@ -24,10 +26,11 @@ city , propertyType , area, bedrooms ,region , opeartion
     title,
     description,
     alternates: {
-      canonical: `/properties/map?${new URLSearchParams(
-        Object.entries(params).filter(([_, v]) => v)
-      ).toString()}`
+      canonical: 'https://www.rayapal.com/map'
     },
+    robots: hasFilters
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
     openGraph: {
       title,
       description,

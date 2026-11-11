@@ -33,6 +33,14 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // rayapal.com (من غير www) كان بيرجع 200 بنفس المحتوى = نسختين من الموقع.
+      // دلوقتي بيتحول 301 لـ www عشان جوجل يشوف نسخة واحدة بس.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "rayapal.com" }],
+        destination: "https://www.rayapal.com/:path*",
+        permanent: true,
+      },
       // الـ redirects بتاعتك زي ما هي بدون أي تغيير...
       { source: "/blog", destination: "/blogs", permanent: true },
       { source: "/about-me", destination: "/", permanent: true },
@@ -44,7 +52,7 @@ const nextConfig = {
       { source: "/wp-content/:path*", destination: "/", permanent: true },
       { source: "/wp-admin/:path*", destination: "/", permanent: true },
       { source: "/التسويق-العقاري", destination: "/blogs", permanent: true },
-      { source: "/استفسار-عن-عقار", destination: "/contact", permanent: true },
+      { source: "/استفسار-عن-عقار", destination: "/properties", permanent: true }, // كانت بتروح لـ /contact ودي صفحة مش موجودة (404)
       { source: "/properties/apartment/:city/:slug", destination: "/properties", permanent: true },
     ];
   },

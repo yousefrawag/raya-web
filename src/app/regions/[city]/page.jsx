@@ -1,6 +1,7 @@
 export const revalidate = 86400;
 import React from 'react';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Script from 'next/script';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
@@ -15,6 +16,7 @@ import { GetEntryByquery } from '@/lib/GetEntryByquery';
 export async function generateMetadata({ params }) {
   const { city } = await params;
   const currentCity = regions.find((item) => item.slug === city);
+  if (!currentCity) notFound();
   
   const cityName = currentCity?.name || "المدينة";
   const cityDesc = currentCity?.description || "";
@@ -74,20 +76,11 @@ const RegionByCity = async ({ params }) => {
   
   // البحث عن بيانات المدينة الحالية من ملف الداتا الثابتة
   const currentCity = regions.find((item) => item.slug === city);
-  
+  if (!currentCity) notFound();
+
   // جلب العقارات من السيرفر بناءً على اسم المدينة
   const propertiesServerdata = await GetEntryByquery(currentCity?.name) || [];
 const subLocationsNames = currentCity.locations?.map(l => l.name) || [];
-  if (!currentCity) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-800" dir="rtl">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">المنطقة غير موجودة</h1>
-          <Link href="/regions" className="text-amber-500 hover:underline">العودة لدليل المناطق</Link>
-        </div>
-      </div>
-    );
-  }
 
   // 🚀 إعداد هيكل السكيما (Structured Data) التفاعلية والديناميكية للمدينة الحالية
 const jsonLd = {

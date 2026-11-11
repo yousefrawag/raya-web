@@ -9,7 +9,13 @@ export async function GeyINvestmentEntry(id) {
 
 
 
-  const res = await client.getEntry(id);
+  let res;
+  try {
+    res = await client.getEntry(id);
+  } catch (error) {
+    // الـ ID غير موجود في Contentful → نرجع null عشان الصفحة ترجع 404 حقيقي
+    return null;
+  }
 
   const item = res.fields
    if (!item) return null; // لو مفيش entry

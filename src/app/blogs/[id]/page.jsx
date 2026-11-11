@@ -1,4 +1,5 @@
 import React from 'react'
+import { notFound } from 'next/navigation'
 import BlogDetails from '@/components/sections/BlogDeatils'
 import { GetBlogEntry } from '@/lib/GetBlogEntry'
 import RelatedPlogs from '@/components/sections/RelatedPlogs';
@@ -16,12 +17,8 @@ export async function generateMetadata({ params }) {
   const { id } = await params
   const project = await GetBlogEntry(id)
 
-  if (!project) {
-    return {
-      title: 'مقال غير متوفر | منصه الراية العقارية',
-      description: 'المقال المطلوب غير موجود أو تم نقله.'
-    }
-  }
+  // notFound هنا (مش بس في الصفحة) عشان الـ status يبقى 404 فعلاً قبل ما الـ streaming يبدأ
+  if (!project) notFound()
 
   const title = project?.blogTietal || 'مقال عقاري'
   const description = (project?.shortDescription || project?.blogDeatils || '').substring(0, 160) || 'مقال عقاري متميز من منصه الراية للتطوير والاستثمار العقاري يوضح أهم النصائح والفرص الاستثمارية.'
@@ -57,7 +54,7 @@ const BlogPage = async ({ params }) => {
   const data = await GetBlogs(project?.blogCatgeoray)
 
   if (!project) {
-    return <div className="text-center py-20 text-gray-600">المقال غير موجود</div>
+    notFound();
   }
 
   // إنشاء الـ Schema الديناميكية للمقال لتعزيز الـ SEO

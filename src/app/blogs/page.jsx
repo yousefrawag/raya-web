@@ -16,6 +16,9 @@ export const metadata = {
     'مشاريع عقارية',
     'سوق العقارات'
   ],
+  alternates: {
+    canonical: 'https://www.rayapal.com/blogs',
+  },
   openGraph: {
     title: 'المقالات العقارية | شركة الراية',
     description:

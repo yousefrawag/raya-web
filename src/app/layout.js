@@ -123,9 +123,9 @@ description:
     },
   },
 
-  alternates: {
-    canonical: "https://www.rayapal.com",
-  },
+  // ⚠️ مفيش canonical هنا عن قصد: أي canonical في الـ layout بيتورث لكل صفحة
+  // مش محددة canonical خاص بيها، فكانت صفحات زي /blogs بتقول لجوجل إنها نسخة من الرئيسية.
+  // كل صفحة بتحدد الـ canonical بتاعها بنفسها.
 
   openGraph: {
     title: "عقارات القدس وصور باهر واريحا وبيت حنينا والبوابه وفلسطين | الراية العقارية",
@@ -137,9 +137,7 @@ description:
     type: "website",
     images: [
       {
-        url: "https://www.rayapal.com/icon.png", // حط صورة عندك
-        width: 1200,
-        height: 630,
+        url: "https://www.rayapal.com/icon.png", // حط صورة عندك (يفضل 1200x630)
         alt: "عقارات القدس - الراية العقارية",
       },
     ],

@@ -12,6 +12,7 @@ import {
   HiOutlineClock
 } from 'react-icons/hi';
 import Script from "next/script";
+import { notFound } from "next/navigation";
 
 import { propertiesData } from "@/data/index";
 import { getPropertiey } from '@/lib/GetEntry';
@@ -21,15 +22,8 @@ export async function generateMetadata({ params }) {
   const { id } = await params
   const project = await getPropertiey(id)
 
-  if (!project) {
-    return {
-      title: 'عقار غير موجود | شركة الراية',
-      robots: {
-        index: false,
-        follow: false
-      }
-    }
-  }
+  // notFound هنا (مش بس في الصفحة) عشان الـ status يبقى 404 فعلاً قبل ما الـ streaming يبدأ
+  if (!project) notFound()
 
   const title = `${project.title} في ${project.city} | عقار ${project.typeOfproject} من منصة الراية`
 
@@ -68,7 +62,8 @@ ${project.details?.slice(0, 140) || 'مشروع عقاري مميز بموقع �
 const PropertyDetail =  async ({params}) => {
    const { id } = await params;
 const property = await getPropertiey(id)
-  
+  if (!property) notFound();
+
 
 
  const schema = {
@@ -79,7 +74,7 @@ const property = await getPropertiey(id)
 
     description: property.details,
 
-    url: `https://rayapal.com/properties/${id}`,
+    url: `https://www.rayapal.com/properties/${id}`,
 
     image: property.seriesimagesCutmez?.map(
       (img) => img.url

@@ -60,7 +60,8 @@ export const metadata = {
     description: "ابحث عن بيتك القادم في أفضل مناطق فلسطين (القدس، رام الله، أريحا) بأسعار منافسة وخيارات تقسيط.",
     url: "https://www.rayapal.com",
     siteName: "الراية العقارية",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    // og-image.png مش موجودة في public، فاستخدمنا صورة موجودة فعلاً
+    images: [{ url: "/icon.png", alt: "منصة الراية العقارية" }],
     locale: "ar_PS",
     type: "website",
   },
@@ -129,12 +130,8 @@ export default function Home() {
       "url": "https://www.rayapal.com",
       "name": "الراية العقارية",
       "description": "ابحث عن شقق للبيع والايجار وأراضي في فلسطين",
-      "inLanguage": "ar",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.rayapal.com/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "inLanguage": "ar"
+      // اتشال SearchAction لأنه كان بيشاور على /search ودي صفحة مش موجودة
     }
   ];
   return (
@@ -149,16 +146,6 @@ export default function Home() {
         }}
       />
 
-      {/* 2. محتوى نصي مخفي (للروبوتات فقط) لتعزيز الكلمات المفتاحية الطويلة */}
-      <section className="sr-only">
-        <h1>عقارات فلسطين والقدس</h1>
-        <p>
-          نحن في الراية العقارية نوفر شقق للبيع في القدس، شقق للايجار في رام الله، واراضي للبيع في اريحا. 
-          نغطي مناطق بيت حنينا، شعفاط، كفر عقب، صور باهر، ومنطقة البوابة في اريحا. 
-          استثمر في عقارات فلسطين بأفضل الأسعار وبنظام التقسيط المباشر.
-        </p>
-      </section>
-
       <ScrollToHash />
       <HeroSection />
       <RegionFilter />
@@ -167,6 +154,22 @@ export default function Home() {
       <AboutSection />
       <BlogServerRendering />
       <ServicesSection />
+
+      {/* 2. نفس النص اللي كان مخفي (sr-only) بقى ظاهر للزوار:
+          جوجل بيعتبر النص المخفي عن الزوار ومكتوب للروبوتات بس spam،
+          لكن لو ظاهر بيتحسب محتوى حقيقي وبيساعد في الكلمات المفتاحية */}
+      <section className="bg-white py-12 border-t border-slate-100">
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-4">
+          رام الله   عقارات فلسطين والقدس
+          </h2>
+          <p className="text-slate-600 leading-relaxed text-base md:text-lg">
+            نحن في الراية العقارية نوفر شقق للبيع في القدس، شقق للايجار في رام الله، واراضي للبيع في اريحا.
+            نغطي مناطق بيت حنينا، شعفاط، كفر عقب، صور باهر، ومنطقة البوابة في اريحا.
+            استثمر في عقارات فلسطين بأفضل الأسعار وبنظام التقسيط المباشر.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }

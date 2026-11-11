@@ -1,6 +1,7 @@
 export const revalidate = 86400;
 import React from 'react';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Script from 'next/script';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
@@ -19,6 +20,7 @@ export async function generateMetadata({ params }) {
   
   const currentCity = regions.find((c) => c.slug === city);
   const currentLocation = currentCity?.locations?.find((l) => l.slug === location);
+  if (!currentCity || !currentLocation) notFound();
 
   const cityName = currentCity?.name || "";
   const locName = currentLocation?.name || "المنطقة";
@@ -97,21 +99,11 @@ const RegionLocation = async ({ params }) => {
   // جلب البيانات من الملف الثابت
   const currentCity = regions.find((item) => item.slug === city);
   const currentLocation = currentCity?.locations?.find((item) => item.slug === location);
+  if (!currentLocation || !currentCity) notFound();
 
   // جلب العقارات بناءً على المدينة والحي (الموقع)
   // ملاحظة: تأكد أن GetEntryByquery تدعم استلام الباراميترين
   const propertiesData = await GetEntryByquery(currentCity?.name, currentLocation?.name) || [];
-
-  if (!currentLocation || !currentCity) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50" dir="rtl">
-        <div className="text-center">
-          <h1 className="text-xl font-bold">الموقع غير موجود</h1>
-          <Link href="/regions" className="text-amber-500 underline">العودة للمناطق</Link>
-        </div>
-      </div>
-    );
-  }
 
   // 🚀 إعداد السكيما (JSON-LD)
 // 🚀 إعداد هيكل السكيما (Structured Data) العميق والمكثف

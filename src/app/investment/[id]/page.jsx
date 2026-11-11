@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { FaMapMarkerAlt, FaRulerCombined, FaDollarSign, FaBuilding, FaHandHoldingUsd, FaFileContract, FaWhatsapp, FaChartLine } from 'react-icons/fa';
 import {GeyINvestmentEntry} from "@/lib/GeyINvestmentEntry"
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import InvestMentHndelimagesClient from '@/components/common/InvestMentHndelimagesClient';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, MARKS } from '@contentful/rich-text-types';
@@ -15,12 +16,8 @@ export async function generateMetadata({ params }) {
   // إذا كانت دالة fetch لديك تأخذ وقتاً، Next.js سيقوم بعمل cache لها تلقائياً
   const investment = await GeyINvestmentEntry(id);
 
-  if (!investment) {
-    return {
-      title: 'فرصة استثمارية | الراية للعقارات',
-      description: 'اكتشف أفضل الفرص الاستثمارية العقارية في فلسطين مع شركة الراية.',
-    };
-  }
+  // notFound هنا (مش بس في الصفحة) عشان الـ status يبقى 404 فعلاً قبل ما الـ streaming يبدأ
+  if (!investment) notFound();
 
   // تجهيز الكلمات المفتاحية (Keywords) بشكل ديناميكي
   const keywords = [
@@ -67,7 +64,6 @@ export async function generateMetadata({ params }) {
     robots: {
       index: true,
       follow: true,
-      nocache: true,
       googleBot: {
         index: true,
         follow: true,
@@ -91,18 +87,7 @@ const currentphoneNumber = `${data?.whatssapfolow1}`
 const defaultPhone = "+972568700632"
   // حالة عدم وجود بيانات
   if (!data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 text-center px-4">
-        <div className="max-w-md p-8 bg-white rounded-2xl shadow-lg border border-gray-100">
-          <FaBuilding className="text-6xl text-gray-300 mx-auto mb-6" />
-          <h1 className="text-3xl font-bold text-gray-800 mb-3">العقار غير موجود</h1>
-          <p className="text-gray-600 mb-6">نعتذر، ولكن يبدو أن العقار الذي تبحث عنه لم يعد متاحاً أو أن الرابط غير صحيح.</p>
-          <a href="/investments" className="inline-block bg-orange-500 text-white font-semibold px-6 py-3 rounded-xl hover:bg-orange-600 transition">
-            العودة لجميع الفرص
-          </a>
-        </div>
-      </div>
-    );
+    notFound();
   }
   const richTextOptions = {
     renderNode: {
