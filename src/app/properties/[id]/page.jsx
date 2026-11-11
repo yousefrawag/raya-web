@@ -1,4 +1,9 @@
-export const revalidate = 86400;
+// ⚡ ISR: الصفحة بتتعمل أول مرة حد يفتحها وبتتخزن (cache)، وبتتحدث كل ساعة.
+// قبل كده كانت بتترندر من الصفر وتكلم Contentful مع كل زيارة (TTFB ~1 ثانية).
+export const revalidate = 3600;
+export async function generateStaticParams() {
+  return [];
+}
 
 import React from 'react';
 import Link from 'next/link';

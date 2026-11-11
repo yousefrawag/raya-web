@@ -1,4 +1,3 @@
-"use client"
 import React from 'react';
 import { Home, Facebook, Instagram, Linkedin, Twitter  } from 'lucide-react';
 import { FaSnapchatGhost } from "react-icons/fa";

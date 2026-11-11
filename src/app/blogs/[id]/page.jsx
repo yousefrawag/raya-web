@@ -1,9 +1,16 @@
+// ⚡ ISR: الصفحة بتتعمل أول مرة حد يفتحها وبتتخزن (cache)، وبتتحدث كل ساعة.
+// قبل كده كانت بتترندر من الصفر وتكلم Contentful مع كل زيارة (TTFB ~1 ثانية).
+export const revalidate = 3600;
+export async function generateStaticParams() {
+  return [];
+}
 import React from 'react'
 import { notFound } from 'next/navigation'
 import BlogDetails from '@/components/sections/BlogDeatils'
 import { GetBlogEntry } from '@/lib/GetBlogEntry'
 import RelatedPlogs from '@/components/sections/RelatedPlogs';
 import { GetBlogs } from '@/lib/GetBlogs';
+import { toBlogCard } from '@/lib/toCard';
 
 // الـ Keywords العقارية المستهدفة (أكثر من 200 كلمة دلالية مدمجة وسياقية)
 const estateKeywords = [
@@ -93,7 +100,7 @@ const BlogPage = async ({ params }) => {
       />
       <BlogDetails project={project} />
 
-      <RelatedPlogs  data={data}/> 
+      <RelatedPlogs data={(data || []).filter((p) => p.id !== id).map(toBlogCard)} /> 
     </>
   )
 }

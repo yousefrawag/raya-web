@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react"; // 1. أضفنا useEffect
 import Link from "next/link";
 import SelectOne from "../common/SelectOne";
 import { HiOutlineLocationMarker, HiOutlineHome, HiOutlineSearch, HiOutlineMap } from "react-icons/hi";
-import getFullTypes from "@/lib/getFullTypes";
+// ⚡ getFullTypes كان بيتنادى هنا في المتصفح → بيحمّل مكتبة Contentful كلها + كل العقارات.
+// دلوقتي القوائم بتيجي جاهزة من السيرفر كـ prop (options).
 
-const FilterSection = () => {
+const FilterSection = ({ options }) => {
   const [searchData, setSearchData] = useState({
     price: "",
     propertyType: "",
@@ -24,10 +25,9 @@ const FilterSection = () => {
   useEffect(() => {
     const fetchTypes = async () => {
       try {
-        const { types , cityes , opeartions } = await getFullTypes();
+        const { types , cityes , opeartions } = options || {};
         // تأكد من إضافة قيمة افتراضية لو الداتا فاضية
         setDynamicTypes(types?.length > 0 ? types : ["شقة", "فيلا" , "مستودع"]);
-      console.log("deynmivtypes" , dynamicTypes)
         setDynamicCityes(cityes?.length > 0 ? cityes : [
     "القدس", "صور باهر", "شعفاط", "كفر عقب", "بيت حنينا", "جبل المكبر", "اريحا", "رام الله", "البيرة"
   ]) 

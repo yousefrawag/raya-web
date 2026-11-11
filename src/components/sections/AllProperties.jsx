@@ -6,6 +6,7 @@ import { getProperties } from '@/lib/GetpropertiesEntry';
 import { SearchX } from "lucide-react";
 import { MdOutlineMapsHomeWork, MdOutlineWarehouse } from 'react-icons/md';
 import Image from 'next/image';
+import { ctfImage } from '@/utils/ctfImage';
 const AllProperties = ({ propertiesServerdata}) => {
 if (propertiesServerdata?.length === 0) {
   return (
@@ -43,7 +44,7 @@ if (propertiesServerdata?.length === 0) {
                 width={400}               // حجم مناسب للبطاقة
                 height={300}  
                 loading="lazy"
-                src={decodeURIComponent(property.seriesimagesCutmez[0]?.url)}
+                src={ctfImage(property.seriesimagesCutmez[0]?.url, 640)}
                   alt={property.title}
                   unoptimized
                   className="w-full h-64  group-hover:scale-105 transition-transform duration-500"

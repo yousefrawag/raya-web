@@ -10,7 +10,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Building } from 'lucide-react';
 import Link from "next/link";
-import { GetEntryByquery } from "@/lib/GetEntryByquery";
 
 export default   function  PropertiesRelated ({data}) {
 

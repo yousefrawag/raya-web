@@ -1,6 +1,7 @@
 import React from 'react'
 import BlogSection from './BlogSection'
 import { GetBlogs } from '@/lib/GetBlogs'
+import { toBlogCard } from '@/lib/toCard'
 const BlogServerRendering = async () => {
   const data = await GetBlogs()
 //     const data  =   [
@@ -60,7 +61,8 @@ const BlogServerRendering = async () => {
 //       "https://images.unsplash.com/photo-1484154218962-a197022b5858",
 //   },
 // ]
-  return <BlogSection data={data} />
+  // السلايدر بيعرض 5 مقالات بس → نبعت 5 كروت خفيفة بدل كل المقالات بنصها الكامل
+  return <BlogSection data={(data || []).slice(0, 5).map(toBlogCard)} />
 }
 
 export default BlogServerRendering

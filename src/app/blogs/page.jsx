@@ -2,6 +2,7 @@
 import React from 'react'
 import AllBlogs from '@/components/sections/AllBlogs'
 import { GetBlogs } from '@/lib/GetBlogs'
+import { toBlogCard } from '@/lib/toCard'
 
 export const metadata = {
   title: 'المقالات العقارية | شركة الراية للتطوير والاستثمار العقاري',
@@ -29,7 +30,7 @@ export const metadata = {
 const Blogspage = async () => {
   const data =  await GetBlogs()
 
-  return <AllBlogs data={data} />
+  return <AllBlogs data={(data || []).map(toBlogCard)} />
 }
 
 export default Blogspage

@@ -1,12 +1,13 @@
 
 
 import Image from "next/image";
-import { HiSearch } from "react-icons/hi";
+import { User } from "lucide-react";
 import FilterSection from "./FilterSection";
 import rayaLanding from "@/images/Hero-images/raya-landdung.jpeg"
 import { GetHeroEntry } from "@/lib/GetHeroEntry";
+import getFullTypes from "@/lib/getFullTypes";
 const HeroSection = async() => {
-  const data = await GetHeroEntry()
+  const [data, filterOptions] = await Promise.all([GetHeroEntry(), getFullTypes()])
   const CurrentItem = data[0]||{}
   const formatTitle = (title) => {
   if (!title) return [];
@@ -33,6 +34,11 @@ const lines = formatTitle(CurrentItem?.title);
             alt="منصة الراية لخدمات الاستثمار والتسويق"
             fill
             priority
+            // الصورة مخفية على الموبايل (hidden sm:block) بس priority كان بيعملها preload بعرض 100vw،
+            // فالموبايل كان بينزّل صورة كبيرة مش هتظهر أصلاً. 1px على الموبايل = أصغر نسخة ممكنة.
+            // وعلى الديسكتوب الصورة 55% من العرض مش 100%.
+            sizes="(max-width: 639px) 1px, (max-width: 1023px) 100vw, 55vw"
+            quality={70}
             className="object-cover object-center"
             style={{
               // القناع الانسيابي الذي يجعل الصورة تندمج مع الخلفية البيضاء من جهة اليمين
@@ -75,16 +81,19 @@ const lines = formatTitle(CurrentItem?.title);
             {/* سكشن البحث (FilterSection) - ممتد عرضياً ليأخذ مساحته كما في وصلت */}
             <div className="w-full lg:w-[135%] xl:w-[150%] relative group">
               <div className="bg-white p-3 rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-50">
-                <FilterSection />
+                <FilterSection options={filterOptions} />
               </div>
             </div>
 
             {/* قسم الثقة (Social Proof) - هويتك */}
             <div className="mt-10 flex items-center gap-4">
                <div className="flex -space-x-3 space-x-reverse">
-                  <img src="https://i.pravatar.cc/100?u=8" className="w-12 h-12 rounded-full border-4 border-white shadow-sm" alt="client" />
-                  <img src="https://i.pravatar.cc/100?u=5" className="w-12 h-12 rounded-full border-4 border-white shadow-sm" alt="client" />
-                  <img src="https://i.pravatar.cc/100?u=11" className="w-12 h-12 rounded-full border-4 border-white shadow-sm" alt="client" />
+                  {/* كانت 3 صور من i.pravatar.cc (موقع خارجي + صور وهمية) → اتبدلت بأيقونات خفيفة من غير أي طلب شبكة */}
+                  {["bg-amber-100 text-amber-600", "bg-slate-100 text-slate-600", "bg-orange-100 text-orange-600"].map((tone) => (
+                    <span key={tone} aria-hidden="true" className={`w-12 h-12 rounded-full border-4 border-white shadow-sm flex items-center justify-center ${tone}`}>
+                      <User size={20} />
+                    </span>
+                  ))}
                </div>
                <div className="flex flex-col">
                   <span className="text-sm font-black text-slate-900">+500 عميل</span>

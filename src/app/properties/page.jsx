@@ -1,12 +1,14 @@
 export const revalidate = 86400;
 import React from 'react'
 import AllProperties from '@/components/sections/AllProperties'
+import { toPropertyCard } from '@/lib/toCard'
 import mapImage from "@/images/Hero-images/srp-map-bg-ar.svg"
 import Script from "next/script";
 
 import FixedFilter from '@/components/sections/FixedFilter'
 
 import { getProperties } from '@/lib/GetpropertiesEntry'
+import getFullTypes from '@/lib/getFullTypes'
 export async function generateMetadata({ searchParams }) {
   const {
     city,
@@ -101,7 +103,10 @@ export async function generateMetadata({ searchParams }) {
 
 const Projects = async ({searchParams}) => {
   const {city , propertyType , area, bedrooms ,region , opeartion} = await searchParams
-   const newdata = await  getProperties(city , propertyType , area, bedrooms ,region , opeartion)
+   const [newdata, filterOptions] = await Promise.all([
+     getProperties(city , propertyType , area, bedrooms ,region , opeartion),
+     getFullTypes(),
+   ])
 const schema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -161,7 +166,7 @@ const schema = {
         __html: JSON.stringify(schema),
       }}
     />
-<FixedFilter />
+<FixedFilter options={filterOptions} />
       
 <div className='  container mx-auto px-4' >
   
@@ -174,7 +179,7 @@ const schema = {
   {/* قسم العقارات */}
   <main className=" lg:px-4 w-full lg:w-full">
 
-    <AllProperties propertiesServerdata={newdata} />
+    <AllProperties propertiesServerdata={(newdata || []).map(toPropertyCard)} />
   </main>
 
 

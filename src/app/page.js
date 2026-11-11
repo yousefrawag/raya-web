@@ -161,7 +161,7 @@ export default function Home() {
       <section className="bg-white py-12 border-t border-slate-100">
         <div className="container mx-auto px-4 sm:px-6 max-w-4xl text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-4">
-          رام الله   عقارات فلسطين والقدس
+       عقارات فلسطين والقدس
           </h2>
           <p className="text-slate-600 leading-relaxed text-base md:text-lg">
             نحن في الراية العقارية نوفر شقق للبيع في القدس، شقق للايجار في رام الله، واراضي للبيع في اريحا.

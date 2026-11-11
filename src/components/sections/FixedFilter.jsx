@@ -2,14 +2,15 @@
 import React, { useState, useEffect , useTransition } from 'react'
 import { useRouter, useSearchParams } from "next/navigation";
 import SelectOne from '../common/SelectOne'
-import getFullTypes from '@/lib/getFullTypes';
+// ⚡ getFullTypes كان بيتنادى هنا في المتصفح → بيحمّل مكتبة Contentful كلها + كل العقارات.
+// دلوقتي القوائم بتيجي جاهزة من السيرفر كـ prop (options).
 const defaultCityOptions = [
   { label: "بيت حنين", value: "بيت حنين" },
   { label: "القدس", value: "القدس" },
   { label: "كفر عقرب", value: "كفر عقرب" },
 ];
 
-export default function FixedFilter() {
+export default function FixedFilter({ options }) {
   // قيم الفلاتر
 
   const router = useRouter();
@@ -51,7 +52,7 @@ export default function FixedFilter() {
   useEffect(() => {
     const fetchTypes = async () => {
       try {
-        const { types , cityes  , opeartions , Areas} = await getFullTypes();
+        const { types , cityes  , opeartions , Areas} = options || {};
         // تأكد من إضافة قيمة افتراضية لو الداتا فاضية
         setDynamicTypes(types?.length > 0 ? types : ["شقة", "فيلا" , "مستودع"]);
         setDynamicCityes(cityes?.length > 0 ? cityes : [

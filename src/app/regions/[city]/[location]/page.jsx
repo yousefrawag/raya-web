@@ -386,3 +386,9 @@ const jsonLd = {
 };
 
 export default RegionLocation;
+// ⚡ صفحات البلدات بتتعمل static وقت الـ build (عددها ثابت) فبتفتح فوراً
+export async function generateStaticParams() {
+  return regions.flatMap((region) =>
+    (region.locations || []).map((location) => ({ city: region.slug, location: location.slug }))
+  );
+}

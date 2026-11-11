@@ -1,12 +1,6 @@
-"use client";
+// ⚡ كان client component بـ Swiper. دلوقتي server component + Carousel خفيف (~2KB) للنقط والتشغيل التلقائي.
 import Image from "next/image";
-import { FaHeart } from "react-icons/fa";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Building } from 'lucide-react';
+import Carousel from "../common/Carousel";
 
 import Link from "next/link";
 import { 
@@ -15,7 +9,6 @@ import {
 
 } from 'react-icons/hi';
 export default function LandingProject({data}) {
- console.log("data" , data);
  
 
   return (
@@ -32,35 +25,9 @@ export default function LandingProject({data}) {
           </p>
         </div>
       
-        <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={20}
-          slidesPerView={1}
-          pagination={{ clickable: true }}
-          className="relative !pb-20"
-          autoplay={{ delay: 3000 }}
-          navigation
-          breakpoints={{
-            640: { 
-              slidesPerView: 1,
-              centeredSlides: true, // Center slides on mobile
-            },
-            768: { 
-              slidesPerView: 2,
-              centeredSlides: false,
-            },
-            1024: { 
-              slidesPerView: 2,
-              centeredSlides: false,
-            },
-            1280: { 
-              slidesPerView: 2,
-              centeredSlides: false,
-            },
-          }}
-        >
+        <Carousel>
           {data?.map((item, index) => (
-            <SwiperSlide key={item.id} className="!flex !justify-center">
+            <div key={item.id} className="snap-start shrink-0 w-[90%] md:w-[49%] flex justify-center">
          <PropertyCard 
             
              image={item?.seriesimagesCutmez[0]?.url || "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800"}
@@ -72,9 +39,9 @@ export default function LandingProject({data}) {
              desc={item?.details}
                 id={item?.id}
           />
-            </SwiperSlide>
+            </div>
           ))}
-        </Swiper>
+        </Carousel>
       </div>
     </div>
   );
@@ -83,7 +50,7 @@ const PropertyCard = ({ image, title, location, price, area, type, desc , id }) 
   <div className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col md:flex-row h-full">
     <div className="md:w-6/12 relative h-60 md:h-auto overflow-hidden">
       <Image    fill
-    sizes="(max-width:768px) 100vw, 50vw" src={image} alt="" className="w-full h-full  group-hover:scale-110 transition-transform duration-700" />
+    sizes="(max-width:768px) 90vw, 25vw" src={image} alt={title || "فرصة استثمارية"} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
       <span className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-amber-600 px-4 py-1 rounded-xl text-[10px] font-black uppercase">فرصة حصرية</span>
     </div>
     <div className="md:w-6/12 p-8 flex flex-col justify-between">

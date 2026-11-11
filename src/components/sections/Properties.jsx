@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Bed, Bath, Square, MapPin, Heart, Star } from 'lucide-react';
 import { getProperties } from '@/lib/GetpropertiesEntry';
 import { GetallEntry } from '@/lib/GetallEntry';
+import { ctfImage } from '@/utils/ctfImage';
 const Properties =  async () => {
   const data = await GetallEntry()
 
@@ -42,10 +43,14 @@ const Properties =  async () => {
   property.seriesimagesCutmez.length > 0 && 
   property.seriesimagesCutmez[0]?.url ? 
     <div className="relative overflow-hidden">
-      <img 
-        src={property.seriesimagesCutmez[0].url}
+      <img
+        src={ctfImage(property.seriesimagesCutmez[0].url, 640)}
         alt={property.title}
-        className="w-full h-64  group-hover:scale-105 transition-transform duration-500"
+        width={640}
+        height={256}
+        loading="lazy"
+        decoding="async"
+        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
       />
       
       <div className="absolute top-4 left-4 bg-white/95 text-gray-800 px-3 py-1 rounded-full text-sm font-semibold">

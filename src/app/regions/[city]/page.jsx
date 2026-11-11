@@ -393,3 +393,7 @@ const jsonLd = {
 };
 
 export default RegionByCity;
+// ⚡ صفحات المحافظات بتتعمل static وقت الـ build (عددها ثابت) فبتفتح فوراً
+export async function generateStaticParams() {
+  return regions.map((region) => ({ city: region.slug }));
+}
