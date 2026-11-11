@@ -3,6 +3,8 @@ import Header from "@/components/common/Hedaer";
 import WhatsAppButton from "@/components/common/WhatsAppButton";
 import Footer from "@/components/common/Footer";
 import ScrollToTop from "@/components/common/ScrollToTop";
+import NavigationProgress from "@/components/common/NavigationProgress";
+import { Suspense } from "react";
 // ⚡ اتشالوا من هنا عشان كانوا بيتحمّلوا في كل صفحة على الفاضي:
 // - leaflet.css: بيتحمّل جوه MapSection نفسه (صفحة الخريطة بس)
 // - خطوط Geist: كانت latin بس والـ body أصلاً مستخدم Arial، فمكانتش بتظهر
@@ -152,6 +154,10 @@ export default function RootLayout({ children }) {
       <body
         className="antialiased"
       >
+        {/* شريط التحميل أعلى الصفحة وقت التنقل (بديل loading.jsx من غير ما يهز الصفحة) */}
+        <Suspense fallback={null}>
+          <NavigationProgress />
+        </Suspense>
         <Header />
         <main>{children}</main>
         <Footer />
